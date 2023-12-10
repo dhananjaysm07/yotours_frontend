@@ -13,8 +13,6 @@ import { store } from "../app/store";
 import ApolloProviderWrapper from "../lib/apollo-provider";
 import { DataProvider } from "../lib/datacontext";
 
-
-
 if (typeof window !== "undefined") {
   require("bootstrap/dist/js/bootstrap");
 }

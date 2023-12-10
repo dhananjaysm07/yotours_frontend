@@ -12,7 +12,8 @@ import FilterTabContent from "../../components/hotels/FilterTabContent";
 import { useFilterStore } from "../../lib/store";
 
 const Home_1 = () => {
-  const {filterOption} = useFilterStore()
+  const { filterOption } = useFilterStore();
+  console.log("api server RUNNING", process.env.NEXT_PUBLIC_API_URL);
   return (
     <>
       <Seo pageTitle="Home" />
@@ -58,8 +59,6 @@ const Home_1 = () => {
       </section>
       {/* End Popular Destinations */}
 
-     
-
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row y-gap-20 justify-between">
@@ -97,7 +96,6 @@ const Home_1 = () => {
           {/* End relative */}
         </div>
       </section>
-
 
       <CallToActions />
       {/* End Call To Actions Section */}
