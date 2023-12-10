@@ -1,7 +1,7 @@
 import { useData } from "../../../lib/datacontext";
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
-const Index = () => {
+const index = () => {
   const { contentData, contentLoading, contentError } = useData();
   //handle error
   if (contentError) {
