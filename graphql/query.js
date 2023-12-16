@@ -187,10 +187,10 @@ export const GET_CONTENT_QUERY = gql`
       footerLinks
       footerLogo
       socialLinks
+      tnc
     }
   }
 `;
-
 
 export const GET_THINGS_QUERY = gql`
   query GetThings {
