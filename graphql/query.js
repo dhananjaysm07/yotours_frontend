@@ -108,6 +108,7 @@ export const GET_DESTINATION = gql`
         price
         currency
         location
+        tourBokunId
         tag {
           id
           name
@@ -135,6 +136,7 @@ export const GET_TOURS_QUERY = gql`
         imageUrl
       }
       tourHyperlink
+      tourBokunId
       location
       destination {
         id
@@ -188,6 +190,7 @@ export const GET_CONTENT_QUERY = gql`
       footerLogo
       socialLinks
       tnc
+      bokunChannelId
     }
   }
 `;

@@ -12,17 +12,11 @@ const index = () => {
     return <div>loading...</div>;
   }
 
-  //firebase
+  //firebase 
 
   return (
     <section className="masthead -type-1 z-5">
-      <div
-        className="masthead__bg"
-        // style={{
-        //   background:
-        //     "linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.5))",
-        // }}
-      >
+      <div className="masthead__bg">
         <img
           alt="image"
           src={
@@ -31,7 +25,6 @@ const index = () => {
               : "/img/masthead/1/bg.webp"
           }
           className="js-lazy"
-          style={{ background: "linear-gradient(white)" }}
         />
       </div>
       <div className="container">

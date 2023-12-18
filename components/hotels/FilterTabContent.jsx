@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/client";
 import { GET_TOURS_QUERY } from "../../graphql/query";
 import { useData } from "../../lib/datacontext";
 import {useFilterStore} from "../../lib/store";
+import { useEffect } from "react";
 const FilterTabContent = () => {
   const { filterOption } = useFilterStore();
   console.log(filterOption);
@@ -17,6 +18,48 @@ const FilterTabContent = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  
+  const {
+    tourData,
+    tourLoading,
+    tourError,
+    attractionData,
+    attractionLoading,
+    attractionError,
+    contentData,
+  } = useData();
+
+  console.log("tourData", tourData);
+
+  console.log("contentData", contentData);
+  useEffect(() => {
+    const bokunChannelId = contentData?.getContent.bokunChannelId;
+    
+
+    console.log('Bokun Channel ID:', bokunChannelId);
+  
+    if (bokunChannelId) {
+      
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
+      script.async = true;
+  
+     
+      console.log('Bokun Widget Script URL:', script.src);
+  
+      document.body.appendChild(script);
+  
+      return () => {
+        // Cleanup script when the component unmounts
+        document.body.removeChild(script);
+      };
+    }
+  
+    // Log a message if Bokun Channel ID is not available
+    console.error('Bokun Channel ID is not available.');
+  
+  }, [contentData?.getContent.bokunChannelId]);
 
   // custom navigation
   function ArrowSlick(props) {
@@ -42,14 +85,6 @@ const FilterTabContent = () => {
     );
   }
 
-  const {
-    tourData,
-    tourLoading,
-    tourError,
-    attractionData,
-    attractionLoading,
-    attractionError,
-  } = useData();
   if (tourLoading ||attractionLoading) return <p>Loading...</p>;
   if (tourError || attractionError) return <p>Error loading:</p>;
     // Determine the dataset based on the filterOption
@@ -71,11 +106,15 @@ const FilterTabContent = () => {
           data-aos="fade"
           data-aos-delay="100"
         >
-          <a
-           target="_blank" 
-           rel="noopener noreferrer"
-           href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
-            className="hotelsCard -type-1 hover-inside-slider"
+          <div  
+          style={{cursor:"pointer"}}
+          className="bokunButton hotelsCard -type-1 hover-inside-slider"
+              //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
+               data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${isTour ? item.tourBokunId : "" }?partialView=1`}
+          //  target="_blank" 
+          //  rel="noopener noreferrer"
+          //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
+          //   className="hotelsCard -type-1 hover-inside-slider"
           >
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">
@@ -164,7 +203,7 @@ const FilterTabContent = () => {
                 </div>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       ))}
     </>
