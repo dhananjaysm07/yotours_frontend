@@ -163,6 +163,7 @@ export const GET_ATTRACTIONS_QUERY = gql`
         imageUrl
       }
       location
+      attractionBokunId
       attractionHyperlink
       destination {
         id
@@ -190,6 +191,7 @@ export const GET_CONTENT_QUERY = gql`
       footerLogo
       socialLinks
       tnc
+      privacy
       bokunChannelId
     }
   }

@@ -3,8 +3,36 @@ import Link from "next/link";
 import Slider from "react-slick";
 import activityData from "../../data/activity";
 import isTextMatched from "../../utils/isTextMatched";
+import { useEffect } from "react";
+import { useData } from "../../lib/datacontext";
 
 const Activity = ({ attractions }) => {
+
+  const { contentData } = useData();
+  useEffect(() => {
+    const bokunChannelId = contentData?.getContent.bokunChannelId;
+
+    console.log("Bokun Channel ID:", bokunChannelId);
+
+    if (bokunChannelId) {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
+      script.async = true;
+
+      console.log("Bokun Widget Script URL:", script.src);
+
+      document.body.appendChild(script);
+
+      return () => {
+        // Cleanup script when the component unmounts
+        document.body.removeChild(script);
+      };
+    }
+
+    // Log a message if Bokun Channel ID is not available
+    console.error("Bokun Channel ID is not available.");
+  }, [contentData?.getContent.bokunChannelId]);
   var settings = {
     dots: true,
     infinite: false,
@@ -71,11 +99,16 @@ const Activity = ({ attractions }) => {
       <Slider {...settings}>
         {attractions.slice(0, 4).map((item) => (
           <div key={item?.id} data-aos="fade" data-aos-delay={100}>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={item.attractionHyperlink}
-              className="activityCard -type-1 rounded-4 hover-inside-slider"
+            <div
+              // target="_blank"
+              // rel="noopener noreferrer"
+              // href={item.attractionHyperlink}
+              style={{ cursor: "pointer" }}
+              className="bokunButton activityCard -type-1 rounded-4 hover-inside-slider"
+              //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
+              data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item.attractionBokunId}?partialView=1`}
+           
+             
             >
               <div className="activityCard__image position-relative">
                 <div className="inside-slider">
@@ -141,7 +174,7 @@ const Activity = ({ attractions }) => {
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         ))}
       </Slider>

@@ -14,7 +14,7 @@ module.exports = [
     menuList: [
       { name: "Contact", routerPath: "/contact" },
       // { name: "Legal Notice", routerPath: "/" },
-      { name: "Privacy Policy", routerPath: "/" },
+      { name: "Privacy Policy", routerPath: "/privacy" },
       { name: "Terms and Conditions", routerPath: "/tnc" },
     ],
   },
