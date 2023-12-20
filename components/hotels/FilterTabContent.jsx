@@ -6,7 +6,7 @@ import isTextMatched from "../../utils/isTextMatched";
 import { useQuery } from "@apollo/client";
 import { GET_TOURS_QUERY } from "../../graphql/query";
 import { useData } from "../../lib/datacontext";
-import {useFilterStore} from "../../lib/store";
+import { useFilterStore } from "../../lib/store";
 import { useEffect } from "react";
 const FilterTabContent = () => {
   const { filterOption } = useFilterStore();
@@ -18,7 +18,7 @@ const FilterTabContent = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  
+
   const {
     tourData,
     tourLoading,
@@ -29,36 +29,32 @@ const FilterTabContent = () => {
     contentData,
   } = useData();
 
-  console.log("tourData", tourData);
+  // console.log("tourData", tourData);
 
-  console.log("contentData", contentData);
+  // console.log("contentData", contentData);
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
-    
 
-    console.log('Bokun Channel ID:', bokunChannelId);
-  
+    console.log("Bokun Channel ID:", bokunChannelId);
+
     if (bokunChannelId) {
-      
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
+      const script = document.createElement("script");
+      script.type = "text/javascript";
       script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
       script.async = true;
-  
-     
-      console.log('Bokun Widget Script URL:', script.src);
-  
+
+      console.log("Bokun Widget Script URL:", script.src);
+
       document.body.appendChild(script);
-  
+
       return () => {
         // Cleanup script when the component unmounts
         document.body.removeChild(script);
       };
     }
-  
+
     // Log a message if Bokun Channel ID is not available
-    console.error('Bokun Channel ID is not available.');
-  
+    console.error("Bokun Channel ID is not available.");
   }, [contentData?.getContent.bokunChannelId]);
 
   // custom navigation
@@ -85,14 +81,14 @@ const FilterTabContent = () => {
     );
   }
 
-  if (tourLoading ||attractionLoading) return <p>Loading...</p>;
+  if (tourLoading || attractionLoading) return <p>Loading...</p>;
   if (tourError || attractionError) return <p>Error loading:</p>;
-    // Determine the dataset based on the filterOption
+  // Determine the dataset based on the filterOption
   let dataToRender, isTour;
-  if (filterOption === 'tour') {
+  if (filterOption === "tour") {
     dataToRender = tourData?.getTours;
     isTour = true;
-  } else if (filterOption === 'attractiontickets') {
+  } else if (filterOption === "attractiontickets") {
     dataToRender = attractionData?.getAttractions; // Replace with actual property name for attractions
     isTour = false;
   }
@@ -106,15 +102,17 @@ const FilterTabContent = () => {
           data-aos="fade"
           data-aos-delay="100"
         >
-          <div  
-          style={{cursor:"pointer"}}
-          className="bokunButton hotelsCard -type-1 hover-inside-slider"
-              //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
-               data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${isTour ? item.tourBokunId : "" }?partialView=1`}
-          //  target="_blank" 
-          //  rel="noopener noreferrer"
-          //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
-          //   className="hotelsCard -type-1 hover-inside-slider"
+          <div
+            style={{ cursor: "pointer" }}
+            className="bokunButton hotelsCard -type-1 hover-inside-slider"
+            //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
+            data-src={`https://widgets.bokun.io/online-sales/${
+              contentData?.getContent.bokunChannelId
+            }/experience/${isTour ? item.tourBokunId : ""}?partialView=1`}
+            //  target="_blank"
+            //  rel="noopener noreferrer"
+            //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
+            //   className="hotelsCard -type-1 hover-inside-slider"
           >
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">

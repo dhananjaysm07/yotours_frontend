@@ -26,7 +26,7 @@ const MainMenu = ({ style = "" }) => {
           <Link href="/tours">Tours</Link>
         </li>
         <li className={router.pathname === "/attractions" ? "current" : ""}>
-          <Link href="/attractions">Attractions</Link>
+          <Link href="/attractions">Attraction-Tickets</Link>
         </li>
         {/* <li className={router.pathname === "/contact" ? "current" : ""}>
           <Link href="/contact">Contact</Link>

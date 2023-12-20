@@ -26,7 +26,7 @@ const AllAttractions = () => {
           <div className="row y-gap-20 justify-between items-end">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">All Attractions</h2>
+                <h2 className="sectionTitle__title">All Attraction Tickets</h2>
                 <p className=" sectionTitle__text mt-5 sm:mt-0">
                   These popular attractions have a lot to offer
                 </p>
@@ -35,7 +35,7 @@ const AllAttractions = () => {
           </div>
 
           <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-          {attractionData ? (
+            {attractionData ? (
               <Activity attractions={attractionData.getAttractions} />
             ) : (
               <h2 className="text-center">No Attractions</h2>

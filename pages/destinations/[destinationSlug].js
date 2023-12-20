@@ -103,12 +103,11 @@ const Destinations = () => {
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Best Things</h2>
                 <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Interdum et malesuada fames ac ante ipsum
+                  These are the best things available for{" "}
+                  {destination.destinationName}
                 </p>
               </div>
             </div>
-
-           
           </div>
           {/* End .row */}
 
@@ -131,20 +130,20 @@ const Destinations = () => {
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Most Popular Tours</h2>
                 <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Interdum et malesuada fames ac ante ipsum
+                  These are the popular tours for {destination.destinationName}
                 </p>
               </div>
             </div>
             {/* End .col */}
 
-            <div className="col-auto">
+            {/* <div className="col-auto">
               <Link
                 href="#"
                 className="button -md -blue-1 bg-blue-1-05 text-blue-1"
               >
                 More <div className="icon-arrow-top-right ml-15" />
               </Link>
-            </div>
+            </div> */}
             {/* End .col */}
           </div>
           {/* End .row */}
@@ -171,20 +170,21 @@ const Destinations = () => {
                   Trending Attraction Tickets
                 </h2>
                 <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Interdum et malesuada fames ac ante ipsum
+                  Following are the attraction tickets for{" "}
+                  {destination.destinationName}
                 </p>
               </div>
             </div>
             {/* End .col */}
 
-            <div className="col-auto">
+            {/* <div className="col-auto">
               <Link
                 href="#"
                 className="button -md -blue-1 bg-blue-1-05 text-blue-1"
               >
                 More <div className="icon-arrow-top-right ml-15" />
               </Link>
-            </div>
+            </div> */}
             {/* End .col */}
           </div>
           {/* End .row */}
@@ -233,7 +233,7 @@ const Destinations = () => {
       </section> */}
       {/* End Top sights in London */}
 
-      <section className="layout-pt-lg layout-pb-md">
+      {/* <section className="layout-pt-lg layout-pb-md">
         <div className="container">
           <div className="row y-gap-20">
             <div className="col-lg-4">
@@ -243,19 +243,14 @@ const Destinations = () => {
                 {destination.destinationName}
               </h2>
             </div>
-            {/* End .col */}
-
             <div className="col-lg-8">
               <div className="accordion -simple row y-gap-20 js-accordion">
                 <Faq />
               </div>
             </div>
-            {/* End .col-lg-8 */}
           </div>
-          {/* End .row */}
         </div>
-        {/* End .container */}
-      </section>
+      </section> */}
       {/* End Faq Section */}
 
       <CallToActions />

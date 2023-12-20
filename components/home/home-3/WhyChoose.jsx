@@ -4,24 +4,24 @@ const WhyChoose = () => {
   const blockContent = [
     {
       id: 1,
-      icon: "/img/featureIcons/3/1.svg",
-      title: "Best Price Guarantee",
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-      delayAnimation: "100",
+      icon: "/img/featureIcons/1/1.svg",
+      title: "We are Tour Operators",
+      text: `Yo Tour’s creative team designs and operates own tours to offer you best local experience `,
+      delayAnim: "100",
     },
     {
       id: 2,
-      icon: "/img/featureIcons/3/2.svg",
-      title: "Easy & Quick Booking",
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-      delayAnimation: "200",
+      icon: "/img/featureIcons/1/2.svg",
+      title: "Instant Confirmation & Lowest Price",
+      text: `Quickly and easily book tours and tickets online at lowest rates`,
+      delayAnim: "200",
     },
     {
       id: 3,
-      icon: "/img/featureIcons/3/3.svg",
-      title: "Customer Care 24/7",
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-      delayAnimation: "300",
+      icon: "/img/featureIcons/1/3.svg",
+      title: "Tours & Attraction Tickets in 100+ Cities Globally",
+      text: `Enjoy tours in Europe, India, Dubai, Thailand, Bali, Singapore & more destinations`,
+      delayAnim: "300",
     },
   ];
   return (

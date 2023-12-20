@@ -2,15 +2,21 @@ const ContactInfo = () => {
   const contactContent = [
     {
       id: 1,
-      title: "Toll Free Customer Care",
+      title: "Customer Support Number",
       action: "tel:+918448448434",
       text: "+918448448434",
     },
     {
       id: 2,
-      title: "Need live support?",
+      title: "Booking Support",
       action: "mailto:connect@yotours.in",
       text: "connect@yotours.in",
+    },
+    {
+      id: 3,
+      title: "Partnerships Support",
+      action: "mailto:info@yotours.in",
+      text: "info@yotours.in",
     },
   ];
   return (

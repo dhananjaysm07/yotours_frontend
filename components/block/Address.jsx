@@ -3,18 +3,29 @@ const Address = () => {
     {
       id: 1,
       colClass: "col-lg-3",
-      title: "Address",
+      title: "India Office Address",
       content: (
-        <>328 Queensberry Street, North Melbourne VIC 3051, Australia.</>
+        <>
+          Wanderung Guides Private Limited 205 Global Business Hub, Kharadi,
+          Pune, 411014, India{" "}
+        </>
+      ),
+    },
+    {
+      id: 4,
+      colClass: "col-lg-3",
+      title: "EU Office Address",
+      content: (
+        <>Yo Tours BV Utrechtseweg 341, 3818 EL Amersfoort, The Netherlands</>
       ),
     },
     {
       id: 2,
       colClass: "col-auto",
-      title: "Toll Free Customer Care",
+      title: "Customer Support Number",
       content: (
         <>
-          <a href="tel:+4733378901">+47 333 78 901</a>
+          <a href="tel:+918448448434">+918448448434</a>
         </>
       ),
     },
@@ -25,7 +36,7 @@ const Address = () => {
       content: (
         <>
           {" "}
-          <a href="mailto:i@gotrip.com">hi@gotrip.com</a>
+          <a href="mailto:connect@yotours.in">connect@yotours.in</a>
         </>
       ),
     },
