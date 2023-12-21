@@ -92,7 +92,6 @@ const FilterTabContent = () => {
     dataToRender = attractionData?.getAttractions; // Replace with actual property name for attractions
     isTour = false;
   }
-
   return (
     <>
       {dataToRender?.map((item) => (
@@ -146,19 +145,25 @@ const FilterTabContent = () => {
                 <div className="cardImage__leftBadge">
                   <div
                     className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                      isTextMatched(item?.tag.name, "trending")
+                      isTextMatched(item?.tag?.name, "trending")
                         ? "bg-dark-1 text-white"
                         : ""
                     } 
                     ${
-                      isTextMatched(item?.tag.name, "best seller")
+                      isTextMatched(item?.tag?.name, "best seller")
+                        ? "bg-blue-1 text-white"
+                        : ""
+                    } 
+
+                    ${
+                      isTextMatched(item?.tag?.name, "Most Popular Tours")
                         ? "bg-blue-1 text-white"
                         : ""
                     } 
                    
                     ${
-                      item?.tag.name &&
-                      typeof item.tag.name === "string" &&
+                      item?.tag?.name &&
+                      typeof item.tag?.name === "string" &&
                       item.tag.name.toLowerCase().includes("sale")
                         ? "bg-yellow-1 text-white"
                         : ""
@@ -166,7 +171,7 @@ const FilterTabContent = () => {
                              
                      `}
                   >
-                    {item?.tag.name}
+                    {item?.tag?.name}
                   </div>
                 </div>
               </div>
