@@ -34,11 +34,10 @@ const SearchBar = () => {
     },
   ];
 
-  const {destinationData,destinationLoading} = useData();
+  const {destinationData,destinationLoading, destinationError} = useData();
 const {setDestinationId} = useSearchStore();
-  if(destinationLoading){
-    return <>Loading...</>
-  }
+if (destinationLoading) return <p>Loading destinations...</p>;
+if (destinationError) return <p>Error loading destinations</p>;
   const handleOptionClick = (item) => {
     setSearchValue(item.destinationName);
     setSelectedItem(item);

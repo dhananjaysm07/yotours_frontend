@@ -107,7 +107,9 @@ const FilterTabContent = () => {
             //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
             data-src={`https://widgets.bokun.io/online-sales/${
               contentData?.getContent.bokunChannelId
-            }/experience/${isTour ? item.tourBokunId : ""}?partialView=1`}
+            }/experience/${
+              isTour ? item.tourBokunId : item.attractionBokunId
+            }?partialView=1`}
             //  target="_blank"
             //  rel="noopener noreferrer"
             //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}

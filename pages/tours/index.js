@@ -8,6 +8,8 @@ import { useData } from "../../lib/datacontext";
 
 const AllTours = () => {
   const { tourData, tourLoading, tourError } = useData();
+  if (tourLoading) return <p>Loading...</p>;
+  if (tourError) return <p>Error: {tourError.message}</p>;
   return (
     <>
       <Seo pageTitle="Tours" />
