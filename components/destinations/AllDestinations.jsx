@@ -61,6 +61,7 @@ const AllDestinations = () => {
                   src={item.bannerImage}
                   alt="image"
                   className="js-lazy"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="citiesCard__content d-flex flex-column justify-between text-center pt-30 pb-20 px-20">

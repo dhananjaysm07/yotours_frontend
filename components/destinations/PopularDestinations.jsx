@@ -15,7 +15,6 @@ const PopularDestinations = () => {
     destination.isPopular == true
   );
 
-  console.log(popularDestinations)
   if (destinationLoading) return <p>Loading destinations...</p>;
   if (destinationError) return <p>Error loading destinations</p>;
   return (

@@ -108,7 +108,9 @@ const FilterTabContent = () => {
             //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
             data-src={`https://widgets.bokun.io/online-sales/${
               contentData?.getContent.bokunChannelId
-            }/experience/${isTour ? item.tourBokunId : item.attractionBokunId}?partialView=1`}
+            }/experience/${
+              isTour ? item.tourBokunId : item.attractionBokunId
+            }?partialView=1`}
             //  target="_blank"
             //  rel="noopener noreferrer"
             //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
@@ -144,30 +146,28 @@ const FilterTabContent = () => {
                 </div>
 
                 <div className="cardImage__leftBadge">
-                  <div
-                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase bg-blue-1 text-white ${
-                      isTextMatched(item?.tag.name, "trending")
-                        ? "bg-dark-1 text-white"
-                        : ""
-                    } 
-                    ${
-                      isTextMatched(item?.tag.name, "best seller")
-                        ? "bg-blue-1 text-white"
-                        : ""
-                    } 
-                   
-                    ${
-                      item?.tag.name &&
-                      typeof item.tag.name === "string" &&
-                      item.tag.name.toLowerCase().includes("sale")
-                        ? "bg-yellow-1 text-white"
-                        : ""
-                    } 
-                             
-                     `}
-                  >
-                    {item?.tag.name}
-                  </div>
+                  {item.tag && (
+                    <div
+                      className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase 
+        ${
+          isTextMatched(item.tag.name, "trending") ? "bg-dark-1 text-white" : ""
+        } 
+        ${
+          isTextMatched(item.tag.name, "best seller")
+            ? "bg-blue-1 text-white"
+            : ""
+        } 
+        ${
+          item.tag.name &&
+          typeof item.tag.name === "string" &&
+          item.tag.name.toLowerCase().includes("sale")
+            ? "bg-yellow-1 text-white"
+            : ""
+        }`}
+                    >
+                      {item.tag.name}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
