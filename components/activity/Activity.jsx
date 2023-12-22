@@ -106,11 +106,15 @@ const Activity = ({ attractions }) => {
               data-aos="fade"
               data-aos-delay="100"
             >
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={item.attractionHyperlink}
-                className="activityCard -type-1 rounded-4 hover-inside-slider"
+              <div
+                // target="_blank"
+                // rel="noopener noreferrer"
+                // href={item.tourHyperlink || "#"}
+                // className="tourCard -type-1 rounded-4 hover-inside-slider"
+                style={{ cursor: "pointer" }}
+                className="bokunButton tourCard -type-1 rounded-4 hover-inside-slider"
+                //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
+                data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item?.attractionBokunId}?partialView=1`}
               >
                 <div className="activityCard__image position-relative">
                   <div className="inside-slider">
@@ -179,7 +183,7 @@ const Activity = ({ attractions }) => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           ))}
         </div>
