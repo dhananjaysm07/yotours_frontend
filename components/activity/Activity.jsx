@@ -173,14 +173,18 @@ const Activity = ({ attractions }) => {
                   </p>
 
                   <div className="row justify-between items-center pt-10">
-                    <div className="col-auto">
-                      <div className="text-14 text-light-1">
-                        From{" "}
-                        <span className="text-16 fw-500 text-dark-1">
-                          US${item.price}
-                        </span>
+                    {item.price ? (
+                      <div className="col-auto">
+                        <div className="text-14 text-light-1">
+                          From{" "}
+                          <span className="text-16 fw-500 text-dark-1">
+                            {item.currency || "US$"} {item.price}
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>

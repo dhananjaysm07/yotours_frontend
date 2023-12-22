@@ -203,6 +203,7 @@ const FilterTabContent = () => {
                     {item?.currency === "USD" && "$"}
                     {item?.currency === "EUR" && "€"}
                     {item?.currency === "GBP" && "£"}
+                    {item?.currency === "INR" && "₹"}
                     {item?.price}
                   </span>
                 </div>
