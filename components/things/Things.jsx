@@ -2,9 +2,29 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useData } from "../../lib/datacontext";
 
 
 const Things = ({ things = [] }) => {
+
+  const { contentData } = useData();
+  useEffect(() => {
+    const bokunChannelId = contentData?.getContent.bokunChannelId;
+    if (bokunChannelId) {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
+      script.async = true;
+      document.body.appendChild(script);
+
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+
+    console.error("Bokun Channel ID is not available.");
+  }, [contentData?.getContent.bokunChannelId]);
   return (
     <>
       <Swiper
@@ -42,11 +62,13 @@ const Things = ({ things = [] }) => {
               data-aos="fade"
               data-aos-delay={100}
             >
-              <a
-            target="_blank" 
-            rel="noopener noreferrer"
-              href={item.thingHyperlink || "#"}
-              className="tourCard -type-1 rounded-4 hover-inside-slider"
+              <div
+            // target="_blank" 
+            // rel="noopener noreferrer"
+            //   href={item.thingHyperlink || "#"}
+              style={{ cursor: "pointer" }}
+              className="bokunButton tourCard -type-1 rounded-4 hover-inside-slider"
+              // data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item.thingBokunId}?partialView=1`}
             >
                 <div className="tourCard__image">
                   <div className="cardImage ratio ratio-1:1">
@@ -68,6 +90,7 @@ const Things = ({ things = [] }) => {
                                 className="rounded-4 col-12 js-lazy"
                                 src={slide.imageUrl}
                                 alt="image"
+                                style={{ objectFit: 'cover' }}
                               />
                             </SwiperSlide>
                           ))}
@@ -104,7 +127,7 @@ const Things = ({ things = [] }) => {
                 </div>
                 {/* End .tourCard__image */}
 
-                <div className="tourCard__content mt-10">
+                <div className="tourCard__content mt-5">
                  
                   <h4 className="tourCard__title text-dark-1 text-18 lh-16 fw-500">
                     <span>{item?.thingTitle}</span>
@@ -115,7 +138,7 @@ const Things = ({ things = [] }) => {
 
                   
                 </div>
-              </a>
+              </div>
             </div>
           </SwiperSlide>
         ))}

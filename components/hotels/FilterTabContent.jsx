@@ -132,6 +132,7 @@ const FilterTabContent = () => {
                           className="rounded-4 col-12 js-lazy"
                           src={slide.imageUrl}
                           alt="image"
+                          style={{ objectFit: 'cover' }}
                         />
                       </div>
                     </div>
@@ -146,7 +147,7 @@ const FilterTabContent = () => {
 
                 <div className="cardImage__leftBadge">
                   <div
-                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
+                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500   uppercase ${
                       isTextMatched(item?.tag?.name, "trending")
                         ? "bg-dark-1 text-white"
                         : ""
@@ -162,16 +163,19 @@ const FilterTabContent = () => {
                         ? "bg-blue-1 text-white"
                         : ""
                     } 
-                   
+                    
+                 
                     ${
                       item?.tag?.name &&
                       typeof item.tag?.name === "string" &&
                       item.tag.name.toLowerCase().includes("sale")
                         ? "bg-yellow-1 text-white"
                         : ""
-                    } 
+                    }
+                    ${item.tag && "bg-blue-1 text-white"} 
                              
                      `}
+
                   >
                     {item?.tag?.name}
                   </div>

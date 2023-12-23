@@ -115,7 +115,7 @@ const Destinations = () => {
             {things ? (
               <Things things={things} />
             ) : (
-              <h2 className="text-center">No Tours</h2>
+              <h2 className="text-center">No Things</h2>
             )}
           </div>
           {/* End .row */}

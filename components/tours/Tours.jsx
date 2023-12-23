@@ -9,26 +9,18 @@ const Tours = ({ tours = [] }) => {
   const { contentData } = useData();
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
-
-    console.log("Bokun Channel ID:", bokunChannelId);
-
     if (bokunChannelId) {
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
       script.async = true;
-
-      console.log("Bokun Widget Script URL:", script.src);
-
       document.body.appendChild(script);
 
       return () => {
-        // Cleanup script when the component unmounts
         document.body.removeChild(script);
       };
     }
 
-    // Log a message if Bokun Channel ID is not available
     console.error("Bokun Channel ID is not available.");
   }, [contentData?.getContent.bokunChannelId]);
 
@@ -92,7 +84,6 @@ const Tours = ({ tours = [] }) => {
       </button>
     );
   }
-  console.log(tours.length);
 
   return (
     <>
@@ -134,6 +125,7 @@ const Tours = ({ tours = [] }) => {
                               className="col-12 js-lazy"
                               src={slide.imageUrl}
                               alt="image"
+                              style={{ objectFit: "cover" }}
                             />
                           </div>
                         </div>
