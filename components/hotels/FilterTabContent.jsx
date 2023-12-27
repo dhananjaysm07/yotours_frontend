@@ -10,7 +10,7 @@ import { useFilterStore } from "../../lib/store";
 import { useEffect } from "react";
 const FilterTabContent = () => {
   const { filterOption } = useFilterStore();
-  console.log(filterOption);
+  // console.log(filterOption);
   var itemSettings = {
     dots: true,
     infinite: true,
