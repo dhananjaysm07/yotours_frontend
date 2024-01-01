@@ -9,7 +9,9 @@ const nextConfig = {
     domains: ["firebasestorage.googleapis.com"],
   },
   outDir: ".next",
-  appDir: true,
+  experimental: {
+    appDir: true,
+  },
 };
 
 module.exports = nextConfig;
