@@ -36,6 +36,7 @@ const Destinations = () => {
   const things = thingsData?.getThings?.filter(
     (thing) => thing.destination.id === id
   );
+  console.log("Things are", things)
 
   if (!destination) return <p>Destination not found.</p>;
   return (
@@ -88,7 +89,7 @@ const Destinations = () => {
               <h2 className="text-22 fw-500">General info</h2>
             </div>
             {/* End .col */}
-            <GeneralInfo />
+            <GeneralInfo destination={destination}/>
           </div>
           {/* End .row */}
           <div className="mt-30 border-top-light" />

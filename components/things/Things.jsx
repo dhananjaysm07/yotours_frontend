@@ -5,9 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useData } from "../../lib/datacontext";
 
-
 const Things = ({ things = [] }) => {
-
   const { contentData } = useData();
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
@@ -57,46 +55,42 @@ const Things = ({ things = [] }) => {
       >
         {things.map((item) => (
           <SwiperSlide key={item.id}>
-            <div
-              key={item?.id}
-              data-aos="fade"
-              data-aos-delay={100}
-            >
+            <div key={item?.id} data-aos="fade" data-aos-delay={100}>
               <div
-            // target="_blank" 
-            // rel="noopener noreferrer"
-            //   href={item.thingHyperlink || "#"}
-              style={{ cursor: "pointer" }}
-              className="bokunButton tourCard -type-1 rounded-4 hover-inside-slider"
-              // data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item.thingBokunId}?partialView=1`}
-            >
+                // target="_blank"
+                // rel="noopener noreferrer"
+                //   href={item.thingHyperlink || "#"}
+                style={{ cursor: "pointer" }}
+                className="tourCard -type-1 rounded-4 hover-inside-slider"
+                // data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item.thingBokunId}?partialView=1`}
+              >
                 <div className="tourCard__image">
-                  <div className="cardImage ratio ratio-1:1">
-                    <div className="cardImage__content">
-                      <div className="cardImage-slider rounded-4 overflow-hidden custom_inside-slider">
-                        <Swiper
-                          className="mySwiper"
-                          modules={[Pagination, Navigation]}
-                          pagination={{
-                            clickable: true,
-                          }}
-                          navigation={true}
-                        >
-                          {item?.images?.map((slide, i) => (
-                            <SwiperSlide key={i}>
+                  <div className="cardImage-slider rounded-4 overflow-hidden custom_inside-slider">
+                    <Swiper
+                      className="mySwiper"
+                      modules={[Pagination, Navigation]}
+                      pagination={{
+                        clickable: true,
+                      }}
+                      navigation={true}
+                    >
+                      {item?.images?.map((slide, i) => (
+                        <SwiperSlide key={i}>
+                          <div className="cardImage ratio ratio-1:1">
+                            <div className="cardImage__content">
                               <Image
                                 width={300}
                                 height={300}
                                 className="rounded-4 col-12 js-lazy"
                                 src={slide.imageUrl}
                                 alt="image"
-                                style={{ objectFit: 'cover' }}
+                                // style={{ objectFit: 'cover' }}
                               />
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                      </div>
-                    </div>
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
                   </div>
 
                   <div className="cardImage__wishlist">
@@ -128,15 +122,12 @@ const Things = ({ things = [] }) => {
                 {/* End .tourCard__image */}
 
                 <div className="tourCard__content mt-5">
-                 
                   <h4 className="tourCard__title text-dark-1 text-18 lh-16 fw-500">
                     <span>{item?.thingTitle}</span>
                   </h4>
                   <p className="text-light-1 lh-14 text-14 mt-5">
                     {item?.thingDescription}
                   </p>
-
-                  
                 </div>
               </div>
             </div>

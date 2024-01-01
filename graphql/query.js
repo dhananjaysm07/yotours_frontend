@@ -10,6 +10,10 @@ export const GET_DESTINATIONS_QUERY = gql`
       continent
       country
       bannerHeading
+      fromDate
+      toDate
+      fromOccasion
+      toOccasion
       images {
         id
         imageUrl
