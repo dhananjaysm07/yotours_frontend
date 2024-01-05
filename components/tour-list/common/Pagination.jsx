@@ -1,10 +1,20 @@
 import { useState } from "react";
 
-const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Pagination = ({
+  setCurrentPage,
+  totalPage,
+  currentPage,
+  dataPerPage,
+}) => {
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageClick = (pageNumber) => {
+    // setCurrentPage(pageNumber);
     setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: Adds smooth scroll animation
+    });
   };
 
   const renderPage = (pageNumber, isActive = false) => {
@@ -21,9 +31,9 @@ const Pagination = () => {
   };
 
   const renderPages = () => {
-    const totalPages = 5; // Change this to the actual total number of pages
+    // const totalPages = 5; // Change this to the actual total number of pages
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= totalPage; i++) {
       pageNumbers.push(i);
     }
     const pages = pageNumbers.map((pageNumber) =>
@@ -45,10 +55,12 @@ const Pagination = () => {
           <div className="row x-gap-20 y-gap-20 items-center md:d-none">
             {renderPages()}
             <div className="col-auto">
-              <div className="size-40 flex-center rounded-full">...</div>
+              {/* <div className="size-40 flex-center rounded-full">...</div> */}
             </div>
             <div className="col-auto">
-              <div className="size-40 flex-center rounded-full">20</div>
+              {/* <div className="size-40 flex-center rounded-full">
+                {totalPage}
+              </div> */}
             </div>
           </div>
 
@@ -58,7 +70,7 @@ const Pagination = () => {
 
           <div className="text-center mt-30 md:mt-10">
             <div className="text-14 text-light-1">
-              1 – 20 of 300+ properties found
+              {/* 1 – {totalPage} of 300+  */}
             </div>
           </div>
         </div>

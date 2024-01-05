@@ -1,30 +1,41 @@
-const CategoryTypes = () => {
-  const categories = [
-    { name: "Tours", count: 92 },
-    { name: "Attractions", count: 45 },
-    { name: "Day Trips", count: 21 },
-    { name: "Outdoor Activities", count: 78 },
-    { name: "Concerts & Shows", count: 679 },
-  ];
+import { useTourFilterStore } from "../../../lib/store";
 
+const CategoryTypes = ({ categories }) => {
+  const { setTag, removeTag } = useTourFilterStore();
+  function handleChange(event, category) {
+    // console.log(
+    //   "event",
+    //   event.target.value,
+    //   event.target.checked,
+    //   event.target.name
+    // );
+    if (event.target.checked) {
+      setTag(category);
+    } else {
+      removeTag(category);
+    }
+  }
   return (
     <>
-      {categories.map((category) => (
+      {categories?.map((category) => (
         <div
           className="row y-gap-10 items-center justify-between"
-          key={category.name}
+          key={category}
         >
           <div className="col-auto">
             <div className="form-checkbox d-flex items-center">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={(event) => handleChange(event, category)}
+              />
               <div className="form-checkbox__mark">
                 <div className="form-checkbox__icon icon-check" />
               </div>
-              <div className="text-15 ml-10">{category.name}</div>
+              <div className="text-15 ml-10">{category}</div>
             </div>
           </div>
           <div className="col-auto">
-            <div className="text-15 text-light-1">{category.count}</div>
+            {/* <div className="text-15 text-light-1">{category.count}</div> */}
           </div>
         </div>
       ))}

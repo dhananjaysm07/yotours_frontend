@@ -3,26 +3,32 @@ import OthersFilter from "../sidebar/OthersFilter";
 import Duration from "../sidebar/Duration";
 import Languages from "../sidebar/Languages";
 import PirceSlider from "../sidebar/PirceSlider";
+import { useData } from "../../../lib/datacontext";
+import React, { useContext } from "react";
 
 const Sidebar = () => {
+  const { tagNameList } = useData();
+  const [categories, setCategories] = React.useState([]);
+  React.useEffect(() => {
+    setCategories(tagNameList?.getAllTags?.map((tag) => tag.name));
+  }, [tagNameList]);
   return (
     <>
       <div className="sidebar__item -no-border">
-        <h5 className="text-18 fw-500 mb-10">Category Types</h5>
+        <h5 className="text-18 fw-500 mb-10">Tag Types</h5>
         <div className="sidebar-checkbox">
-          <CategoryTypes />
+          <CategoryTypes categories={categories} />
         </div>
         {/* End Sidebar-checkbox */}
       </div>
       {/* End popular filter */}
-
+      {/* 
       <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Other</h5>
         <div className="sidebar-checkbox">
           <OthersFilter />
         </div>
-        {/* End Sidebar-checkbox */}
-      </div>
+      </div> */}
       {/* End Aminities filter */}
 
       <div className="sidebar__item pb-30">
@@ -35,21 +41,20 @@ const Sidebar = () => {
       </div>
       {/* End Nightly priceslider */}
 
-      <div className="sidebar__item">
+      {/* <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Duration</h5>
         <div className="sidebar-checkbox">
           <Duration />
         </div>
-      </div>
+      </div> */}
       {/* End style filter */}
 
-      <div className="sidebar__item">
+      {/* <div className="sidebar__item">
         <h5 className="text-18 fw-500 mb-10">Languages</h5>
         <div className="sidebar-checkbox">
           <Languages />
         </div>
-        {/* End Sidebar-checkbox */}
-      </div>
+      </div> */}
       {/* End Aminities filter */}
     </>
   );

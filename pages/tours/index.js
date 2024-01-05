@@ -5,53 +5,151 @@ import DefaultHeader from "../../components/header/default-header";
 import DefaultFooter from "../../components/footer/default";
 import Tours from "../../components/tours/Tours";
 import { useData } from "../../lib/datacontext";
+import Activity from "../../components/activity/Activity";
+import parse from "html-react-parser";
+// import Tourcombined from "../../components/tour-list/AllTour-combined";
+import TourProperties from "../../components/tour-list/tour-list-v1/TourProperties";
+import TopHeaderFilter from "../../components/tour-list/tour-list-v1/TopHeaderFilter";
+// import { Pagination } from "swiper";
+// import { Sidebar } from "react-pro-sidebar";
+import Pagination from "../../components/tour-list/common/Pagination";
+import Sidebar from "../../components/tour-list/tour-list-v1/Sidebar";
+import MainFilterSearchBox from "../../components/tour-list/tour-list-v1/MainFilterSearchBox";
+import { useTourFilterStore, useTourPaginationStore } from "../../lib/store";
+import React from "react";
 
-const AllTours = () => {
-  const { tourData, tourLoading, tourError } = useData();
-  if (tourLoading) return <p>Loading...</p>;
-  if (tourError) return <p>Error: {tourError.message}</p>;
+// import styles from "./tnc.module.scss";
+// import { contextType } from "google-map-react";
+
+const Tour = () => {
+  const { setCurrentPage, totalPage, currentPage, dataPerPage } =
+    useTourPaginationStore();
+  // const [startTime, setStartTime] = React.useState(null);
+  // const [endTime, setEndTime] = React.useState(null);
+  // const [priceMax, setPriceMax] = React.useState(null);
+  // const [location, setLocation] = React.useState(null);
+  // const [priceMin, setPriceMin] = React.useState(null);
+  // const [tagName, setTagName] = React.useState([]);
+  const { startTime, endTime, priceMax, location, priceMin, tagName } =
+    useTourFilterStore();
+  const [filter, setFilter] = React.useState({
+    priceMin: null,
+    startDate: null,
+    priceMax: null,
+    location: null,
+    endDate: null,
+    tagName: [],
+  });
+
+  // console.log("tag elected", tagName, priceMax, priceMin, location);
+  React.useEffect(() => {
+    // const filter = {};
+    setFilter({
+      priceMin: priceMin,
+      startDate: startTime,
+      priceMax: priceMax,
+      location: location,
+      endDate: endTime,
+      tagName: tagName,
+    });
+  }, [priceMax, priceMin, startTime, endTime, location, tagName]);
   return (
     <>
-      <Seo pageTitle="Tours" />
+      <Seo pageTitle="Tour List v1" />
       {/* End Page Title */}
 
       <div className="header-margin"></div>
       {/* header top margin */}
 
+      {/* <Header /> */}
+      {/* header top margin */}
+
       <DefaultHeader />
       {/* End Header 1 */}
 
-      <section className="layout-pt-md layout-pb-md" data-aos="fade-up">
+      <section className="pt-40 pb-40 bg-light-2">
         <div className="container">
-          <div className="row y-gap-20 justify-between items-end">
-            <div className="col-auto">
-              <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">All Tours</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  These popular Tours have a lot to offer
-                </p>
+          <div className="row">
+            <div className="col-12">
+              <div className="text-center">
+                {/* <h1 className="text-30 fw-600">Tours in London</h1> */}
               </div>
+              {/* End text-center */}
+              <MainFilterSearchBox />
             </div>
+            {/* End col-12 */}
           </div>
+        </div>
+      </section>
+      {/* Top SearchBanner */}
 
-          <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-            {tourData ? (
-              <Tours tours={tourData.getTours} />
-            ) : (
-              <h2 className="text-center">No Tours</h2>
-            )}
+      <section className="layout-pt-md layout-pb-lg">
+        <div className="container">
+          <div className="row y-gap-30">
+            <div className="col-xl-3">
+              <aside className="sidebar y-gap-40 xl:d-none">
+                <Sidebar />
+              </aside>
+              {/* End sidebar for desktop */}
+
+              <div
+                className="offcanvas offcanvas-start"
+                tabIndex="-1"
+                id="listingSidebar"
+              >
+                <div className="offcanvas-header">
+                  <h5 className="offcanvas-title" id="offcanvasLabel">
+                    Filter Tours
+                  </h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                {/* End offcanvas header */}
+
+                <div className="offcanvas-body">
+                  <aside className="sidebar y-gap-40  xl:d-block">
+                    <Sidebar />
+                  </aside>
+                </div>
+                {/* End offcanvas body */}
+              </div>
+              {/* End mobile menu sidebar */}
+            </div>
+            {/* End col */}
+
+            <div className="col-xl-9 ">
+              <TopHeaderFilter />
+              <div className="mt-30"></div>
+              {/* End mt--30 */}
+              <div className="row y-gap-30">
+                <TourProperties filter={filter} />
+              </div>
+              {/* End .row */}
+              <Pagination
+                setCurrentPage={setCurrentPage}
+                totalPage={totalPage}
+                currentPage={currentPage}
+                dataPerPage={dataPerPage}
+              />
+            </div>
+            {/* End .col for right content */}
           </div>
+          {/* End .row */}
         </div>
         {/* End .container */}
       </section>
+      {/* End layout for listing sidebar and content */}
 
       <CallToActions />
       {/* End Call To Actions Section */}
 
       <DefaultFooter />
-      {/* End Call To Actions Section */}
     </>
   );
 };
 
-export default dynamic(() => Promise.resolve(AllTours), { ssr: false });
+export default dynamic(() => Promise.resolve(Tour), { ssr: false });

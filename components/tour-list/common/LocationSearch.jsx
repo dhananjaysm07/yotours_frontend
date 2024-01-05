@@ -1,37 +1,49 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { countryData } from "../../../utils/country";
 
-const SearchBar = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [selectedItem, setSelectedItem] = useState(null);
+const SearchBar = ({ searchValue, setSearchValue }) => {
+  const [selectedItem, setSelectedItem] = React.useState(null);
+  // const locationSearchContent = [
+  //   {
+  //     id: 1,
+  //     name: "London",
+  //     address: "Greater London, United Kingdom",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "New York",
+  //     address: "New York State, United States",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Paris",
+  //     address: "France",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Madrid",
+  //     address: "Spain",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Santorini",
+  //     address: "Greece",
+  //   },
+  // ];
 
-  const locationSearchContent = [
-    {
-      id: 1,
-      name: "London",
-      address: "Greater London, United Kingdom",
-    },
-    {
-      id: 2,
-      name: "New York",
-      address: "New York State, United States",
-    },
-    {
-      id: 3,
-      name: "Paris",
-      address: "France",
-    },
-    {
-      id: 4,
-      name: "Madrid",
-      address: "Spain",
-    },
-    {
-      id: 5,
-      name: "Santorini",
-      address: "Greece",
-    },
-  ];
-
+  let locationData = [];
+  countryData.forEach((data) => {
+    const newArray = data.countries.map((el, index) => ({
+      id: index + Math.random(),
+      name: el.name,
+      address: data.continent,
+    }));
+    // console.log("neww array", newArray);
+    locationData = [...locationData, ...newArray];
+  });
+  // console.log("locaiion array", locationData);
+  const locationSearchContent = [...locationData];
+  // console.log("location array", locationSearchContent);
   const handleOptionClick = (item) => {
     setSearchValue(item.name);
     setSelectedItem(item);

@@ -155,6 +155,42 @@ export const GET_TOURS_QUERY = gql`
   }
 `;
 
+export const GET_FILTERED_TOURS = gql`
+  query GetFilteredTours(
+    $page: Int!
+    $loadCount: Int!
+    $filter: TourFilterInput!
+  ) {
+    getFilteredTours(page: $page, loadCount: $loadCount, filter: $filter) {
+      tours {
+        id
+        tourTitle
+        images {
+          id
+          imageUrl
+        }
+        tourHyperlink
+        tourBokunId
+        location
+        destination {
+          id
+          destinationName
+          fromDate
+          toDate
+        }
+        price
+        currency
+        tag {
+          id
+          name
+          active
+        }
+      }
+      totalCount
+    }
+  }
+`;
+
 export const GET_ATTRACTIONS_QUERY = gql`
   query GetAttractions {
     getAttractions {
@@ -218,6 +254,14 @@ export const GET_THINGS_QUERY = gql`
         id
         name
       }
+    }
+  }
+`;
+
+export const GET_ALL_TAGS = gql`
+  query GetAllTags {
+    getAllTags {
+      name
     }
   }
 `;
