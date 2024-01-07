@@ -76,7 +76,7 @@ const Things = ({ things = [] }) => {
                     >
                       {item?.images?.map((slide, i) => (
                         <SwiperSlide key={i}>
-                          <div className="cardImage ratio ratio-1:1">
+                          <div className="cardImage ratio ratio-2:1">
                             <div className="cardImage__content">
                               <Image
                                 width={300}
