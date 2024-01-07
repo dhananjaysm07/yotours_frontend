@@ -28,7 +28,46 @@ export const GET_DESTINATIONS_QUERY = gql`
     }
   }
 `;
-
+export const GET_FILTERED_DESTINATION = gql`
+  query GetFilteredDestination(
+    $page: Int!
+    $loadCount: Int!
+    $filter: TourFilterInput!
+  ) {
+    getFilteredDestination(
+      page: $page
+      loadCount: $loadCount
+      filter: $filter
+    ) {
+      destinations {
+        id
+        destinationName
+        description
+        bannerImage
+        isPopular
+        continent
+        country
+        bannerHeading
+        fromDate
+        toDate
+        fromOccasion
+        toOccasion
+        introduction
+        images {
+          id
+          imageUrl
+        }
+        tours {
+          id
+        }
+        attractions {
+          id
+        }
+      }
+      totalCount
+    }
+  }
+`;
 // query GetDestinations {
 //   getDestinations {
 //     id

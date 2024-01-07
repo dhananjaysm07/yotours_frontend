@@ -1,11 +1,11 @@
 import React from "react";
 import DateSearch from "../common/DateSearch";
 import LocationSearch from "./LocationSearch";
-import { useTourFilterStore } from "../../../lib/store";
+import { useDestinationFilterStore } from "../../../lib/store";
 
 const MainFilterSearchBox = () => {
   const [searchValue, setSearchValue] = React.useState("");
-  const { setLocation } = useTourFilterStore();
+  const { setLocation } = useDestinationFilterStore();
   return (
     <>
       <div className="col-12">

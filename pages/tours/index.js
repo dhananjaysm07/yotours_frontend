@@ -8,12 +8,12 @@ import { useData } from "../../lib/datacontext";
 import Activity from "../../components/activity/Activity";
 import parse from "html-react-parser";
 // import Tourcombined from "../../components/tour-list/AllTour-combined";
-import TourProperties from "../../components/tour-list/tour-list-v1/TourProperties";
-import TopHeaderFilter from "../../components/tour-list/tour-list-v1/TopHeaderFilter";
+import TourProperties from "../../components/tour-list/tour-list-v2/TourProperties";
+import TopHeaderFilter from "../../components/tour-list/tour-list-v2/TopHeaderFilter";
 // import { Pagination } from "swiper";
 // import { Sidebar } from "react-pro-sidebar";
 import Pagination from "../../components/tour-list/common/Pagination";
-import Sidebar from "../../components/tour-list/tour-list-v1/Sidebar";
+import Sidebar from "../../components/tour-list/tour-list-v2/Sidebar";
 import MainFilterSearchBox from "../../components/tour-list/tour-list-v1/MainFilterSearchBox";
 import { useTourFilterStore, useTourPaginationStore } from "../../lib/store";
 import React from "react";
@@ -30,14 +30,22 @@ const Tour = () => {
   // const [location, setLocation] = React.useState(null);
   // const [priceMin, setPriceMin] = React.useState(null);
   // const [tagName, setTagName] = React.useState([]);
-  const { startTime, endTime, priceMax, location, priceMin, tagName } =
-    useTourFilterStore();
+  const {
+    startTime,
+    endTime,
+    priceMax,
+    location,
+    priceMin,
+    tagName,
+    continent,
+  } = useTourFilterStore();
   const [filter, setFilter] = React.useState({
     priceMin: null,
     startDate: null,
     priceMax: null,
     location: null,
     endDate: null,
+    continent: [],
     tagName: [],
   });
 
@@ -51,8 +59,9 @@ const Tour = () => {
       location: location,
       endDate: endTime,
       tagName: tagName,
+      continent: continent,
     });
-  }, [priceMax, priceMin, startTime, endTime, location, tagName]);
+  }, [priceMax, priceMin, startTime, endTime, location, tagName, continent]);
   return (
     <>
       <Seo pageTitle="Tour List v1" />
@@ -67,20 +76,17 @@ const Tour = () => {
       <DefaultHeader />
       {/* End Header 1 */}
 
-      <section className="pt-40 pb-40 bg-light-2">
+      {/* <section className="pt-40 pb-40 bg-light-2">
         <div className="container">
           <div className="row">
             <div className="col-12">
               <div className="text-center">
-                {/* <h1 className="text-30 fw-600">Tours in London</h1> */}
               </div>
-              {/* End text-center */}
               <MainFilterSearchBox />
             </div>
-            {/* End col-12 */}
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Top SearchBanner */}
 
       <section className="layout-pt-md layout-pb-lg">

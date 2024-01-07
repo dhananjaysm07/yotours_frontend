@@ -51,13 +51,14 @@ const TourProperties = ({ filter }) => {
   };
 
   const handleRefetchDataForFirstTime = async () => {
+    setIsLoading(true);
     const dataNew = await refetch({
       page: 1,
       loadCount,
       filter,
     });
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    setIsLoading(dataNew.loading);
+    setIsLoading(false);
     setTourPaginationData(
       Math.ceil(dataNew?.data?.getFilteredTours?.totalCount / dataPerPage),
       1, ///current page

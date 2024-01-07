@@ -1,8 +1,35 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { countryData } from "../../../utils/country";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = React.useState(null);
+  // const locationSearchContent = [
+  //   {
+  //     id: 1,
+  //     name: "London",
+  //     address: "Greater London, United Kingdom",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "New York",
+  //     address: "New York State, United States",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Paris",
+  //     address: "France",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Madrid",
+  //     address: "Spain",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Santorini",
+  //     address: "Greece",
+  //   },
+  // ];
 
   let locationData = [];
   countryData.forEach((data) => {
@@ -24,7 +51,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
 
   return (
     <>
-      <div className="searchMenu-loc px-20 py-10 bg-white rounded-4 js-form-dd js-liverSearch">
+      <div className="searchMenu-loc pl-20 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
         <div
           data-bs-toggle="dropdown"
           data-bs-auto-close="true"

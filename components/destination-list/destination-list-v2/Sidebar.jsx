@@ -7,13 +7,16 @@ import MainFilterSearchBox from "./MainFilterSearchBox";
 import { useData } from "../../../lib/datacontext";
 import React from "react";
 import { countryData } from "../../../utils/country";
-import { useTourFilterStore } from "../../../lib/store";
+import {
+  useDestinationFilterStore,
+  useTourFilterStore,
+} from "../../../lib/store";
 
 const Sidebar = () => {
   const { tagNameList } = useData();
   const [categories, setCategories] = React.useState([]);
   const { setTag, removeTag, setContinent, removeContinent } =
-    useTourFilterStore();
+    useDestinationFilterStore();
   // const [category,setCategory]=React.useState("")
   const continent = countryData.map((el) => el.continent);
   React.useEffect(() => {

@@ -1,13 +1,13 @@
-import { useTourPaginationStore } from "../../../lib/store";
+import { useDestinationPaginationStore } from "../../../lib/store";
 
 const TopHeaderFilter = () => {
-  const { totalResult } = useTourPaginationStore();
+  const { totalResult } = useDestinationPaginationStore();
   return (
     <>
       <div className="row y-gap-10 items-center justify-between">
         <div className="col-auto">
           <div className="text-18">
-            <span className="fw-500">{totalResult} Tours available</span>{" "}
+            <span className="fw-500">{totalResult} Destinations available</span>{" "}
             {/* in europe */}
           </div>
         </div>

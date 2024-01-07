@@ -19,8 +19,8 @@ const Sidebar = () => {
         <div className="sidebar-checkbox">
           <CategoryTypes categories={categories} />
         </div>
-        {/* End Sidebar-checkbox */}
       </div>
+
       {/* End popular filter */}
       {/* 
       <div className="sidebar__item">

@@ -5,34 +5,39 @@ import { Navigation, Pagination } from "swiper";
 import toursData from "../../../data/tours";
 import isTextMatched from "../../../utils/isTextMatched";
 import { useData } from "../../../lib/datacontext";
-import { useTourPaginationStore } from "../../../lib/store";
+import {
+  useDestinationFilterStore,
+  useDestinationPaginationStore,
+  useTourPaginationStore,
+} from "../../../lib/store";
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_FILTERED_TOURS } from "../../../graphql/query";
+import { createSlug } from "../../../utils/slugify";
 const TourProperties = ({ filter }) => {
   const {
     contentData,
-    refetch,
-    tourFilteredData,
-    tourFilteredError,
-    tourFilteredLoading,
+    destinationFilteredLoading,
+    destinationFilteredError,
+    destinationFilteredData,
+    refetchFilteredDestination,
   } = useData();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const {
-    setTourPaginationData,
+    setDestinationPaginationData,
     currentPage,
     dataPerPage,
     loadCount,
     totalPageLoaded,
     setCurrentPage,
-    setTourData,
-    tourList,
+    setDestinationData,
+    destinationList,
     totalResult,
-  } = useTourPaginationStore();
+  } = useDestinationPaginationStore();
 
   const handleRefetchData = async () => {
-    const dataNew = await refetch({
+    const dataNew = await refetchFilteredDestination({
       page: totalPageLoaded + 1,
       loadCount,
       filter,
@@ -47,24 +52,29 @@ const TourProperties = ({ filter }) => {
     //     setIsLoading(false);
     //   }, 2000);
     // }
-    setTourData(dataNew?.data?.getFilteredTours?.tours, totalPageLoaded + 1);
+    setDestinationData(
+      dataNew?.data?.getFilteredDestination?.tours,
+      totalPageLoaded + 1
+    );
   };
 
   const handleRefetchDataForFirstTime = async () => {
     setIsLoading(true);
-    const dataNew = await refetch({
+    const dataNew = await refetchFilteredDestination({
       page: 1,
       loadCount,
       filter,
     });
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
     setIsLoading(dataNew.loading);
-    setTourPaginationData(
-      Math.ceil(dataNew?.data?.getFilteredTours?.totalCount / dataPerPage),
+    setDestinationPaginationData(
+      Math.ceil(
+        dataNew?.data?.getFilteredDestination?.totalCount / dataPerPage
+      ),
       1, ///current page
       1, ////page loaded from api
-      dataNew?.data?.getFilteredTours?.totalCount,
-      dataNew?.data?.getFilteredTours?.tours
+      dataNew?.data?.getFilteredDestination?.totalCount,
+      dataNew?.data?.getFilteredDestination?.destinations
     );
   };
 
@@ -92,9 +102,9 @@ const TourProperties = ({ filter }) => {
   }, [currentPage]);
 
   React.useEffect(() => {
-    setTourPaginationData(0, 0, 0, 0, []);
+    setDestinationPaginationData(0, 0, 0, 0, []);
   }, [filter]);
-  // console.log("tour list", tourList);
+  // console.log("tour list", destinationList);
   React.useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
     if (bokunChannelId) {
@@ -148,11 +158,12 @@ const TourProperties = ({ filter }) => {
     slidesToScroll: 1,
   };
   if (isLoading) return <p>Loading...</p>;
-  if (tourFilteredError) return <p>Error: {tourFilteredError.message}</p>;
-  console.log("tour list", tourList);
+  if (destinationFilteredError)
+    return <p>Error: {destinationFilteredError.message}</p>;
+  console.log("tour list", destinationList);
   return (
     <>
-      {tourList
+      {destinationList
         ?.slice((currentPage - 1) * dataPerPage, currentPage * dataPerPage)
         .map((item, index) => (
           <div
@@ -162,7 +173,11 @@ const TourProperties = ({ filter }) => {
             data-aos-delay={(index + 1) * 100}
           >
             <Link
-              href={`/tour/tour-single/${item.id}`}
+              href={{
+                pathname: `/destinations/${createSlug(item.destinationName)}`,
+                query: { id: item.id }, // passing the ID as a query parameter
+              }}
+              key={item.id}
               className="tourCard -type-1 rounded-4 position-relative"
             >
               <div className="tourCard__image">
@@ -234,10 +249,10 @@ const TourProperties = ({ filter }) => {
                   <div className="text-14 text-light-1">{item?.tourType}</div>
                 </div>
                 <h4 className="tourCard__title text-dark-1 text-18 lh-16 fw-500">
-                  <span> {item?.tourTitle}</span>
+                  <span> {item?.bannerHeading}</span>
                 </h4>
                 <p className="text-light-1 lh-14 text-14 mt-5">
-                  {item?.location}
+                  {item?.destinationName}
                 </p>
 
                 <div className="row justify-between items-center pt-15">
@@ -258,13 +273,13 @@ const TourProperties = ({ filter }) => {
                     </div>
                   </div>
                   <div className="col-auto">
-                    <div className="text-14 text-light-1">
+                    {/* <div className="text-14 text-light-1">
                       From
                       <span className="text-16 fw-500 text-dark-1">
                         {" "}
                         {item?.currency} {item?.price}
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
