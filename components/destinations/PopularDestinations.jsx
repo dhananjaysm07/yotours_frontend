@@ -8,12 +8,17 @@ import { GET_DESTINATIONS_QUERY } from "../../graphql/query";
 import { useQuery } from "@apollo/client";
 import { createSlug } from "../../utils/slugify";
 import { useData } from "../../lib/datacontext";
-const PopularDestinations = () => {
+const PopularDestinations = ({
+  popularDestinations,
+  destinationError,
+  destinationLoading,
+  id,
+}) => {
   // const { loading, error, data } = useQuery(GET_DESTINATIONS_QUERY);
-  const {destinationData,destinationLoading,destinationError} = useData()
-  const popularDestinations = destinationData?.getDestinations?.filter(destination =>
-    destination.isPopular == true
-  );
+  // const { destinationData, destinationLoading, destinationError } = useData();
+  // const popularDestinations = destinationData?.getDestinations?.filter(
+  //   (destination) => destination.isPopular == true
+  // );
 
   if (destinationLoading) return <p>Loading destinations...</p>;
   if (destinationError) return <p>Error loading destinations</p>;
@@ -23,13 +28,13 @@ const PopularDestinations = () => {
         spaceBetween={30}
         className="overflow-visible"
         scrollbar={{
-          el: ".js-popular-destination-scrollbar",
+          el: `.js-popular-destination-scrollbar_${id}`,
           draggable: true,
         }}
         modules={[Scrollbar, Navigation]}
         navigation={{
-          nextEl: ".js-destination-next",
-          prevEl: ".js-destination-prev",
+          nextEl: `.js-destination-next_${id}`,
+          prevEl: `.js-destination-prev_${id}`,
         }}
         breakpoints={{
           500: {
@@ -65,14 +70,16 @@ const PopularDestinations = () => {
                   src={item.bannerImage}
                   alt="image"
                   className="js-lazy"
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="citiesCard__content d-flex flex-column justify-between text-center pt-30 pb-20 px-20">
                 <div className="citiesCard__bg" />
                 <div className="citiesCard__top">
                   <div className="text-14 text-white">
-                    {item.tours ? item.tours.length:0} {" Tours"} {item.attractions ? item.attractions.length:0} {" Attractions"}
+                    {item.tours ? item.tours.length : 0} {" Tours"}{" "}
+                    {item.attractions ? item.attractions.length : 0}{" "}
+                    {" Attractions"}
                   </div>
                 </div>
                 <div className="citiesCard__bottom">
@@ -90,13 +97,19 @@ const PopularDestinations = () => {
       </Swiper>
 
       <div>
-        <button className="section-slider-nav  -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-prev">
+        <button
+          className={`section-slider-nav  -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-prev_${id}`}
+        >
           <i className="icon icon-chevron-left text-12" />
         </button>
-        <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-next">
+        <button
+          className={`section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-next_${id}`}
+        >
           <i className="icon icon-chevron-right text-12" />
         </button>
-        <div className="slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar" />
+        <div
+          className={`slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar_${id}`}
+        />
       </div>
     </>
   );

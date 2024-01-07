@@ -15,6 +15,8 @@ import { GET_DESTINATION } from "../../graphql/query";
 import { useQuery } from "@apollo/client";
 import { useData } from "../../lib/datacontext";
 import Things from "../../components/things/Things";
+import IntroTown from "../../components/destinations/components/IntroTown";
+
 const Destinations = () => {
   const router = useRouter();
   const { query } = router;
@@ -36,7 +38,7 @@ const Destinations = () => {
   const things = thingsData?.getThings?.filter(
     (thing) => thing.destination.id === id
   );
-  console.log("Things are", things)
+  console.log("Things are", things);
 
   if (!destination) return <p>Destination not found.</p>;
   return (
@@ -64,17 +66,20 @@ const Destinations = () => {
             <Categories />
           </div> */}
           {/* End .row */}
+          {destination.introduction ? (
+            <div className="row y-gap-20 pt-40">
+              <div className="col-auto">
+                <h2>What to know before visiting London</h2>
+              </div>
 
-          {/* <div className="row y-gap-20 pt-40">
-            <div className="col-auto">
-              <h2>What to know before visiting London</h2>
+              <IntroTown introduction={destination.introduction} />
             </div>
+          ) : (
+            ""
+          )}
 
-            <IntroTown />
-          </div>
-
-          <div className="pt-30 mt-30 border-top-light" />
-
+          {/* <div className="pt-30 mt-30 border-top-light" /> */}
+          {/* 
           <div className="row y-gap-20">
             <div className="col-12">
               <h2 className="text-22 fw-500">Local weather</h2>
@@ -89,7 +94,7 @@ const Destinations = () => {
               <h2 className="text-22 fw-500">General info</h2>
             </div>
             {/* End .col */}
-            <GeneralInfo destination={destination}/>
+            <GeneralInfo destination={destination} />
           </div>
           {/* End .row */}
           <div className="mt-30 border-top-light" />

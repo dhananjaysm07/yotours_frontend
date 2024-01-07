@@ -10,10 +10,28 @@ import FilterHotelsTabs from "../../components/hotels/filter-tabs/FilterHotelsTa
 import Link from "next/link";
 import FilterTabContent from "../../components/hotels/FilterTabContent";
 import { useFilterStore } from "../../lib/store";
+import { useData } from "../../lib/datacontext";
+import React from "react";
 
 const Home_1 = () => {
   const { filterOption } = useFilterStore();
+  const { destinationData, destinationLoading, destinationError } = useData();
   console.log("api server RUNNING", process.env.NEXT_PUBLIC_API_URL);
+  console.log("destination data", destinationData);
+  const [destinationGroup, setDestinationGroup] = React.useState({});
+  React.useEffect(() => {
+    if (destinationData?.getDestinations?.length) {
+      setDestinationGroup((prev) => {
+        destinationData?.getDestinations.forEach((destination) => {
+          if (destination.isPopular)
+            prev[destination.continent] = prev[destination.continent]?.length
+              ? [...prev[destination.continent], destination]
+              : [destination];
+        });
+        return { ...prev };
+      });
+    }
+  }, [destinationData]);
   return (
     <>
       <Seo pageTitle="Home" />
@@ -50,10 +68,26 @@ const Home_1 = () => {
             {/* End col-auto */}
           </div>
           {/* End .row */}
+          {Object.keys(destinationGroup).map((el, index) => {
+            return (
+              <>
+                {" "}
+                <div className="relative pt-40 sm:pt-20">
+                  <strong className="mt-10 mb--2 sm:mt-0 font-bold text-lg">
+                    Destinations in {el}
+                  </strong>
+                  <PopularDestinations
+                    popularDestinations={destinationGroup[el]}
+                    destinationError={destinationError}
+                    destinationLoading={destinationLoading}
+                    id={index + 1}
+                  />
 
-          <div className="relative pt-40 sm:pt-20">
-            <PopularDestinations />
-          </div>
+                  {/* <PopularDestinations /> */}
+                </div>
+              </>
+            );
+          })}
         </div>
         {/* End .container */}
       </section>
