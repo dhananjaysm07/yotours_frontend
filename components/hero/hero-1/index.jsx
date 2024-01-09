@@ -25,6 +25,8 @@ const index = () => {
               : "/img/masthead/1/bg.webp"
           }
           className="js-lazy"
+          //Opacity to modify 
+          //TODO:
         />
       </div>
       <div className="container">
@@ -40,7 +42,7 @@ const index = () => {
                   : "Find Next Place To Visit"}
               </h1>
               <p
-                className="text-white mt-6 md:mt-10"
+                className="text-white mt-6 md:mt-10 text-25"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >

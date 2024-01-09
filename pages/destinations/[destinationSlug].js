@@ -55,6 +55,13 @@ const Destinations = () => {
       <LocationTopBar props={destination} />
       {/* End location top bar section */}
 
+{/* 
+
+Dynamic Tours, Attractions fetching with pagination logic in slider
+TODO:
+
+
+*/}
       <section className="layout-pb-md">
         <div className="container">
           <div className="row">
@@ -69,7 +76,7 @@ const Destinations = () => {
           {destination.introduction ? (
             <div className="row y-gap-20 pt-40">
               <div className="col-auto">
-                <h2>What to know before visiting London</h2>
+                <h2>What to know before visiting {destination.destinationName}</h2>
               </div>
 
               <IntroTown introduction={destination.introduction} />

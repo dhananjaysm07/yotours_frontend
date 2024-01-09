@@ -3,30 +3,19 @@ import CallToActions from "../../components/common/CallToActions";
 import Seo from "../../components/common/Seo";
 import DefaultHeader from "../../components/header/default-header";
 import DefaultFooter from "../../components/footer/default";
-import Tours from "../../components/tours/Tours";
-import { useData } from "../../lib/datacontext";
-import Activity from "../../components/activity/Activity";
-import parse from "html-react-parser";
-// import Tourcombined from "../../components/tour-list/AllTour-combined";
-import TourProperties from "../../components/destination-list/destination-list-v2/TourProperties";
 import TopHeaderFilter from "../../components/destination-list/destination-list-v2/TopHeaderFilter";
-// import { Pagination } from "swiper";
-// import { Sidebar } from "react-pro-sidebar";
 import Pagination from "../../components/destination-list/common/Pagination";
-import Sidebar from "../../components/destination-list/destination-list-v2/Sidebar";
 import {
   useDestinationFilterStore,
-  useTourFilterStore,
-  useTourPaginationStore,
+  useDestinationPaginationStore
 } from "../../lib/store";
 import React from "react";
+import DestinationGrid from "../../components/destination-list/destination-list-v2/DestinationGrid";
+import DestinationSidebar from "../../components/destination-list/destination-list-v2/Sidebar";
 
-// import styles from "./tnc.module.scss";
-// import { contextType } from "google-map-react";
-
-const Tour = () => {
+const Destination = () => {
   const { setCurrentPage, totalPage, currentPage, dataPerPage } =
-    useTourPaginationStore();
+  useDestinationPaginationStore();
   // const [startTime, setStartTime] = React.useState(null);
   // const [endTime, setEndTime] = React.useState(null);
   // const [priceMax, setPriceMax] = React.useState(null);
@@ -97,7 +86,7 @@ const Tour = () => {
           <div className="row y-gap-30">
             <div className="col-xl-3">
               <aside className="sidebar y-gap-40 xl:d-none">
-                <Sidebar />
+                <DestinationSidebar />
               </aside>
               {/* End sidebar for desktop */}
 
@@ -108,7 +97,7 @@ const Tour = () => {
               >
                 <div className="offcanvas-header">
                   <h5 className="offcanvas-title" id="offcanvasLabel">
-                    Filter Tours
+                    Filter Destinations
                   </h5>
                   <button
                     type="button"
@@ -121,7 +110,7 @@ const Tour = () => {
 
                 <div className="offcanvas-body">
                   <aside className="sidebar y-gap-40  xl:d-block">
-                    <Sidebar />
+                    <DestinationSidebar />
                   </aside>
                 </div>
                 {/* End offcanvas body */}
@@ -135,7 +124,7 @@ const Tour = () => {
               <div className="mt-30"></div>
               {/* End mt--30 */}
               <div className="row y-gap-30">
-                <TourProperties filter={filter} />
+                <DestinationGrid filter={filter} />
               </div>
               {/* End .row */}
               <Pagination
@@ -161,4 +150,4 @@ const Tour = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Tour), { ssr: false });
+export default dynamic(() => Promise.resolve(Destination), { ssr: false });

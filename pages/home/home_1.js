@@ -43,15 +43,38 @@ const Home_1 = () => {
       <Hero1 />
       {/* End Hero 1 */}
 
+      {/* 
+
+      Logo: Company Name
+      Header : Work with Us Button
+      Footer: Agent Login
+
+
+      LENGTH: 3 (Europe, Asia)
+      Popular Destination in Europe
+      Top Tours and Attraction Tickets in Europe
+
+      Popular Destination in Asia
+      Top Tours and Attraction Tickets in Asia
+      
+
+
+      TODO: Destinations We Love, Continent Wise Tabs
+
+
+      */}
+
       <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Popular Destinations</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                <h2 className="sectionTitle__title">Popular Destinations </h2>
+                {/* <h2 className="sectionTitle__title">Popular Destinations in {el}</h2> */}
+
+                {/* <p className=" sectionTitle__text mt-5 sm:mt-0">
                   These popular destinations have a lot to offer
-                </p>
+                </p> */}
               </div>
             </div>
             {/* End col-auto */}
@@ -73,9 +96,7 @@ const Home_1 = () => {
               <>
                 {" "}
                 <div className="relative pt-40 sm:pt-20">
-                  <strong className="mt-10 mb--2 sm:mt-0 font-bold text-lg">
-                    Destinations in {el}
-                  </strong>
+                  
                   <PopularDestinations
                     popularDestinations={destinationGroup[el]}
                     destinationError={destinationError}
@@ -101,6 +122,8 @@ const Home_1 = () => {
         </div>
       </section>
       {/* Block Guide Section */}
+
+      {/* COUPON SECTION */}
 
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">

@@ -204,10 +204,11 @@ const FilterTabContent = () => {
                 <div className="fw-500">
                   Starting from{" "}
                   <span className="text-blue-1">
-                    {item?.currency === "USD" && "$"}
+                    {/* {item?.currency === "USD" && "$"}
                     {item?.currency === "EUR" && "€"}
                     {item?.currency === "GBP" && "£"}
-                    {item?.currency === "INR" && "₹"}
+                    {item?.currency === "INR" && "₹"} */}
+                    {item?.currency}{" "}
                     {item?.price}
                   </span>
                 </div>

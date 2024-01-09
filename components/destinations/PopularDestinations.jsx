@@ -69,7 +69,8 @@ const PopularDestinations = ({
                   height={400}
                   src={item.bannerImage}
                   alt="image"
-                  className="js-lazy"
+                  // className="js-lazy"
+                  //TODO: BLUR IMAGES
                   style={{ objectFit: "cover" }}
                 />
               </div>

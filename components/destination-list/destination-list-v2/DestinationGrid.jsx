@@ -14,7 +14,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_FILTERED_TOURS } from "../../../graphql/query";
 import { createSlug } from "../../../utils/slugify";
-const TourProperties = ({ filter }) => {
+const DestinationGrid = ({ filter }) => {
   const {
     contentData,
     destinationFilteredLoading,
@@ -192,27 +192,25 @@ const TourProperties = ({ filter }) => {
                         }}
                         navigation={true}
                       >
-                        {item?.images?.map((slide, i) => (
-                          <SwiperSlide key={i}>
+                        
                             <Image
                               width={300}
                               height={300}
                               className="rounded-4 col-12 js-lazy"
-                              src={slide.imageUrl}
+                              src={item.bannerImage}
                               alt="image"
                             />
-                          </SwiperSlide>
-                        ))}
+                         
                       </Swiper>
                     </div>
                   </div>
                 </div>
 
-                <div className="cardImage__wishlist">
+                {/* <div className="cardImage__wishlist">
                   <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
                     <i className="icon-heart text-12" />
                   </button>
-                </div>
+                </div> */}
 
                 {item?.tag?.name ? (
                   <div className="cardImage__leftBadge">
@@ -241,22 +239,17 @@ const TourProperties = ({ filter }) => {
               {/* End .tourCard__image */}
 
               <div className="tourCard__content mt-10">
-                <div className="d-flex items-center lh-14 mb-5">
-                  <div className="text-14 text-light-1">
-                    {/* {item?.duration}+ hours */}
-                  </div>
-                  <div className="size-3 bg-light-1 rounded-full ml-10 mr-10" />
-                  <div className="text-14 text-light-1">{item?.tourType}</div>
-                </div>
+              
                 <h4 className="tourCard__title text-dark-1 text-18 lh-16 fw-500">
-                  <span> {item?.bannerHeading}</span>
+                {item?.destinationName}
                 </h4>
-                <p className="text-light-1 lh-14 text-14 mt-5">
-                  {item?.destinationName}
-                </p>
+                {/* <p className="text-light-1 lh-14 text-14 mt-5">
+                
+               {item?.bannerHeading}
+               </p> */}
 
                 <div className="row justify-between items-center pt-15">
-                  <div className="col-auto">
+                  {/* <div className="col-auto">
                     <div className="d-flex items-center">
                       <div className="d-flex items-center x-gap-5">
                         <div className="icon-star text-yellow-1 text-10" />
@@ -265,13 +258,9 @@ const TourProperties = ({ filter }) => {
                         <div className="icon-star text-yellow-1 text-10" />
                         <div className="icon-star text-yellow-1 text-10" />
                       </div>
-                      {/* End ratings */}
-
-                      {/* <div className="text-14 text-light-1 ml-10">
-                        {item?.numberOfReviews} reviews
-                      </div> */}
+        
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-auto">
                     {/* <div className="text-14 text-light-1">
                       From
@@ -290,4 +279,4 @@ const TourProperties = ({ filter }) => {
   );
 };
 
-export default TourProperties;
+export default DestinationGrid;

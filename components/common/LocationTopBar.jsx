@@ -30,7 +30,7 @@ const LocationTopBar = ({ props }) => {
           <div className="col-auto">
             {props && (
               <a href="#" className="text-14 text-light-1">
-                {props.destinationName} Tourism: Best of {props.destinationName}
+                {props.destinationName} Tourism: Top things to do in {props.destinationName}
               </a>
             )}
           </div>

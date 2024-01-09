@@ -6,6 +6,9 @@ import { useDestinationFilterStore } from "../../../lib/store";
 const MainFilterSearchBox = () => {
   const [searchValue, setSearchValue] = React.useState("");
   const { setLocation } = useDestinationFilterStore();
+
+  //TODO: Destinations ONLY Which are in db
+  
   return (
     <>
       <div className="col-12">
