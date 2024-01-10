@@ -132,7 +132,7 @@ const Tour = () => {
               <div className="mt-30"></div>
               {/* End mt--30 */}
               <div className="row y-gap-30">
-                <TourProperties filter={filter} />
+                <TourProperties filter={filter} setFilter={setFilter} />
               </div>
               {/* End .row */}
               <Pagination

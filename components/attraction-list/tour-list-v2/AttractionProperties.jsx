@@ -5,22 +5,18 @@ import { Navigation, Pagination } from "swiper";
 import toursData from "../../../data/tours";
 import isTextMatched from "../../../utils/isTextMatched";
 import { useData } from "../../../lib/datacontext";
-import {
-  useFilterStore,
-  useTourFilterStore,
-  useTourPaginationStore,
-} from "../../../lib/store";
+import { useAttractionPaginationStore } from "../../../lib/store";
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_FILTERED_TOURS } from "../../../graphql/query";
+// import { GET_FILTERED_TOURS } from "../../../graphql/query";
 import { useRouter } from "next/router";
-const TourProperties = ({ filter, setFilter }) => {
+const AttractionProperties = ({ filter, setFilter }) => {
   const {
     contentData,
-    refetch,
-    tourFilteredData,
-    tourFilteredError,
-    tourFilteredLoading,
+    refetchAttraction,
+    attractionFilteredData,
+    attractionFilteredError,
+    attractionFilteredLoading,
   } = useData();
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
@@ -38,21 +34,21 @@ const TourProperties = ({ filter, setFilter }) => {
         tagName: [],
       });
   }, [continent]);
-  console.log("filter-------------", filter, continent);
+  // console.log("filter-------------", filter, continent);
   const {
-    setTourPaginationData,
+    setAttractionPaginationData,
     currentPage,
     dataPerPage,
     loadCount,
     totalPageLoaded,
     setCurrentPage,
-    setTourData,
-    tourList,
+    setAttractionData,
+    attractionList,
     totalResult,
-  } = useTourPaginationStore();
+  } = useAttractionPaginationStore();
 
   const handleRefetchData = async () => {
-    const dataNew = await refetch({
+    const dataNew = await refetchAttraction({
       page: totalPageLoaded + 1,
       loadCount,
       filter,
@@ -67,24 +63,29 @@ const TourProperties = ({ filter, setFilter }) => {
     //     setIsLoading(false);
     //   }, 2000);
     // }
-    setTourData(dataNew?.data?.getFilteredTours?.tours, totalPageLoaded + 1);
+    setAttractionData(
+      dataNew?.data?.getFilteredAttractions?.attractions,
+      totalPageLoaded + 1
+    );
   };
 
   const handleRefetchDataForFirstTime = async () => {
     setIsLoading(true);
-    const dataNew = await refetch({
+    const dataNew = await refetchAttraction({
       page: 1,
       loadCount,
       filter,
     });
-    // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
+    console.log("new data", dataNew?.data?.getFilteredAttractions?.attractions);
     setIsLoading(dataNew.loading);
-    setTourPaginationData(
-      Math.ceil(dataNew?.data?.getFilteredTours?.totalCount / dataPerPage),
+    setAttractionPaginationData(
+      Math.ceil(
+        dataNew?.data?.getFilteredAttractions?.totalCount / dataPerPage
+      ),
       1, ///current page
       1, ////page loaded from api
-      dataNew?.data?.getFilteredTours?.totalCount,
-      dataNew?.data?.getFilteredTours?.tours
+      dataNew?.data?.getFilteredAttractions?.totalCount,
+      dataNew?.data?.getFilteredAttractions?.attractions
     );
   };
 
@@ -112,7 +113,7 @@ const TourProperties = ({ filter, setFilter }) => {
   }, [currentPage]);
 
   React.useEffect(() => {
-    setTourPaginationData(0, 0, 0, 0, []);
+    setAttractionPaginationData(0, 0, 0, 0, []);
   }, [filter]);
   // console.log("tour list", tourList);
   React.useEffect(() => {
@@ -168,11 +169,12 @@ const TourProperties = ({ filter, setFilter }) => {
     slidesToScroll: 1,
   };
   if (isLoading) return <p>Loading...</p>;
-  if (tourFilteredError) return <p>Error: {tourFilteredError.message}</p>;
-  console.log("tour list", tourList);
+  if (attractionFilteredError)
+    return <p>Error: {attractionFilteredError.message}</p>;
+  console.log("tour list", attractionList);
   return (
     <>
-      {tourList
+      {attractionList
         ?.slice((currentPage - 1) * dataPerPage, currentPage * dataPerPage)
         .map((item, index) => (
           <div
@@ -181,9 +183,9 @@ const TourProperties = ({ filter, setFilter }) => {
             data-aos="fade"
             data-aos-delay={(index + 1) * 100}
             style={{ cursor: "pointer" }}
-            className="bokunButton tourCard -type-1 rounded-4 hover-inside-slider col-lg-4 col-sm-6"
+            className="bokunButton -type-1 rounded-4 hover-inside-slider col-lg-4 col-sm-6"
             //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
-            data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item.tourBokunId}?partialView=1`}
+            data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item?.attractionBokunId}?partialView=1`}
           >
             <div className="tourCard__image">
               <div className="cardImage ratio ratio-2:1">
@@ -234,6 +236,10 @@ const TourProperties = ({ filter, setFilter }) => {
                       isTextMatched(item?.tag?.name, "top rated")
                         ? "bg-yellow-1 text-dark-1"
                         : ""
+                    } ${
+                      isTextMatched(item?.tag?.name, "Most Popular Tours")
+                        ? "bg-blue-2 text-dark-1"
+                        : ""
                     }`}
                   >
                     {item?.tag?.name}
@@ -254,7 +260,7 @@ const TourProperties = ({ filter, setFilter }) => {
                 <div className="text-14 text-light-1">{item?.tourType}</div>
               </div>
               <h4 className="tourCard__title text-dark-1 text-18 lh-16 fw-500">
-                <span> {item?.tourTitle}</span>
+                <span> {item?.attractionTitle}</span>
               </h4>
               <p className="text-light-1 lh-14 text-14 mt-5">
                 {item?.location}
@@ -294,4 +300,4 @@ const TourProperties = ({ filter, setFilter }) => {
   );
 };
 
-export default TourProperties;
+export default AttractionProperties;

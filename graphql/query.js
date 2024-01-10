@@ -259,7 +259,44 @@ export const GET_ATTRACTIONS_QUERY = gql`
     }
   }
 `;
-
+export const GET_FILTERED_ATTRACTIONs = gql`
+  query GetFilteredAttractions(
+    $page: Int!
+    $loadCount: Int!
+    $filter: TourFilterInput!
+  ) {
+    getFilteredAttractions(
+      page: $page
+      loadCount: $loadCount
+      filter: $filter
+    ) {
+      attractions {
+        id
+        attractionTitle
+        images {
+          id
+          imageUrl
+        }
+        location
+        attractionBokunId
+        attractionHyperlink
+        destination {
+          id
+          destinationName
+          continent
+        }
+        price
+        currency
+        tag {
+          id
+          name
+          active
+        }
+      }
+      totalCount
+    }
+  }
+`;
 export const GET_CONTENT_QUERY = gql`
   query GetContent {
     getContent {

@@ -14,7 +14,6 @@ import { useData } from "../../lib/datacontext";
 import React from "react";
 import FilterTabsHotelsForContinent from "../../components/hotels/filter-tabs/FilterHotelsContinent";
 import FilterTabContentContinent from "../../components/hotels/FilterTabContentContinent";
-import AddBanner from "../../components/add-banner/AddBanner";
 
 const Home_1 = () => {
   const { filterOption } = useFilterStore();
@@ -139,15 +138,6 @@ const Home_1 = () => {
       </section>
       {/* Block Guide Section */}
 
-      <section className="layout-pt-md layout-pb-md">
-        <div className="container">
-          <div className="row y-gap-20">
-            <AddBanner />
-          </div>
-        </div>
-        {/* End .container */}
-      </section>
-
       {/* COUPON SECTION */}
 
       <section className="layout-pt-md layout-pb-lg">
@@ -239,7 +229,23 @@ const Home_1 = () => {
                   <div className="sectionTitle -md">
                     <h2 className="sectionTitle__title">Best Seller</h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
-                      Our best selling {filterOption}
+                      {/* Our best selling {filterOption} */}
+                      <div className="col-auto md:d-none ml-auto">
+                        <Link
+                          href={
+                            filterOptionEurope == "tour"
+                              ? "/tours?continent=Europe"
+                              : "/attractions?continent=Europe"
+                          }
+                          className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                        >
+                          View All{" "}
+                          {filterOptionEurope == "tour"
+                            ? "Tours"
+                            : "Attractions"}
+                          <div className="icon-arrow-top-right ml-15" />
+                        </Link>
+                      </div>
                     </p>
                   </div>
                 </div>
@@ -339,7 +345,21 @@ const Home_1 = () => {
                   <div className="sectionTitle -md">
                     <h2 className="sectionTitle__title">Best Seller</h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
-                      Our best selling {filterOption}
+                      {/* Our best selling {filterOption} */}
+                      <div className="col-auto md:d-none ml-auto">
+                        <Link
+                          href={
+                            filterOptionAsia == "tour"
+                              ? "/tours?continent=Asia"
+                              : "/attractions?continent=Asia"
+                          }
+                          className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                        >
+                          View All{" "}
+                          {filterOptionAsia == "tour" ? "Tours" : "Attractions"}
+                          <div className="icon-arrow-top-right ml-15" />
+                        </Link>
+                      </div>
                     </p>
                   </div>
                 </div>
