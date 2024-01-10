@@ -126,7 +126,8 @@ const FilterTabContentContinent = ({
                         <Image
                           width={300}
                           height={300}
-                          className="rounded-4 col-12 js-lazy"
+                          quality={75}
+                          className="rounded-4 col-12"
                           src={slide.imageUrl}
                           alt="image"
                           style={{ objectFit: "cover" }}

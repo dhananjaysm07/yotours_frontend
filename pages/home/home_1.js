@@ -14,6 +14,7 @@ import { useData } from "../../lib/datacontext";
 import React from "react";
 import FilterTabsHotelsForContinent from "../../components/hotels/filter-tabs/FilterHotelsContinent";
 import FilterTabContentContinent from "../../components/hotels/FilterTabContentContinent";
+import AddBanner from "../../components/add-banner/AddBanner";
 
 const Home_1 = () => {
   const { filterOption } = useFilterStore();
@@ -137,6 +138,15 @@ const Home_1 = () => {
         </div>
       </section>
       {/* Block Guide Section */}
+
+      <section className="layout-pt-md layout-pb-md">
+        <div className="container">
+          <div className="row y-gap-20">
+            <AddBanner />
+          </div>
+        </div>
+        {/* End .container */}
+      </section>
 
       {/* COUPON SECTION */}
 

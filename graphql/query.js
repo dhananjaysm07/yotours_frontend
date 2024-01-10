@@ -273,6 +273,8 @@ export const GET_CONTENT_QUERY = gql`
       tnc
       privacy
       bokunChannelId
+      leftDiscountImage
+      rightDiscountImage
     }
   }
 `;

@@ -54,7 +54,7 @@ const PopularDestinations = ({
         }}
       >
         {popularDestinations?.map((item) => (
-          <SwiperSlide key={item.id}>
+          <SwiperSlide  key={item.id}>
             <Link
               href={{
                 pathname: `/destinations/${createSlug(item.destinationName)}`,
@@ -66,9 +66,11 @@ const PopularDestinations = ({
               <div className="citiesCard__image ratio ratio-3:4">
                 <Image
                   width={300}
+                  quality={100}
                   height={400}
                   src={item.bannerImage}
                   alt="image"
+                  
                   // className="js-lazy"
                   //TODO: BLUR IMAGES
                   style={{ objectFit: "cover" }}

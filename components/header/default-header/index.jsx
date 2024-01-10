@@ -37,6 +37,7 @@ const Header1 = () => {
                   {/* <img src="/img/general/logo-dark.svg" alt="logo icon" /> */}
                 </Link>
                 {/* End logo */}
+                <span className="text-black fw-600 mr-10 text-30">YoTours</span>
 
                 <div className="header-menu">
                   <div className="header-menu__content">

@@ -16,6 +16,7 @@ import { useQuery } from "@apollo/client";
 import { useData } from "../../lib/datacontext";
 import Things from "../../components/things/Things";
 import IntroTown from "../../components/destinations/components/IntroTown";
+import Categories from '../../components/destinations/components/Categories'
 
 const Destinations = () => {
   const router = useRouter();
@@ -69,9 +70,9 @@ TODO:
           </div>
           {/* End .row */}
 
-          {/* <div className="row x-gap-20 y-gap-20 items-center pt-20 item_gap-x10">
+          <div className="row x-gap-20 y-gap-20 items-center pt-20 item_gap-x10">
             <Categories />
-          </div> */}
+          </div>
           {/* End .row */}
           {destination.introduction ? (
             <div className="row y-gap-20 pt-40">
