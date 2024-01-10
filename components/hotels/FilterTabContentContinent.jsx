@@ -1,24 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
-import { hotelsData } from "../../data/hotels";
+// import { hotelsData } from "../../data/hotels";
 import isTextMatched from "../../utils/isTextMatched";
-import { useQuery } from "@apollo/client";
-import { GET_TOURS_QUERY } from "../../graphql/query";
+// import { useQuery } from "@apollo/client";
+// import { GET_TOURS_QUERY } from "../../graphql/query";
 import { useData } from "../../lib/datacontext";
-import { useFilterStore } from "../../lib/store";
+// import { useFilterStore } from "../../lib/store";
 import { useEffect } from "react";
-const FilterTabContent = ({
-  tourData,
-  tourLoading,
-  tourError,
-  attractionData,
-  attractionLoading,
-  attractionError,
-  contentData,
+const FilterTabContentContinent = ({
+  dataToRender,
+  filter,
+  loading,
+  error,
 }) => {
-  const { filterOption } = useFilterStore();
-  // console.log(filterOption);
+  // console.log(dataToRender);
   var itemSettings = {
     dots: true,
     infinite: true,
@@ -26,6 +22,8 @@ const FilterTabContent = ({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  const { contentData } = useData();
 
   // console.log("tourData", tourData);
 
@@ -79,20 +77,21 @@ const FilterTabContent = ({
     );
   }
 
-  if (tourLoading || attractionLoading) return <p>Loading...</p>;
-  if (tourError || attractionError) return <p>Error loading:</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading:</p>;
   // Determine the dataset based on the filterOption
-  let dataToRender, isTour;
-  if (filterOption === "tour") {
-    dataToRender = tourData?.getTours;
+  let isTour;
+  if (filter === "tour") {
+    // dataToRender = tourData?.getTours;
     isTour = true;
-  } else if (filterOption === "attractiontickets") {
-    dataToRender = attractionData?.getAttractions; // Replace with actual property name for attractions
+  } else if (filter === "attractiontickets") {
+    // dataToRender = attractionData?.getAttractions; // Replace with actual property name for attractions
     isTour = false;
   }
+
   return (
     <>
-      {dataToRender?.map((item) => (
+      {dataToRender?.slice(0, 4).map((item) => (
         <div
           className="col-xl-3 col-lg-3 col-sm-6"
           key={item?.id}
@@ -217,4 +216,4 @@ const FilterTabContent = ({
   );
 };
 
-export default FilterTabContent;
+export default FilterTabContentContinent;

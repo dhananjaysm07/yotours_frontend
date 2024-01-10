@@ -183,6 +183,7 @@ export const GET_TOURS_QUERY = gql`
       destination {
         id
         destinationName
+        continent
       }
       price
       currency
@@ -246,6 +247,7 @@ export const GET_ATTRACTIONS_QUERY = gql`
       destination {
         id
         destinationName
+        continent
       }
       price
       currency
