@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { destinations1 } from "../../../data/desinations";
 
-const Destinations = () => {
+const DestinationsWeLove = () => {
   const [filterOption, setFilterOption] = useState("all");
 
   const filterOptions = [
@@ -50,4 +50,4 @@ const Destinations = () => {
   );
 };
 
-export default Destinations;
+export default DestinationsWeLove;

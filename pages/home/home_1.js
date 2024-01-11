@@ -14,7 +14,10 @@ import { useData } from "../../lib/datacontext";
 import React from "react";
 import FilterTabsHotelsForContinent from "../../components/hotels/filter-tabs/FilterHotelsContinent";
 import FilterTabContentContinent from "../../components/hotels/FilterTabContentContinent";
-
+import AddBanner from "../../components/add-banner/AddBanner";
+import DestinationsWeLove from "../../components/home/home-1/DestinationsWeLove";
+import Testimonial from "../../components/home/home-1/Testimonial";
+import TestimonialLeftCol from "../../components/home/home-1/TestimonialLeftCol";
 const Home_1 = () => {
   const { filterOption } = useFilterStore();
   const { destinationData, destinationLoading, destinationError, contentData } =
@@ -175,6 +178,15 @@ const Home_1 = () => {
           </div>
           {/* End relative */}
         </div>
+      </section>
+
+      <section className="layout-pt-md layout-pb-md">
+        <div className="container">
+          <div className="row y-gap-20">
+            <AddBanner />
+          </div>
+        </div>
+        {/* End .container */}
       </section>
       {destinationGroup.Europe ? (
         <>
@@ -397,6 +409,41 @@ const Home_1 = () => {
       ) : (
         ""
       )}
+       {/* <section className="layout-pt-lg layout-pb-lg bg-blue-2">
+        <div className="container">
+          <div className="row y-gap-40 justify-between">
+            <div className="col-xl-5 col-lg-6" data-aos="fade-up">
+              <TestimonialLeftCol />
+            </div>
+
+            <div className="col-lg-6">
+              <div
+                className="overflow-hidden js-testimonials-slider-3"
+                data-aos="fade-up"
+                data-aos-delay="50"
+              >
+                <Testimonial />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      <section className="layout-pt-md layout-pb-lg">
+        <div className="container">
+          <div className="row">
+            <div className="col-auto">
+              <div className="sectionTitle -md">
+                <h2 className="sectionTitle__title">Destinations we love</h2>
+                
+              </div>
+            </div>
+          </div>
+
+          <div className="tabs -pills pt-40 js-tabs">
+            <DestinationsWeLove />
+          </div>
+        </div>
+      </section>
       <CallToActions />
       {/* End Call To Actions Section */}
 

@@ -221,7 +221,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
                 </button>
               </div>
 
-              {item?.tag?.name ? (
+              {/* {item?.tag?.name ? (
                 <div className="cardImage__leftBadge">
                   <div
                     className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
@@ -247,7 +247,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
                 </div>
               ) : (
                 ""
-              )}
+              )} */}
             </div>
             {/* End .tourCard__image */}
 
@@ -267,7 +267,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
               </p>
 
               <div className="row justify-between items-center pt-15">
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <div className="d-flex items-center">
                     <div className="d-flex items-center x-gap-5">
                       <div className="icon-star text-yellow-1 text-10" />
@@ -276,13 +276,9 @@ const AttractionProperties = ({ filter, setFilter }) => {
                       <div className="icon-star text-yellow-1 text-10" />
                       <div className="icon-star text-yellow-1 text-10" />
                     </div>
-                    {/* End ratings */}
-
-                    {/* <div className="text-14 text-light-1 ml-10">
-                        {item?.numberOfReviews} reviews
-                      </div> */}
+                   
                   </div>
-                </div>
+                </div> */}
                 <div className="col-auto">
                   <div className="text-14 text-light-1">
                     From
