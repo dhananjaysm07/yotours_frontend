@@ -35,7 +35,7 @@ const DestinationSidebar = () => {
   }
   return (
     <>
-      <div className="sidebar__item -no-border">
+      {/* <div className="sidebar__item -no-border">
         <div className="px-20 py-20 bg-light-2 rounded-4">
           <h5 className="text-18 fw-500 mb-10">Search Destinations</h5>
 
@@ -43,7 +43,7 @@ const DestinationSidebar = () => {
             <MainFilterSearchBox />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* End search tours */}
 
       {/* <div className="sidebar__item -no-border">

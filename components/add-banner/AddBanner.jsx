@@ -14,7 +14,7 @@ const AddBanner = () => {
   return (
     <>
       {rightImage && leftImage && (
-        <div>
+        <>
           <div className="col-md-6" data-aos="fade-up" data-aos-delay={0}>
             <div className="ctaCard -type-1 rounded-4 ">
               <div className="ctaCard__image ratio ratio-63:55">
@@ -41,7 +41,7 @@ const AddBanner = () => {
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

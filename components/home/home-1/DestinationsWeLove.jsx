@@ -1,17 +1,30 @@
 import Link from "next/link";
 import { useState } from "react";
 import { destinations1 } from "../../../data/desinations";
+import { useData } from "../../../lib/datacontext";
 
 const DestinationsWeLove = () => {
   const [filterOption, setFilterOption] = useState("all");
-
+const {destinationData,destinationLoading,destinationError}= useData();
   const filterOptions = [
     { label: "All", value: "all" },
     { label: "Europe", value: "europe" },
     { label: "Asia", value: "asia" },
-    { label: "North America", value: "north_america" },
+    { label: "India", value: "india" },
     // add more options as needed
   ];
+  const filteredDestinations = destinationData.getDestinations.filter(destination => {
+    if (filterOption === "all") {
+      // If filterOption is "all", include all destinations
+      return true;
+    } else if (filterOption === "india"){
+      return destination.country.toLowerCase() === filterOption;
+    }     
+    else {
+      // Otherwise, filter based on the selected continent
+      return destination.continent.toLowerCase() === filterOption;
+    }
+  });
   return (
     <>
       <div className="tabs__controls d-flex js-tabs-controls">
@@ -32,12 +45,12 @@ const DestinationsWeLove = () => {
       <div className="tabs__content pt-30 js-tabs-content">
         <div className="tabs__pane -tab-item-1 is-tab-el-active">
           <div className="row y-gap-20">
-            {destinations1.map((item) => (
+            {filteredDestinations && filteredDestinations.map((item) => (
               <div className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
-                <Link href="#" className="d-block">
-                  <div className="text-15 fw-500">{item.city}</div>
+                <Link href="/destinations" className="d-block">
+                  <div className="text-15 fw-500">{item.destinationName}</div>
                   <div className="text-14 text-light-1">
-                    {item.properties} properties
+                    {item.tours.length} tours
                   </div>
                 </Link>
               </div>

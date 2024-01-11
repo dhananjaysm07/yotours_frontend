@@ -90,20 +90,18 @@ const Home_1 = () => {
 
       */}
 
-      <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
+      {/* <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Popular Destinations </h2>
-                {/* <h2 className="sectionTitle__title">Popular Destinations in {el}</h2> */}
 
                 <p className=" sectionTitle__text mt-5 sm:mt-0">
                   These popular destinations have a lot to offer
                 </p>
               </div>
             </div>
-            {/* End col-auto */}
 
             <div className="col-auto md:d-none">
               <Link
@@ -114,9 +112,7 @@ const Home_1 = () => {
                 <div className="icon-arrow-top-right ml-15" />
               </Link>
             </div>
-            {/* End col-auto */}
           </div>
-          {/* End .row */}
           <div className="relative pt-40 sm:pt-20">
             <PopularDestinations
               popularDestinations={destinations}
@@ -125,25 +121,11 @@ const Home_1 = () => {
               id={100140929}
             />
 
-            {/* <PopularDestinations /> */}
           </div>
         </div>
-        {/* End .container */}
-      </section>
-      {/* End Popular Destinations */}
+      </section> */}
 
-      <section className="layout-pt-md layout-pb-lg">
-        <div className="container">
-          <div className="row y-gap-20 justify-between">
-            <BlockGuide />
-          </div>
-        </div>
-      </section>
-      {/* Block Guide Section */}
-
-      {/* COUPON SECTION */}
-
-      <section className="layout-pt-md layout-pb-lg">
+      {/* <section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row y-gap-10 justify-between items-end">
             <div className="col-auto">
@@ -154,14 +136,11 @@ const Home_1 = () => {
                 </p>
               </div>
             </div>
-            {/* End .col-auto */}
 
             <div className="col-auto tabs -pills-2 ">
               <FilterHotelsTabs />
             </div>
-            {/* End .col-auto */}
           </div>
-          {/* End .row */}
 
           <div className="relative overflow-hidden pt-40 sm:pt-20">
             <div className="row y-gap-30">
@@ -176,18 +155,9 @@ const Home_1 = () => {
               />
             </div>
           </div>
-          {/* End relative */}
         </div>
-      </section>
+      </section> */}
 
-      <section className="layout-pt-md layout-pb-md">
-        <div className="container">
-          <div className="row y-gap-20">
-            <AddBanner />
-          </div>
-        </div>
-        {/* End .container */}
-      </section>
       {destinationGroup.Europe ? (
         <>
           <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
@@ -302,6 +272,21 @@ const Home_1 = () => {
       ) : (
         ""
       )}
+
+      <section className="layout-pt-md layout-pb-lg">
+        <div className="container">
+          <div className="row y-gap-20 justify-between">
+            <BlockGuide />
+          </div>
+        </div>
+      </section>
+      <section className="layout-pt-md layout-pb-md">
+        <div className="container">
+          <div className="row y-gap-20">
+            <AddBanner />
+          </div>
+        </div>
+      </section>
       {destinationGroup.Asia ? (
         <>
           <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
@@ -409,7 +394,7 @@ const Home_1 = () => {
       ) : (
         ""
       )}
-       {/* <section className="layout-pt-lg layout-pb-lg bg-blue-2">
+      {/* <section className="layout-pt-lg layout-pb-lg bg-blue-2">
         <div className="container">
           <div className="row y-gap-40 justify-between">
             <div className="col-xl-5 col-lg-6" data-aos="fade-up">
@@ -434,7 +419,6 @@ const Home_1 = () => {
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Destinations we love</h2>
-                
               </div>
             </div>
           </div>

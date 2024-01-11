@@ -221,7 +221,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
                 </button>
               </div>
 
-              {/* {item?.tag?.name ? (
+              {item?.tag?.name ? (
                 <div className="cardImage__leftBadge">
                   <div
                     className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
@@ -236,18 +236,24 @@ const AttractionProperties = ({ filter, setFilter }) => {
                       isTextMatched(item?.tag?.name, "top rated")
                         ? "bg-yellow-1 text-dark-1"
                         : ""
-                    } ${
-                      isTextMatched(item?.tag?.name, "Most Popular Tours")
-                        ? "bg-blue-2 text-dark-1"
+                    }
+                    ${
+                      item?.tag?.name &&
+                      typeof item.tag?.name === "string" &&
+                      item.tag.name.toLowerCase().includes("sale")
+                        ? "bg-yellow-1 text-white"
                         : ""
-                    }`}
+                    }
+                    ${item.tag && "bg-blue-1 text-white"} 
+                    
+                    `}
                   >
                     {item?.tag?.name}
                   </div>
                 </div>
               ) : (
                 ""
-              )} */}
+              )}
             </div>
             {/* End .tourCard__image */}
 
