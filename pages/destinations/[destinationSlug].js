@@ -16,7 +16,7 @@ import { useQuery } from "@apollo/client";
 import { useData } from "../../lib/datacontext";
 import Things from "../../components/things/Things";
 import IntroTown from "../../components/destinations/components/IntroTown";
-import Categories from '../../components/destinations/components/Categories'
+import Categories from "../../components/destinations/components/Categories";
 
 const Destinations = () => {
   const router = useRouter();
@@ -56,7 +56,7 @@ const Destinations = () => {
       <LocationTopBar props={destination} />
       {/* End location top bar section */}
 
-{/* 
+      {/* 
 
 Dynamic Tours, Attractions fetching with pagination logic in slider
 TODO:
@@ -77,7 +77,9 @@ TODO:
           {destination.introduction ? (
             <div className="row y-gap-20 pt-40">
               <div className="col-auto">
-                <h2>What to know before visiting {destination.destinationName}</h2>
+                <h2>
+                  What to know before visiting {destination.destinationName}
+                </h2>
               </div>
 
               <IntroTown introduction={destination.introduction} />
