@@ -22,7 +22,10 @@ const Header1 = () => {
 
   return (
     <>
-      <header className={`header ${navbar ? "bg-dark-1 is-sticky" : ""}`}>
+      <header
+        className={`header ${navbar ? "bg-dark-1 is-sticky" : ""}`}
+        // style={{ background: navbar ? "#C9305F" : "" }}
+      >
         <div className="header__container px-30 sm:px-20">
           <div className="row justify-between items-center">
             <div className="col-auto">
@@ -61,20 +64,20 @@ const Header1 = () => {
 
                   <LanguageMegaMenu textClass="text-white" />
                 </div> */}
-                {/* <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
                   <Link
                     href="/others-pages/login"
                     className="button px-30 fw-400 text-14 -white bg-white h-50 text-dark-1"
                   >
                     Work With Us
-                  </Link> */}
-                {/* <Link
+                  </Link>
+                  {/* <Link
                     href="/others-pages/signup"
                     className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
                   >
                     Sign In / Register
                   </Link> */}
-                {/* </div> */}
+                </div>
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
                   {/* <div>
                     <Link
