@@ -91,7 +91,7 @@ const FilterTabContentContinent = ({
 
   return (
     <>
-      {dataToRender?.slice(0, 4).map((item) => (
+      {dataToRender?.slice(0, 8).map((item) => (
         <div
           className="col-xl-3 col-lg-3 col-sm-6"
           key={item?.id}

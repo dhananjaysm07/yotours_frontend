@@ -209,10 +209,13 @@ const Home_1 = () => {
               <div className="row y-gap-10 justify-between items-end">
                 <div className="col-auto">
                   <div className="sectionTitle -md">
-                    <h2 className="sectionTitle__title">Best Seller</h2>
+                    <h2 className="sectionTitle__title">
+                      {" "}
+                      Best Tours and Attraction Tickets in Europe
+                    </h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
                       {/* Our best selling {filterOption} */}
-                      <div className="col-auto md:d-none ml-auto">
+                      <div className="col-4 md:d-none ml-auto">
                         <Link
                           href={
                             filterOptionEurope == "tour"
@@ -340,10 +343,12 @@ const Home_1 = () => {
               <div className="row y-gap-10 justify-between items-end">
                 <div className="col-auto">
                   <div className="sectionTitle -md">
-                    <h2 className="sectionTitle__title">Best Seller</h2>
+                    <h2 className="sectionTitle__title">
+                      Best Tours and Attraction Tickets in Asia
+                    </h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
                       {/* Our best selling {filterOption} */}
-                      <div className="col-auto md:d-none ml-auto">
+                      <div className="col-5 md:d-none ml-auto">
                         <Link
                           href={
                             filterOptionAsia == "tour"

@@ -5,7 +5,7 @@ import { useData } from "../../../lib/datacontext";
 
 const DestinationsWeLove = () => {
   const [filterOption, setFilterOption] = useState("all");
-const {destinationData,destinationLoading,destinationError}= useData();
+  const { destinationData, destinationLoading, destinationError } = useData();
   const filterOptions = [
     { label: "All", value: "all" },
     { label: "Europe", value: "europe" },
@@ -13,18 +13,19 @@ const {destinationData,destinationLoading,destinationError}= useData();
     { label: "India", value: "india" },
     // add more options as needed
   ];
-  const filteredDestinations = destinationData.getDestinations.filter(destination => {
-    if (filterOption === "all") {
-      // If filterOption is "all", include all destinations
-      return true;
-    } else if (filterOption === "india"){
-      return destination.country.toLowerCase() === filterOption;
-    }     
-    else {
-      // Otherwise, filter based on the selected continent
-      return destination.continent.toLowerCase() === filterOption;
+  const filteredDestinations = destinationData?.getDestinations?.filter(
+    (destination) => {
+      if (filterOption === "all") {
+        // If filterOption is "all", include all destinations
+        return true;
+      } else if (filterOption === "india") {
+        return destination.country.toLowerCase() === filterOption;
+      } else {
+        // Otherwise, filter based on the selected continent
+        return destination.continent.toLowerCase() === filterOption;
+      }
     }
-  });
+  );
   return (
     <>
       <div className="tabs__controls d-flex js-tabs-controls">
@@ -45,16 +46,17 @@ const {destinationData,destinationLoading,destinationError}= useData();
       <div className="tabs__content pt-30 js-tabs-content">
         <div className="tabs__pane -tab-item-1 is-tab-el-active">
           <div className="row y-gap-20">
-            {filteredDestinations && filteredDestinations.map((item) => (
-              <div className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
-                <Link href="/destinations" className="d-block">
-                  <div className="text-15 fw-500">{item.destinationName}</div>
-                  <div className="text-14 text-light-1">
-                    {item.tours.length} tours
-                  </div>
-                </Link>
-              </div>
-            ))}
+            {filteredDestinations &&
+              filteredDestinations.map((item) => (
+                <div className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
+                  <Link href="/destinations" className="d-block">
+                    <div className="text-15 fw-500">{item.destinationName}</div>
+                    <div className="text-14 text-light-1">
+                      {item.tours.length} tours
+                    </div>
+                  </Link>
+                </div>
+              ))}
           </div>
         </div>
       </div>

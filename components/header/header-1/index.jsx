@@ -28,11 +28,17 @@ const Header1 = () => {
             <div className="col-auto">
               <div className="d-flex items-center">
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/yotours.webp" style={{ maxHeight: '50px', width: 'auto' }} alt="logo icon" />
+                  <img
+                    src="/img/general/yotours.webp"
+                    style={{ maxHeight: "50px", width: "auto" }}
+                    alt="logo icon"
+                  />
                   {/* <img src="/img/general/logo-dark.svg" alt="logo icon" /> */}
                 </Link>
                 {/* End logo */}
-                <span className="text-white fw-500 mr-10 text-30">YoTours</span>
+                <span className="text-white fw-500 mr-10 text-30">
+                  Yo Tours
+                </span>
 
                 <div className="header-menu">
                   <div className="header-menu__content">
@@ -55,27 +61,27 @@ const Header1 = () => {
 
                   <LanguageMegaMenu textClass="text-white" />
                 </div> */}
-                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
+                {/* <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
                   <Link
                     href="/others-pages/login"
                     className="button px-30 fw-400 text-14 -white bg-white h-50 text-dark-1"
                   >
                     Work With Us
-                  </Link>
-                  {/* <Link
+                  </Link> */}
+                {/* <Link
                     href="/others-pages/signup"
                     className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
                   >
                     Sign In / Register
                   </Link> */}
-                </div>
+                {/* </div> */}
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
-                  <div>
+                  {/* <div>
                     <Link
                       href="/others-pages/login"
                       className="d-flex items-center icon-user text-inherit text-22"
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <button
                       className="d-flex items-center icon-menu text-inherit text-20"
