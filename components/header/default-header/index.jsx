@@ -37,7 +37,9 @@ const Header1 = () => {
                   {/* <img src="/img/general/logo-dark.svg" alt="logo icon" /> */}
                 </Link>
                 {/* End logo */}
-                <span className="text-black fw-600 mr-10 text-30">YoTours</span>
+                <span className="text-black fw-600 mr-10 text-30">
+                  Yo Tours
+                </span>
 
                 <div className="header-menu">
                   <div className="header-menu__content">
@@ -75,12 +77,12 @@ const Header1 = () => {
                   </Link>
                 </div> */}
                 <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
-                  <div>
+                  {/* <div>
                     <Link
                       href="/others-pages/login"
                       className="d-flex items-center icon-user text-inherit text-22"
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <button
                       className="d-flex items-center icon-menu text-inherit text-20"
