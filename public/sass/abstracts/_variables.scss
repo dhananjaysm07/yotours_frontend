@@ -20,7 +20,8 @@ $breakpoints-loop: (
 );
 
 $font-size: 16px;
-$text-sizes: 4, 7, 10, 12, 13, 14, 15, 16, 18, 20, 22, 24, 25, 26, 30, 40, 50, 60, 80;
+$text-sizes: 4, 7, 10, 12, 13, 14, 15, 16, 18, 20, 22, 24, 25, 26, 30, 40, 50,
+  60, 80;
 
 :root {
   @each $size in $text-sizes {
@@ -33,16 +34,22 @@ $colors: (
   black: #000000,
   border: #dddddd,
 
-  dark-1: #051036,
-  dark-2: #0d2857,
-  dark-3: #13357b,
-  dark-4: #163c8c,
+  // dark-1: #051036,
+  // dark-2: #0d2857,
+  // dark-3: #13357b,
+  // dark-4: #163c8c,
+  dark-1: #b50b3eec,
+  dark-2: #a20937,
+  dark-3: #8e0931,
+  dark-4: #580820,
 
-  light-1: #697488,
+  // light-1: #697488,
+  light: #d58ca2,
   light-2: #f5f5f5,
   light-3: #fbfcff,
 
-  blue-1: #3554d1,
+  // blue-1: #3554d1,
+  blue-1: #c9305f,
   blue-2: #e5f0fd,
 
   green-1: #ebfcea,
@@ -53,7 +60,7 @@ $colors: (
   yellow-3: #ffc700,
   yellow-4: #fff8dd,
 
-  brown-1: #923e01,
+  brown-1: #692f06,
 
   purple-1: #7e53f9,
 
