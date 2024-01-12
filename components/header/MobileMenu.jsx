@@ -14,10 +14,7 @@ import {
   pageItems,
   categorieMobileItems,
 } from "../../data/mainMenuData";
-import {
-  isActiveLink,
- 
-} from "../../utils/linkActiveChecker";
+import { isActiveLink } from "../../utils/linkActiveChecker";
 import Social from "../common/social/Social";
 import ContactInfo from "./ContactInfo";
 
@@ -28,7 +25,11 @@ const MobileMenu = () => {
     <>
       <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
         <Link href="/">
-          <img src="/img/general/yotours.webp" style={{ maxHeight: '50px', width: 'auto' }} alt="brand" />
+          <img
+            src="/img/general/yotours.webp"
+            style={{ maxHeight: "50px", width: "auto" }}
+            alt="brand"
+          />
         </Link>
         {/* End logo */}
 
@@ -46,16 +47,11 @@ const MobileMenu = () => {
       <ProSidebarProvider>
         <Sidebar width="400" backgroundColor="#fff">
           <Menu>
-            
-          <MenuItem
+            <MenuItem
               component={
                 <Link
                   href="/"
-                  className={
-                    router.pathname === "/"
-                      ? "menu-active-link"
-                      : ""
-                  }
+                  className={router.pathname === "/" ? "menu-active-link" : ""}
                 />
               }
             >
@@ -83,16 +79,13 @@ const MobileMenu = () => {
                 <Link
                   href="/tours"
                   className={
-                    router.pathname === "/tours"
-                      ? "menu-active-link"
-                      : ""
+                    router.pathname === "/tours" ? "menu-active-link" : ""
                   }
                 />
               }
             >
               Tours
             </MenuItem>
-           
 
             <MenuItem
               component={
