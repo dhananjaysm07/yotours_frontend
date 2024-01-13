@@ -42,7 +42,7 @@ const DestinationGrid = ({ filter }) => {
       loadCount,
       filter,
     });
-    console.log("data new for second", dataNew);
+    // console.log("data new for second", dataNew);
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
     setIsLoading(dataNew.loading);
     // if (dataNew?.data?.getFilteredTours) {
@@ -66,7 +66,7 @@ const DestinationGrid = ({ filter }) => {
       filter,
     });
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    console.log("data new", dataNew);
+    // console.log("data new", dataNew);
     setIsLoading(dataNew.loading);
     setDestinationPaginationData(
       Math.ceil(
