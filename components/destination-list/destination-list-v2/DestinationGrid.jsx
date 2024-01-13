@@ -42,7 +42,7 @@ const DestinationGrid = ({ filter }) => {
       loadCount,
       filter,
     });
-    // console.log("data new", dataNew);
+    console.log("data new for second", dataNew);
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
     setIsLoading(dataNew.loading);
     // if (dataNew?.data?.getFilteredTours) {
@@ -53,7 +53,7 @@ const DestinationGrid = ({ filter }) => {
     //   }, 2000);
     // }
     setDestinationData(
-      dataNew?.data?.getFilteredDestination?.tours,
+      dataNew?.data?.getFilteredDestination?.destinations,
       totalPageLoaded + 1
     );
   };
@@ -66,6 +66,7 @@ const DestinationGrid = ({ filter }) => {
       filter,
     });
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
+    console.log("data new", dataNew);
     setIsLoading(dataNew.loading);
     setDestinationPaginationData(
       Math.ceil(
@@ -192,15 +193,13 @@ const DestinationGrid = ({ filter }) => {
                         }}
                         navigation={true}
                       >
-                        
-                            <Image
-                              width={300}
-                              height={300}
-                              className="rounded-4 col-12 js-lazy"
-                              src={item.bannerImage}
-                              alt="image"
-                            />
-                         
+                        <Image
+                          width={300}
+                          height={300}
+                          className="rounded-4 col-12 js-lazy"
+                          src={item.bannerImage}
+                          alt="image"
+                        />
                       </Swiper>
                     </div>
                   </div>
@@ -239,9 +238,8 @@ const DestinationGrid = ({ filter }) => {
               {/* End .tourCard__image */}
 
               <div className="tourCard__content mt-10">
-              
                 <h4 className="tourCard__title text-dark-1 text-18 lh-16 fw-500">
-                {item?.destinationName}
+                  {item?.destinationName}
                 </h4>
                 {/* <p className="text-light-1 lh-14 text-14 mt-5">
                 
