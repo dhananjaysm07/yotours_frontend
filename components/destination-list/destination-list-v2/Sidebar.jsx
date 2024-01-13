@@ -35,26 +35,7 @@ const DestinationSidebar = () => {
   }
   return (
     <>
-      {/* <div className="sidebar__item -no-border">
-        <div className="px-20 py-20 bg-light-2 rounded-4">
-          <h5 className="text-18 fw-500 mb-10">Search Destinations</h5>
-
-          <div className="row y-gap-20 pt-20">
-            <MainFilterSearchBox />
-          </div>
-        </div>
-      </div> */}
-      {/* End search tours */}
-
-      {/* <div className="sidebar__item -no-border">
-        <h5 className="text-18 fw-500 mb-10">Category Types</h5>
-        <div className="sidebar-checkbox">
-          <CategoryTypes
-            categories={categories}
-            handleChange={handleChangeTag}
-          />
-        </div>
-      </div> */}
+     
       <div className="sidebar__item -no-border">
         <h5 className="text-18 fw-500 mb-10">Continents</h5>
         <div className="sidebar-checkbox">

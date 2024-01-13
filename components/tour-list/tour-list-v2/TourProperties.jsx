@@ -242,7 +242,7 @@ const TourProperties = ({ filter, setFilter }) => {
                         ? "bg-yellow-1 text-white"
                         : ""
                     }
-                    ${item.tag && "bg-blue-1 text-white"} 
+                    ${item.tag && "bg-pink-1 text-white"} 
                     
                     `}
                   >

@@ -3,3 +3,7 @@
 @import "../node_modules/react-modal-video/scss/modal-video.scss";
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "public/sass/main.scss";
+
+a:hover {
+    color:var(--bs-code-color);
+}

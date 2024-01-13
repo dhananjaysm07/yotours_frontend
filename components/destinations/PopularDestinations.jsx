@@ -89,7 +89,7 @@ const PopularDestinations = ({
                   <h4 className="text-26 md:text-20 lh-13 text-white mb-20">
                     {item.destinationName}
                   </h4>
-                  <button className="button col-12 h-60 -blue-1 bg-white text-dark-1">
+                  <button className="button col-12 h-60 -pink-1 bg-white text-dark-1">
                     Discover
                   </button>
                 </div>
@@ -101,12 +101,12 @@ const PopularDestinations = ({
 
       <div>
         <button
-          className={`section-slider-nav  -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-prev_${id}`}
+          className={`section-slider-nav  -prev flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-prev_${id}`}
         >
           <i className="icon icon-chevron-left text-12" />
         </button>
         <button
-          className={`section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-next_${id}`}
+          className={`section-slider-nav -next flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-next_${id}`}
         >
           <i className="icon icon-chevron-right text-12" />
         </button>

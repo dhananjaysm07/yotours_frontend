@@ -180,7 +180,7 @@ const Home_1 = () => {
                 <div className="col-auto md:d-none">
                   <Link
                     href="/destinations"
-                    className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                    className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                   >
                     View All Destinations
                     <div className="icon-arrow-top-right ml-15" />
@@ -222,7 +222,7 @@ const Home_1 = () => {
                               ? "/tours?continent=Europe"
                               : "/attractions?continent=Europe"
                           }
-                          className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                          className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                         >
                           View All{" "}
                           {filterOptionEurope == "tour"
@@ -312,7 +312,7 @@ const Home_1 = () => {
                 <div className="col-auto md:d-none">
                   <Link
                     href="/destinations"
-                    className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                    className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                   >
                     View All Destinations
                     <div className="icon-arrow-top-right ml-15" />
@@ -355,7 +355,7 @@ const Home_1 = () => {
                               ? "/tours?continent=Asia"
                               : "/attractions?continent=Asia"
                           }
-                          className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                          className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                         >
                           View All{" "}
                           {filterOptionAsia == "tour" ? "Tours" : "Attractions"}
@@ -387,11 +387,11 @@ const Home_1 = () => {
               </div>
               {/* End .row */}
 
-              <div className="relative overflow-hidden pt-40 sm:pt-20">
+              {/* <div className="relative overflow-hidden pt-40 sm:pt-20">
                 <div className="row y-gap-30">
                   <FilterTabContent />
                 </div>
-              </div>
+              </div> */}
               {/* End relative */}
             </div>
           </section>
