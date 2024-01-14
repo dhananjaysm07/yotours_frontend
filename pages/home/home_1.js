@@ -177,10 +177,10 @@ const Home_1 = () => {
                 </div>
                 {/* End col-auto */}
 
-                <div className="col-auto md:d-none">
+                <div className="col-auto">
                   <Link
                     href="/destinations"
-                    className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                    className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                   >
                     View All Destinations
                     <div className="icon-arrow-top-right ml-15" />
@@ -222,7 +222,8 @@ const Home_1 = () => {
                               ? "/tours?continent=Europe"
                               : "/attractions?continent=Europe"
                           }
-                          className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                          className="button -md -pink-1 bg-pink-1-05 text-pink-1"
+                          style={{ whiteSpace: 'nowrap' }}
                         >
                           View All{" "}
                           {filterOptionEurope == "tour"
@@ -270,6 +271,26 @@ const Home_1 = () => {
               )}
               {/* End relative */}
             </div>
+            <p className=" d-none sm:d-block sectionTitle__text mt-5 sm:mt-0">
+                      {/* Our best selling {filterOption} */}
+                      <div className="col-auto ml-auto">
+                        <Link
+                          href={
+                            filterOptionEurope == "tour"
+                              ? "/tours?continent=Europe"
+                              : "/attractions?continent=Europe"
+                          }
+                          className="button -md  bg-pink-1 text-white"
+                          
+                        >
+                          View All{" "}
+                          {filterOptionEurope == "tour"
+                            ? "Tours in Europe"
+                            : "Attractions in Europe"}
+                          <div className="icon-arrow-top-right ml-15" />
+                        </Link>
+                      </div>
+                    </p>
           </section>
         </>
       ) : (
@@ -309,10 +330,10 @@ const Home_1 = () => {
                 </div>
                 {/* End col-auto */}
 
-                <div className="col-auto md:d-none">
+                <div className="col-auto">
                   <Link
                     href="/destinations"
-                    className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                    className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                   >
                     View All Destinations
                     <div className="icon-arrow-top-right ml-15" />
@@ -348,14 +369,16 @@ const Home_1 = () => {
                     </h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
                       {/* Our best selling {filterOption} */}
-                      <div className="col-5 md:d-none ml-auto">
+                      <div className="col-4 md:d-none ml-auto">
                         <Link
                           href={
                             filterOptionAsia == "tour"
                               ? "/tours?continent=Asia"
                               : "/attractions?continent=Asia"
                           }
-                          className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+                          className="button -md -pink-1 bg-pink-1-05 text-pink-1"
+                          style={{ whiteSpace: 'nowrap' }}
+                          
                         >
                           View All{" "}
                           {filterOptionAsia == "tour" ? "Tours" : "Attractions"}
@@ -365,7 +388,7 @@ const Home_1 = () => {
                     </p>
                   </div>
                 </div>
-                {/* End .col-auto */}
+                
 
                 <div className="col-auto tabs -pills-2 ">
                   <FilterTabContentContinent
@@ -387,13 +410,32 @@ const Home_1 = () => {
               </div>
               {/* End .row */}
 
-              <div className="relative overflow-hidden pt-40 sm:pt-20">
+              {/* <div className="relative overflow-hidden pt-40 sm:pt-20">
                 <div className="row y-gap-30">
                   <FilterTabContent />
                 </div>
-              </div>
+              </div> */}
               {/* End relative */}
             </div>
+            <p className=" d-none sm:d-block sectionTitle__text mt-5 sm:mt-0">
+                      {/* Our best selling {filterOption} */}
+                      <div className="col-auto ml-auto">
+                        <Link
+                          href={
+                            filterOptionAsia == "tour"
+                              ? "/tours?continent=Asia"
+                              : "/attractions?continent=Asia"
+                          }
+                          className="button -md  bg-pink-1 text-white"
+                        >
+                          View All{" "}
+                          {filterOptionAsia == "tour"
+                            ? "Tours in Asia"
+                            : "Attractions in Asia"}
+                          <div className="icon-arrow-top-right ml-15" />
+                        </Link>
+                      </div>
+                    </p>
           </section>
         </>
       ) : (

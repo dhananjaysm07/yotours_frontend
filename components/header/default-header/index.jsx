@@ -40,13 +40,13 @@ const Header1 = () => {
                   {/* <img src="/img/general/logo-dark.svg" alt="logo icon" /> */}
                 </Link>
                 {/* End logo */}
-                <span className="text-black fw-600 mr-10 text-30">
+                <span className={`${navbar ? "text-white" : "text-dark-1"} fw-600 mr-10 text-30`}>
                   Yo Tours
                 </span>
 
                 <div className="header-menu">
                   <div className="header-menu__content">
-                    <MainMenu style="text-dark-1" />
+                    <MainMenu style={`${navbar ? "text-white" : "text-dark-1"}`} />
                   </div>
                 </div>
                 {/* End header-menu */}

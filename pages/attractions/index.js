@@ -42,6 +42,7 @@ const Tour = () => {
     priceMin,
     tagName,
     continent,
+    country
   } = useAttractionFilterStore();
   const [filter, setFilter] = React.useState({
     priceMin: null,
@@ -50,6 +51,7 @@ const Tour = () => {
     location: null,
     endDate: null,
     continent: [],
+    country:[],
     tagName: [],
   });
 
@@ -64,11 +66,12 @@ const Tour = () => {
       endDate: endTime,
       tagName: tagName,
       continent: continent,
+      country:country
     });
-  }, [priceMax, priceMin, startTime, endTime, location, tagName, continent]);
+  }, [priceMax, priceMin, startTime, endTime, location, tagName, continent,country]);
   return (
     <>
-      <Seo pageTitle="Tour List v1" />
+      <Seo pageTitle="Attraction Tickets" />
       {/* End Page Title */}
 
       <div className="header-margin"></div>

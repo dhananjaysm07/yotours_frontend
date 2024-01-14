@@ -4,22 +4,23 @@ import { destinations1 } from "../../../data/desinations";
 import { useData } from "../../../lib/datacontext";
 
 const DestinationsWeLove = () => {
-  const [filterOption, setFilterOption] = useState("all");
+  const [filterOption, setFilterOption] = useState("india");
   const { destinationData, destinationLoading, destinationError } = useData();
   const filterOptions = [
-    { label: "All", value: "all" },
-    { label: "Europe", value: "europe" },
-    { label: "Asia", value: "asia" },
     { label: "India", value: "india" },
+    { label: "Asia", value: "asia" },
+    { label: "Europe", value: "europe" },
     // add more options as needed
   ];
   const filteredDestinations = destinationData?.getDestinations?.filter(
     (destination) => {
-      if (filterOption === "all") {
-        // If filterOption is "all", include all destinations
-        return true;
-      } else if (filterOption === "india") {
+      if (filterOption === "india") {
         return destination.country.toLowerCase() === filterOption;
+      } else if (filterOption === "asia") {
+        return (
+          destination.continent.toLowerCase() == "asia" &&
+          destination.country.toLowerCase() !== "india"
+        );
       } else {
         // Otherwise, filter based on the selected continent
         return destination.continent.toLowerCase() === filterOption;
@@ -47,16 +48,31 @@ const DestinationsWeLove = () => {
         <div className="tabs__pane -tab-item-1 is-tab-el-active">
           <div className="row y-gap-20">
             {filteredDestinations &&
-              filteredDestinations.map((item) => (
-                <div className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
-                  <Link href="/destinations" className="d-block">
-                    <div className="text-15 fw-500">{item.destinationName}</div>
-                    <div className="text-14 text-light-1">
-                      {item.tours.length} tours
-                    </div>
-                  </Link>
-                </div>
-              ))}
+              filteredDestinations
+                .slice()
+                .sort((a, b) =>
+                  a.destinationName.localeCompare(b.destinationName)
+                )
+                .map((item) => (
+                  <div
+                    className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
+                    key={item.id}
+                  >
+                    <Link href="/destinations" className="d-block">
+                      <div className="text-15 fw-500">
+                        {item.destinationName}
+                      </div>
+                      <div className="text-14 text-light-1">
+                        {(item.tours?.filter((tour) => tour.active).length ||
+                          0) +
+                          (item.attractions?.filter(
+                            (attraction) => attraction.active
+                          ).length || 0)}{" "}
+                        tours
+                      </div>
+                    </Link>
+                  </div>
+                ))}
           </div>
         </div>
       </div>

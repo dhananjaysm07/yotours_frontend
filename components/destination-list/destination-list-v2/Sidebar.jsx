@@ -8,62 +8,83 @@ import {
   useDestinationFilterStore,
   useTourFilterStore,
 } from "../../../lib/store";
+import CountryContinentFilter from "../../attraction-list/sidebar/CountryContinentFilter";
 
 const DestinationSidebar = () => {
-  const { tagNameList } = useData();
-  const [categories, setCategories] = React.useState([]);
-  const { setTag, removeTag, setContinent, removeContinent } =
-    useDestinationFilterStore();
-  // const [category,setCategory]=React.useState("")
-  const continent = countryData.map((el) => el.continent);
-  React.useEffect(() => {
-    setCategories(tagNameList?.getAllTags?.map((tag) => tag.name));
-  }, [tagNameList]);
-  function handleChangeTag(event, category) {
-    if (event.target.checked) {
-      setTag(category);
-    } else {
-      removeTag(category);
-    }
-  }
+  const { destCCData,destCCLoading } = useData();
+  if (destCCLoading) return <div>Loading...</div>;
+  // Extract unique countries and continents using a Set
+  const uniqueCountries = [
+    ...new Set(destCCData?.getCountriesAndContinents.map((item) => item.country)),
+  ].sort();
+  const uniqueContinents = [
+    ...new Set(destCCData?.getCountriesAndContinents.map((item) => item.continent)),
+  ].sort();
+
+  const {
+   
+    setContinent,
+    removeContinent,
+    setCountry,
+    removeCountry,
+    continent: selectedContinents,
+  } = useDestinationFilterStore();
+ 
+
   function handleChangeContinent(event, category) {
     if (event.target.checked) {
       setContinent(category);
     } else {
       removeContinent(category);
     }
+
   }
+
+  function handleChangeCountry(event, category) {
+    if (event.target.checked) {
+      setCountry(category);
+    } else {
+      removeCountry(category);
+    }
+  }
+
+  // Filter countries based on the selected continents
+const filteredCountries = destCCData?.getCountriesAndContinents
+.filter((item) => selectedContinents.length ? selectedContinents.includes(item.continent) : true)
+.map((item) => item.country);
+
+const countsByContinent = {};
+const countsByCountry = {};
+destCCData?.getCountriesAndContinents.forEach((item) => {
+  countsByContinent[item.continent] = item.destinationCount + (countsByContinent[item.continent] || 0);
+  countsByCountry[item.country] = item.destinationCount + (countsByCountry[item.country] || 0);
+});
   return (
     <>
-      {/* <div className="sidebar__item -no-border">
-        <div className="px-20 py-20 bg-light-2 rounded-4">
-          <h5 className="text-18 fw-500 mb-10">Search Destinations</h5>
-
-          <div className="row y-gap-20 pt-20">
-            <MainFilterSearchBox />
+      {uniqueContinents && (
+        <div className="sidebar__item -no-border">
+          <h5 className="text-18 fw-500 mb-10">Continents</h5>
+          <div className="sidebar-checkbox">
+            <CountryContinentFilter
+              categories={uniqueContinents}
+              handleChange={handleChangeContinent}
+              continentCounts={countsByContinent}
+            />
           </div>
         </div>
-      </div> */}
-      {/* End search tours */}
-
-      {/* <div className="sidebar__item -no-border">
-        <h5 className="text-18 fw-500 mb-10">Category Types</h5>
-        <div className="sidebar-checkbox">
-          <CategoryTypes
-            categories={categories}
-            handleChange={handleChangeTag}
-          />
+      )}
+      {filteredCountries && (
+        <div className="sidebar__item -no-border">
+          <h5 className="text-18 fw-500 mb-10">Countries</h5>
+          <div className="sidebar-checkbox">
+            <CountryContinentFilter
+              categories={filteredCountries}
+              handleChange={handleChangeCountry}
+              countryCounts={countsByCountry}
+            />
+          </div>
         </div>
-      </div> */}
-      <div className="sidebar__item -no-border">
-        <h5 className="text-18 fw-500 mb-10">Continents</h5>
-        <div className="sidebar-checkbox">
-          <CategoryTypes
-            categories={continent}
-            handleChange={handleChangeContinent}
-          />
-        </div>
-      </div>
+      )}
       {/* End popular filter */}
       {/* 
       <div className="sidebar__item">

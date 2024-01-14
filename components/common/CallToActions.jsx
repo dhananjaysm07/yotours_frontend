@@ -1,6 +1,6 @@
 const CallToActions = () => {
   return (
-    <section className="layout-pt-md layout-pb-md bg-dark-2">
+    <section className="layout-pt-md layout-pb-md bg-red-2">
       <div className="container">
         <div className="row y-gap-30 justify-between items-center">
           <div className="col-auto">
@@ -32,7 +32,7 @@ const CallToActions = () => {
               {/* End email input */}
 
               <div>
-                <button className="button -md h-60 bg-blue-1 text-white">
+                <button className="button -md h-60 bg-pink-1 text-white">
                   Subscribe
                 </button>
               </div>

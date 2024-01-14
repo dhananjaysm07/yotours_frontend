@@ -49,7 +49,7 @@ const MainFilterSearchBox = () => {
 
             <div className="button-item">
               <button
-                className="mainSearch__submit button -dark-1 h-60 px-35 col-12 rounded-100 bg-blue-1 text-white"
+                className="mainSearch__submit button -dark-1 h-60 px-35 col-12 rounded-100 bg-pink-1 text-white"
                 onClick={() => {
                   if(filterOption =="tour"){
                     Router.push("/search/tours")
