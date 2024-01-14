@@ -1,19 +1,41 @@
 import CategoryTypes from "../sidebar/CategoryTypes";
-import OthersFilter from "../sidebar/OthersFilter";
-import Duration from "../sidebar/Duration";
-import Languages from "../sidebar/Languages";
 import PirceSlider from "../sidebar/PirceSlider";
 import MainFilterSearchBox from "./MainFilterSearchBox";
 import { useData } from "../../../lib/datacontext";
 import React from "react";
 import { countryData } from "../../../utils/country";
 import { useTourFilterStore } from "../../../lib/store";
+import CountryContinentFilter from "../../attraction-list/sidebar/CountryContinentFilter";
 
 const Sidebar = () => {
+  const { tourCCData,tourCCLoading } = useData();
+  if (tourCCLoading) return <div>Loading...</div>;
+  // Extract unique countries and continents using a Set
+  const uniqueCountries = [
+    ...new Set(
+      tourCCData?.getCountriesAndContinentsForTours.map(
+        (item) => item.country
+      )
+    ),
+  ].sort();
+  const uniqueContinents = [
+    ...new Set(
+      tourCCData?.getCountriesAndContinentsForTours.map(
+        (item) => item.continent
+      )
+    ),
+  ].sort();
   const { tagNameList } = useData();
   const [categories, setCategories] = React.useState([]);
-  const { setTag, removeTag, setContinent, removeContinent } =
-    useTourFilterStore();
+  const {
+    setTag,
+    removeTag,
+    setContinent,
+    removeContinent,
+    setCountry,
+    removeCountry,
+    continent: selectedContinents,
+  } = useTourFilterStore();
   // const [category,setCategory]=React.useState("")
   const continent = countryData.map((el) => el.continent);
   React.useEffect(() => {
@@ -33,6 +55,32 @@ const Sidebar = () => {
       removeContinent(category);
     }
   }
+
+  function handleChangeCountry(event, category) {
+    if (event.target.checked) {
+      setCountry(category);
+    } else {
+      removeCountry(category);
+    }
+  }
+
+  // Filter countries based on the selected continents
+  const filteredCountries = tourCCData?.getCountriesAndContinentsForTours
+    .filter((item) =>
+      selectedContinents.length
+        ? selectedContinents.includes(item.continent)
+        : true
+    )
+    .map((item) => item.country);
+
+
+    const countsByContinent = {};
+    const countsByCountry = {};
+  
+    tourCCData?.getCountriesAndContinentsForTours.forEach((item) => {
+      countsByContinent[item.continent] = item.tourCount + (countsByContinent[item.continent] || 0);
+      countsByCountry[item.country] = item.tourCount + (countsByCountry[item.country] || 0);
+    });
   return (
     <>
       <div className="sidebar__item -no-border">
@@ -55,15 +103,32 @@ const Sidebar = () => {
           />
         </div>
       </div>
-      <div className="sidebar__item -no-border">
-        <h5 className="text-18 fw-500 mb-10">Continents</h5>
-        <div className="sidebar-checkbox">
-          <CategoryTypes
-            categories={continent}
-            handleChange={handleChangeContinent}
-          />
+      {uniqueContinents && (
+        <div className="sidebar__item -no-border">
+          <h5 className="text-18 fw-500 mb-10">Continents</h5>
+          <div className="sidebar-checkbox">
+            <CountryContinentFilter
+              categories={uniqueContinents}
+              handleChange={handleChangeContinent}
+              continentCounts={countsByContinent}
+
+            />
+          </div>
         </div>
-      </div>
+      )}
+      {filteredCountries && (
+        <div className="sidebar__item -no-border">
+          <h5 className="text-18 fw-500 mb-10">Countries</h5>
+          <div className="sidebar-checkbox">
+            <CountryContinentFilter
+              categories={filteredCountries}
+              handleChange={handleChangeCountry}
+              countryCounts={countsByCountry}
+
+            />
+          </div>
+        </div>
+      )}
       {/* End popular filter */}
       {/* 
       <div className="sidebar__item">

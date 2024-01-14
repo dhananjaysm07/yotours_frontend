@@ -132,31 +132,47 @@ const Tours = ({ tours = [] }) => {
                       ))}
                     </Slider>
 
-                    <div className="cardImage__wishlist">
+                    {/* <div className="cardImage__wishlist">
                       <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
                         <i className="icon-heart text-12" />
                       </button>
-                    </div>
+                    </div> */}
 
-                    {/* <div className="cardImage__leftBadge">
-                    <div
-                      className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                        isTextMatched(item?.tag, "likely to sell out*")
-                          ? "bg-dark-1 text-white"
-                          : ""
-                      } ${
-                        isTextMatched(item?.tag, "best seller")
-                          ? "bg-blue-1 text-white"
-                          : ""
-                      }  ${
-                        isTextMatched(item?.tag, "top rated")
-                          ? "bg-yellow-1 text-dark-1"
-                          : ""
-                      }`}
-                    >
-                      {item.tag}
-                    </div>
-                  </div> */}
+                    
+<div className="cardImage__leftBadge">
+                  <div
+                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500   uppercase ${
+                      isTextMatched(item?.tag?.name, "trending")
+                        ? "bg-dark-1 text-white"
+                        : ""
+                    } 
+                    ${
+                      isTextMatched(item?.tag?.name, "best seller")
+                        ? "bg-blue-1 text-white"
+                        : ""
+                    } 
+
+                    ${
+                      isTextMatched(item?.tag?.name, "Most Popular Tours")
+                        ? "bg-blue-1 text-white"
+                        : ""
+                    } 
+                    
+                 
+                    ${
+                      item?.tag?.name &&
+                      typeof item.tag?.name === "string" &&
+                      item.tag.name.toLowerCase().includes("sale")
+                        ? "bg-yellow-1 text-white"
+                        : ""
+                    }
+                    ${item.tag && "bg-pink-1 text-white"} 
+                             
+                     `}
+                  >
+                    {item?.tag?.name}
+                  </div>
+                </div>
                   </div>
                 </div>
                 {/* End .tourCard__image */}

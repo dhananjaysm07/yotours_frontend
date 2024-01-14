@@ -13,6 +13,8 @@ module.exports = [
     title: "Support",
     menuList: [
       { name: "Contact", routerPath: "/contact" },
+      { name: "About Us", routerPath: "/aboutus" },
+      { name: "Agent/Reseller", routerPath: "/agentreseller" },
       // { name: "Legal Notice", routerPath: "/" },
       { name: "Privacy Policy", routerPath: "/privacy" },
       { name: "Terms and Conditions", routerPath: "/tnc" },

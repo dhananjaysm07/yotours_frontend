@@ -18,7 +18,7 @@ const DestinationsWeLove = () => {
         return destination.country.toLowerCase() === filterOption;
       } else if (filterOption === "asia") {
         return (
-          destination.continent.toLowerCase() !== "asia" ||
+          destination.continent.toLowerCase() == "asia" &&
           destination.country.toLowerCase() !== "india"
         );
       } else {
@@ -63,7 +63,12 @@ const DestinationsWeLove = () => {
                         {item.destinationName}
                       </div>
                       <div className="text-14 text-light-1">
-                        {item.tours.length} tours
+                        {(item.tours?.filter((tour) => tour.active).length ||
+                          0) +
+                          (item.attractions?.filter(
+                            (attraction) => attraction.active
+                          ).length || 0)}{" "}
+                        tours
                       </div>
                     </Link>
                   </div>

@@ -1,4 +1,44 @@
 import { gql } from "@apollo/client";
+
+
+export const GET_COUNTRIES_CONTINENTS_QUERY = gql`
+  query GetCountriesAndContinents {
+  getCountriesAndContinents {
+    country
+    continent
+    destinationCount
+  }
+}
+`;
+
+
+export const GET_COUNTRIES_CONTINENTS_TOURS_QUERY = gql`
+  query GetCountriesAndContinentsForTours {
+  getCountriesAndContinentsForTours {
+    country
+    continent
+    tourCount
+  }
+
+}
+`;
+
+
+export const GET_COUNTRIES_CONTINENTS_ATTRACTIONS_QUERY = gql`
+  query GetCountriesAndContinentsForAttractions {
+  getCountriesAndContinentsForAttractions {
+    country
+    continent
+    attractionCount
+  
+}
+
+}
+`;
+
+
+
+
 export const GET_DESTINATIONS_QUERY = gql`
   query GetDestinations {
     getDestinations {
@@ -156,12 +196,14 @@ export const GET_DESTINATION = gql`
           name
           active
         }
+        active
       }
       attractions {
         id
         attractionTitle
         price
         location
+        active
       }
     }
   }
@@ -309,6 +351,8 @@ export const GET_CONTENT_QUERY = gql`
       socialLinks
       tnc
       privacy
+      about
+      agent
       bokunChannelId
       leftDiscountImage
       rightDiscountImage

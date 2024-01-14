@@ -161,7 +161,7 @@ const DestinationGrid = ({ filter }) => {
   if (isLoading) return <p>Loading...</p>;
   if (destinationFilteredError)
     return <p>Error: {destinationFilteredError.message}</p>;
-  console.log("tour list", destinationList);
+  console.log("Destination list", destinationList);
   return (
     <>
       {destinationList
