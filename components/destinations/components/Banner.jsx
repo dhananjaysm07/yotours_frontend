@@ -12,7 +12,7 @@ const Banner = ({ props }) => {
           <h1 className="text-50 fw-600 text-white lg:text-40 md:text-30">
             Explore {props.destinationName}
           </h1>
-          <div className="text-white">{props.bannerHeading}</div>
+          <div className="text-white" style={{ background: 'rgba(0, 0, 0, 0.5)', padding: '10px', borderRadius: '5px' }}>{props.bannerHeading}</div>
         </div>
         {/* <div className="absolute d-flex justify-end items-end col-12 h-full z-1 px-10 py-10">
           <button className="button -md -blue-1 bg-white text-dark-1 text-14 fw-500">
