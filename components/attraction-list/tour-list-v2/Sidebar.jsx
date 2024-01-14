@@ -28,7 +28,7 @@ const Sidebar = () => {
     ),
   ].sort();
   const [categories, setCategories] = React.useState([]);
-  const { setTag, removeTag, setContinent, removeContinent, setCountry,removeCountry,continent:selectedContinents } =
+  const { setTag,setLocation, removeTag, setContinent, removeContinent, setCountry,removeCountry,continent:selectedContinents } =
     useAttractionFilterStore();
   // const [category,setCategory]=React.useState("")
   const continent = countryData.map((el) => el.continent);
@@ -43,8 +43,10 @@ const Sidebar = () => {
     }
   }
   function handleChangeContinent(event, category) {
+    setLocation("");
     if (event.target.checked) {
       setContinent(category);
+      
     } else {
       removeContinent(category);
     }
@@ -52,6 +54,7 @@ const Sidebar = () => {
 
   
   function handleChangeCountry(event, category) {
+    setLocation("");
     if (event.target.checked) {
       setCountry(category);
     } else {

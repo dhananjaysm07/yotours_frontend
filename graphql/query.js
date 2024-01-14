@@ -61,9 +61,11 @@ export const GET_DESTINATIONS_QUERY = gql`
       }
       tours {
         id
+        active
       }
       attractions {
         id
+        active
       }
     }
   }

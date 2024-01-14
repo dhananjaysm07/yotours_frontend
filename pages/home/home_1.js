@@ -24,13 +24,13 @@ const Home_1 = () => {
     useData();
   const { attractionData, attractionLoading, attractionError } = useData();
   const { tourData, tourLoading, tourError } = useData();
-  console.log("api server RUNNING", process.env.NEXT_PUBLIC_API_URL);
-  console.log(
-    "destination data---------",
-    destinationData,
-    attractionData,
-    tourData
-  );
+  // console.log("api server RUNNING", process.env.NEXT_PUBLIC_API_URL);
+  // console.log(
+  //   "destination data---------",
+  //   destinationData,
+  //   attractionData,
+  //   tourData
+  // );
   const [destinations, setDestinations] = React.useState([]);
   React.useState(() => {
     if (destinationData?.getDestinations?.length) {

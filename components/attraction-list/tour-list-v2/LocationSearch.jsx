@@ -1,22 +1,53 @@
 import { useState } from "react";
 import { countryData } from "../../../utils/country";
+import { useData } from "../../../lib/datacontext";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
-  let locationData = [];
-  countryData.forEach((data) => {
-    const newArray = data.countries.map((el, index) => ({
-      id: index + Math.random(),
-      name: el.name,
-      address: data.continent,
-    }));
-    // console.log("neww array", newArray);
-    locationData = [...locationData, ...newArray];
-  });
-  // console.log("locaiion array", locationData);
-  const locationSearchContent = [...locationData];
+  // let locationData = [];
+  // countryData.forEach((data) => {
+  //   const newArray = data.countries.map((el, index) => ({
+  //     id: index + Math.random(),
+  //     name: el.name,
+  //     address: data.continent,
+  //   }));
+  //   // console.log("neww array", newArray);
+  //   locationData = [...locationData, ...newArray];
+  // });
+  // // console.log("locaiion array", locationData);
+  // const locationSearchContent = [...locationData];
   // console.log("location array", locationSearchContent);
+
+  const { attractionData, attractionLoading } = useData();
+
+  if (attractionLoading) return <div>Loading...</div>;
+ // Create a Map to store unique destinations based on id
+const uniqueDestinationsMap = new Map();
+
+// Iterate through tourData and add each destination to the Map
+attractionData?.getAttractions.forEach((attraction) => {
+  const destination = attraction.destination;
+  if (destination && destination.id) {
+    uniqueDestinationsMap.set(destination.id, {
+      destinationName: destination.destinationName,
+      id: destination.id,
+    });
+  }
+});
+
+// Convert Map values to an array
+const uniqueDestinations = Array.from(uniqueDestinationsMap.values());
+
+console.log(searchValue)
+  // Filter destinations based on the search input
+  const filteredDestinations = uniqueDestinations
+    .filter((item) =>
+    item && item.destinationName
+      ? item.destinationName.toLowerCase().includes(searchValue.toLowerCase())
+      : false
+    )
+    .sort((a, b) => a.destinationName.localeCompare(b.destinationName));
   const handleOptionClick = (item) => {
     setSearchValue(item.name);
     setSelectedItem(item);
@@ -24,7 +55,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
 
   return (
     <>
-      <div className="searchMenu-loc px-20 py-10 bg-white rounded-4 js-form-dd js-liverSearch">
+       <div className="searchMenu-loc px-20 py-10 bg-white rounded-4 js-form-dd js-liverSearch">
         <div
           data-bs-toggle="dropdown"
           data-bs-auto-close="true"
@@ -54,7 +85,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
         <div className="shadow-2 dropdown-menu min-width-400">
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
             <ul className="y-gap-5 js-results">
-              {locationSearchContent.map((item) => (
+              {filteredDestinations.map((item) => (
                 <li
                   className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
                     selectedItem && selectedItem.id === item.id ? "active" : ""
@@ -67,11 +98,9 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
                     <div className="icon-location-2 text-light-1 text-20 pt-4" />
                     <div className="ml-10">
                       <div className="text-15 lh-12 fw-500 js-search-option-target">
-                        {item.name}
+                        {item.destinationName}
                       </div>
-                      <div className="text-14 lh-12 text-light-1 mt-5">
-                        {item.address}
-                      </div>
+                      {/* Additional details if needed */}
                     </div>
                   </div>
                 </li>

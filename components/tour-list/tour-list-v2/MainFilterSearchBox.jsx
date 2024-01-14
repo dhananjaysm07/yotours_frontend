@@ -38,6 +38,7 @@ const MainFilterSearchBox = () => {
             className="button -dark-1 py-15 px-40 h-full col-12 rounded-0 bg-pink-1 text-white"
             onClick={() => {
               setLocation(searchValue);
+              setSearchValue("");
             }}
           >
             <i className="icon-search text-20 mr-10" />
