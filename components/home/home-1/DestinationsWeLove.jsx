@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { destinations1 } from "../../../data/desinations";
 import { useData } from "../../../lib/datacontext";
+import { createSlug } from "../../../utils/slugify";
 
 const DestinationsWeLove = () => {
   const [filterOption, setFilterOption] = useState("india");
@@ -58,7 +59,12 @@ const DestinationsWeLove = () => {
                     className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
                     key={item.id}
                   >
-                    <Link href="/destinations" className="d-block">
+                    <Link 
+                    href={{
+                      pathname: `/destinations/${createSlug(item.destinationName)}`,
+                      query: { id: item.id }, // passing the ID as a query parameter
+                    }}
+                    className="d-block">
                       <div className="text-15 fw-500">
                         {item.destinationName}
                       </div>

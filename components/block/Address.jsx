@@ -6,8 +6,10 @@ const Address = () => {
       title: "India Office Address",
       content: (
         <>
-          Wanderung Guides Private Limited 205 Global Business Hub, Kharadi,
-          Pune, 411014, India{" "}
+          Wanderung Guides Private Limited <br />
+          <span className="italic fw-400">
+            205 Global Business Hub, Kharadi, Pune, 411014, India
+          </span>
         </>
       ),
     },
@@ -16,7 +18,12 @@ const Address = () => {
       colClass: "col-lg-3",
       title: "EU Office Address",
       content: (
-        <>Yo Tours BV Utrechtseweg 341, 3818 EL Amersfoort, The Netherlands</>
+        <>
+          Yo Tours BV <br />{" "}
+          <span className="italic fw-400">
+            Utrechtseweg 341, 3818 EL Amersfoort, The Netherlands
+          </span>
+        </>
       ),
     },
     {
@@ -46,7 +53,7 @@ const Address = () => {
       {addressContent.map((item) => (
         <div className={`${item.colClass}`} key={item.id}>
           <div className="text-14 text-light-1">{item.title}</div>
-          <div className="text-18 fw-500 mt-10">{item.content}</div>
+          <div className="text-16 fw-500 mt-10">{item.content}</div>
         </div>
       ))}
     </>
