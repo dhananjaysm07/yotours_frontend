@@ -359,6 +359,9 @@ const Home_1 = () => {
             </div>
             {/* End .container */}
           </section>
+
+
+          {/* TOURS IN ASIA */}
           <section className="layout-pt-md layout-pb-lg">
             <div className="container">
               <div className="row y-gap-10 justify-between items-end">
@@ -390,12 +393,13 @@ const Home_1 = () => {
                 </div>
                 
 
-                <div className="col-auto tabs -pills-2 ">
+                <div className="relative overflow-hidden pt-40 sm:pt-20">
+                  <div className="row y-gap-30">
                   <FilterTabContentContinent
                     loading={destinationLoading}
                     error={destinationError}
                     dataToRender={
-                      filterOptionEurope == "tour"
+                      filterOptionAsia == "tour"
                         ? tourData?.getTours?.filter(
                             (el) => el.destination.continent == "Asia"
                           )
@@ -403,19 +407,13 @@ const Home_1 = () => {
                             (el) => el.destination.continent == "Asia"
                           )
                     }
-                    filter={filterOptionEurope}
+                    filter={filterOptionAsia}
                   />
                 </div>
-                {/* End .col-auto */}
-              </div>
-              {/* End .row */}
-
-              {/* <div className="relative overflow-hidden pt-40 sm:pt-20">
-                <div className="row y-gap-30">
-                  <FilterTabContent />
                 </div>
-              </div> */}
-              {/* End relative */}
+              </div>
+
+           
             </div>
             <p className=" d-none sm:d-block sectionTitle__text mt-5 sm:mt-0">
                       {/* Our best selling {filterOption} */}
@@ -441,25 +439,7 @@ const Home_1 = () => {
       ) : (
         ""
       )}
-      {/* <section className="layout-pt-lg layout-pb-lg bg-blue-2">
-        <div className="container">
-          <div className="row y-gap-40 justify-between">
-            <div className="col-xl-5 col-lg-6" data-aos="fade-up">
-              <TestimonialLeftCol />
-            </div>
-
-            <div className="col-lg-6">
-              <div
-                className="overflow-hidden js-testimonials-slider-3"
-                data-aos="fade-up"
-                data-aos-delay="50"
-              >
-                <Testimonial />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
+      {/* DESTINATIONS WE LOVE */}
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row">

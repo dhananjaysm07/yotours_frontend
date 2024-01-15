@@ -22,6 +22,9 @@ const PopularDestinations = ({
 
   if (destinationLoading) return <p>Loading destinations...</p>;
   if (destinationError) return <p>Error loading destinations</p>;
+  const sortedPopularDestinations = popularDestinations?.slice().sort((a, b) =>
+  a.destinationName.localeCompare(b.destinationName)
+);
   return (
     <>
       <Swiper
@@ -54,14 +57,13 @@ const PopularDestinations = ({
         }}
       >
         {popularDestinations?.map((item) => (
-          <SwiperSlide  key={item.id}>
+          <SwiperSlide key={item.id}>
             <Link
               href={{
                 pathname: `/destinations/${createSlug(item.destinationName)}`,
                 query: { id: item.id }, // passing the ID as a query parameter
               }}
               className="citiesCard -type-1 d-block rounded-4"
-              key={item.id}
             >
               <div className="citiesCard__image ratio ratio-3:4">
                 <Image
@@ -70,7 +72,6 @@ const PopularDestinations = ({
                   height={400}
                   src={item.bannerImage}
                   alt="image"
-                  
                   // className="js-lazy"
                   //TODO: BLUR IMAGES
                   style={{ objectFit: "cover" }}

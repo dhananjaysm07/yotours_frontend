@@ -37,8 +37,8 @@ const SearchedTours = () => {
   if (tourError) {
     return <>Error loading tours: {tourError.message}</>;
   }
-  console.log("Tourdata", tourData);
-  console.log(filteredTours);
+  // console.log("Tourdata", tourData);
+  // console.log(filteredTours);
 
   return (
     <>
@@ -57,9 +57,12 @@ const SearchedTours = () => {
               </div>
             </div>
           </div>
-          <div className="relative pt-40 sm:pt-20">
+          {filteredTours.length>0 ? (<div className="relative pt-40 sm:pt-20">
             <Tours tours={filteredTours} />
-          </div>
+          </div>): (<div className="relative pt-40 text-black sm:pt-20">
+            <h1>No Tours Found </h1>
+          </div>)
+          }
         </div>
       </section>
       <CallToActions />

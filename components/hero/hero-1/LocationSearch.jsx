@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useData } from "../../../lib/datacontext";
 import { useSearchStore } from "../../../lib/store";
 
-const SearchBar = () => {
-  const [searchValue, setSearchValue] = useState("");
+const SearchBar = ({ searchValue, setSearchValue }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const data = [
@@ -44,6 +43,12 @@ if (destinationError) return <p>Error loading destinations</p>;
     setDestinationId(item.id)
   };
 
+  const filteredDestinations = destinationData?.getDestinations
+    .filter((item) =>
+      item.destinationName.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .sort((a, b) => a.destinationName.localeCompare(b.destinationName));
+
   return (
     <>
       <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
@@ -69,7 +74,7 @@ if (destinationError) return <p>Error loading destinations</p>;
         <div className="shadow-2 dropdown-menu min-width-400">
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
             <ul className="y-gap-5 js-results">
-              {destinationData.getDestinations.map((item) => (
+              {filteredDestinations.map((item) => (
                 <li
                   className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
                     selectedItem && selectedItem.id === item.id ? "active" : ""
