@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   server: {
     host: "0.0.0.0",
-    port: 3004,
+    port: 80,
   },
   images: {
     domains: ["firebasestorage.googleapis.com"],
@@ -12,7 +12,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
- 
 };
 
 module.exports = nextConfig;
