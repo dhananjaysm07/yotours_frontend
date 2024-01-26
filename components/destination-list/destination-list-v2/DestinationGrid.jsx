@@ -45,13 +45,6 @@ const DestinationGrid = ({ filter }) => {
     // console.log("data new for second", dataNew);
     // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
     setIsLoading(dataNew.loading);
-    // if (dataNew?.data?.getFilteredTours) {
-    //   setIsLoading(false);
-    // } else {
-    //   setTimeout(() => {
-    //     setIsLoading(false);
-    //   }, 2000);
-    // }
     setDestinationData(
       dataNew?.data?.getFilteredDestination?.destinations,
       totalPageLoaded + 1
@@ -80,15 +73,6 @@ const DestinationGrid = ({ filter }) => {
   };
 
   React.useEffect(() => {
-    // console.log("inside use effect");
-    // console.log(
-    //   "total result",
-    //   totalResult,
-    //   currentPage * dataPerPage < totalResult,
-    //   currentPage * dataPerPage >= loadCount * totalPageLoaded,
-    //   currentPage,
-    //   totalPageLoaded
-    // );
     if (currentPage == 0) {
       // console.log("called for the first tiime😚", filter);
       handleRefetchDataForFirstTime();

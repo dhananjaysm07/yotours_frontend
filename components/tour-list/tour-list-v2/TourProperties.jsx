@@ -38,7 +38,7 @@ const TourProperties = ({ filter, setFilter }) => {
         tagName: [],
       });
   }, [continent]);
-  console.log("filter-------------", filter, continent);
+  // console.log("filter-------------", filter, continent);
   const {
     setTourPaginationData,
     currentPage,
@@ -252,7 +252,6 @@ const TourProperties = ({ filter, setFilter }) => {
               ) : (
                 ""
               )}
-             
             </div>
             {/* End .tourCard__image */}
 

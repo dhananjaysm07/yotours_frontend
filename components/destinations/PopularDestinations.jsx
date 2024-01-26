@@ -22,9 +22,9 @@ const PopularDestinations = ({
 
   if (destinationLoading) return <p>Loading destinations...</p>;
   if (destinationError) return <p>Error loading destinations</p>;
-  const sortedPopularDestinations = popularDestinations?.slice().sort((a, b) =>
-  a.destinationName.localeCompare(b.destinationName)
-);
+  //   const sortedPopularDestinations = popularDestinations?.slice().sort((a, b) =>
+  //   a.destinationName.localeCompare(b.destinationName)
+  // );
   return (
     <>
       <Swiper

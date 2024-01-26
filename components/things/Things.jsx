@@ -7,6 +7,7 @@ import { useData } from "../../lib/datacontext";
 
 const Things = ({ things = [] }) => {
   const { contentData } = useData();
+  // console.log("thingssss------", things);
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
     if (bokunChannelId) {
