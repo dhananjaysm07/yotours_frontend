@@ -7,23 +7,23 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
   const { tourData, tourLoading } = useData();
 
   if (tourLoading) return <div>Loading...</div>;
- // Create a Map to store unique destinations based on id
-const uniqueDestinationsMap = new Map();
+  // Create a Map to store unique destinations based on id
+  const uniqueDestinationsMap = new Map();
 
-// Iterate through tourData and add each destination to the Map
-tourData?.getTours.forEach((tour) => {
-  const destination = tour.destination;
-  if (destination && destination.id) {
-    uniqueDestinationsMap.set(destination.id, {
-      destinationName: destination.destinationName,
-      id: destination.id,
-    });
-  }
-});
+  // Iterate through tourData and add each destination to the Map
+  tourData?.getTours.forEach((tour) => {
+    const destination = tour.destination;
+    if (destination && destination.id) {
+      uniqueDestinationsMap.set(destination.id, {
+        destinationName: destination.destinationName,
+        id: destination.id,
+      });
+    }
+  });
 
-// Convert Map values to an array
-const uniqueDestinations = Array.from(uniqueDestinationsMap.values());
-  console.log("unique dest",uniqueDestinations)
+  // Convert Map values to an array
+  const uniqueDestinations = Array.from(uniqueDestinationsMap.values());
+  // console.log("unique dest",uniqueDestinations)
   const handleOptionClick = (item) => {
     setSearchValue(item.destinationName);
     setSelectedItem(item);

@@ -23,6 +23,7 @@ const TourProperties = ({ filter, setFilter }) => {
     tourFilteredLoading,
   } = useData();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [err, setErr] = React.useState("");
   const router = useRouter();
   const { continent } = router.query;
   // const { setContinent } = useTourFilterStore();
@@ -52,61 +53,51 @@ const TourProperties = ({ filter, setFilter }) => {
   } = useTourPaginationStore();
 
   const handleRefetchData = async () => {
-    const dataNew = await refetch({
-      page: totalPageLoaded + 1,
-      loadCount,
-      filter,
-    });
-    // console.log("data new", dataNew);
-    // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    setIsLoading(dataNew.loading);
-    // if (dataNew?.data?.getFilteredTours) {
-    //   setIsLoading(false);
-    // } else {
-    //   setTimeout(() => {
-    //     setIsLoading(false);
-    //   }, 2000);
-    // }
-    setTourData(dataNew?.data?.getFilteredTours?.tours, totalPageLoaded + 1);
+    try {
+      setIsLoading(true);
+      const pageToBeLoaded =
+        Math.floor(currentPage / (loadCount / dataPerPage)) + 1;
+      const dataNew = await refetch({
+        page: pageToBeLoaded,
+        loadCount,
+        filter,
+      });
+      setTourData(dataNew?.data?.getFilteredTours?.tours, pageToBeLoaded);
+    } catch (err) {
+      setErr("Unable to fetch data");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRefetchDataForFirstTime = async () => {
-    setIsLoading(true);
-    const dataNew = await refetch({
-      page: 1,
-      loadCount,
-      filter,
-    });
-    // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    setIsLoading(dataNew.loading);
-    setTourPaginationData(
-      Math.ceil(dataNew?.data?.getFilteredTours?.totalCount / dataPerPage),
-      1, ///current page
-      1, ////page loaded from api
-      dataNew?.data?.getFilteredTours?.totalCount,
-      dataNew?.data?.getFilteredTours?.tours
-    );
+    try {
+      setIsLoading(true);
+      const dataNew = await refetch({
+        page: 1,
+        loadCount,
+        filter,
+      });
+      // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
+      // setIsLoading(dataNew.loading);
+      setTourPaginationData(
+        Math.ceil(dataNew?.data?.getFilteredTours?.totalCount / dataPerPage),
+        0, ///current page
+        1, ////page loaded from api
+        dataNew?.data?.getFilteredTours?.totalCount,
+        dataNew?.data?.getFilteredTours?.tours
+      );
+    } catch (err) {
+      setErr("Unable to fetch data");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   React.useEffect(() => {
-    // console.log("inside use effect");
-    // console.log(
-    //   "total result",
-    //   totalResult,
-    //   currentPage * dataPerPage < totalResult,
-    //   currentPage * dataPerPage >= loadCount * totalPageLoaded,
-    //   currentPage,
-    //   totalPageLoaded
-    // );
     if (currentPage == 0) {
-      // console.log("called for the first tiime😚", filter);
       handleRefetchDataForFirstTime();
-    } else if (
-      currentPage * dataPerPage >= loadCount * totalPageLoaded &&
-      // currentPage * dataPerPage < totalResult &&
-      currentPage != 0
-      // !isLoading
-    ) {
+    } else if (!tourList[currentPage * dataPerPage]) {
       handleRefetchData();
     }
   }, [currentPage]);
@@ -168,12 +159,12 @@ const TourProperties = ({ filter, setFilter }) => {
     slidesToScroll: 1,
   };
   if (isLoading) return <p>Loading...</p>;
-  if (tourFilteredError) return <p>Error: {tourFilteredError.message}</p>;
+  if (tourFilteredError || err) return <p>Error Loading</p>;
   console.log("tour list", tourList);
   return (
     <>
       {tourList
-        ?.slice((currentPage - 1) * dataPerPage, currentPage * dataPerPage)
+        ?.slice(currentPage * dataPerPage, (currentPage + 1) * dataPerPage)
         .map((item, index) => (
           <div
             // className="col-lg-4 col-sm-6"
@@ -183,7 +174,7 @@ const TourProperties = ({ filter, setFilter }) => {
             style={{ cursor: "pointer" }}
             className="bokunButton tourCard -type-1 rounded-4 hover-inside-slider col-lg-4 col-sm-6"
             //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
-            data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item.tourBokunId}?partialView=1`}
+            data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item?.tourBokunId}?partialView=1`}
           >
             <div className="tourCard__image">
               <div className="cardImage ratio ratio-2:1">
@@ -203,7 +194,7 @@ const TourProperties = ({ filter, setFilter }) => {
                             width={300}
                             height={300}
                             className="rounded-4 col-12 js-lazy"
-                            src={slide.imageUrl}
+                            src={slide?.imageUrl || ""}
                             alt="image"
                           />
                         </SwiperSlide>

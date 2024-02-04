@@ -23,7 +23,7 @@ const DestinationGrid = ({ filter }) => {
     refetchFilteredDestination,
   } = useData();
   const [isLoading, setIsLoading] = React.useState(false);
-
+  const [err, setErr] = React.useState("");
   const {
     setDestinationPaginationData,
     currentPage,
@@ -37,51 +37,57 @@ const DestinationGrid = ({ filter }) => {
   } = useDestinationPaginationStore();
 
   const handleRefetchData = async () => {
-    const dataNew = await refetchFilteredDestination({
-      page: totalPageLoaded + 1,
-      loadCount,
-      filter,
-    });
-    // console.log("data new for second", dataNew);
-    // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    setIsLoading(dataNew.loading);
-    setDestinationData(
-      dataNew?.data?.getFilteredDestination?.destinations,
-      totalPageLoaded + 1
-    );
+    try {
+      setIsLoading(true);
+      const pageToBeLoaded =
+        Math.floor(currentPage / (loadCount / dataPerPage)) + 1;
+      const dataNew = await refetchFilteredDestination({
+        page: pageToBeLoaded,
+        loadCount,
+        filter,
+      });
+      setDestinationData(
+        dataNew?.data?.getFilteredDestination?.destinations,
+        pageToBeLoaded
+      );
+    } catch (err) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRefetchDataForFirstTime = async () => {
-    setIsLoading(true);
-    const dataNew = await refetchFilteredDestination({
-      page: 1,
-      loadCount,
-      filter,
-    });
-    // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    // console.log("data new", dataNew);
-    setIsLoading(dataNew.loading);
-    setDestinationPaginationData(
-      Math.ceil(
-        dataNew?.data?.getFilteredDestination?.totalCount / dataPerPage
-      ),
-      1, ///current page
-      1, ////page loaded from api
-      dataNew?.data?.getFilteredDestination?.totalCount,
-      dataNew?.data?.getFilteredDestination?.destinations
-    );
+    try {
+      setIsLoading(true);
+      const dataNew = await refetchFilteredDestination({
+        page: 1,
+        loadCount,
+        filter,
+      });
+      // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
+      // console.log("data new", dataNew);
+      setIsLoading(dataNew.loading);
+      setDestinationPaginationData(
+        Math.ceil(
+          dataNew?.data?.getFilteredDestination?.totalCount / dataPerPage
+        ),
+        0, ///current page
+        1, ////page loaded from api
+        dataNew?.data?.getFilteredDestination?.totalCount,
+        dataNew?.data?.getFilteredDestination?.destinations
+      );
+    } catch (err) {
+      setErr("Unable to fetch destination");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   React.useEffect(() => {
     if (currentPage == 0) {
       // console.log("called for the first tiime😚", filter);
       handleRefetchDataForFirstTime();
-    } else if (
-      currentPage * dataPerPage >= loadCount * totalPageLoaded &&
-      // currentPage * dataPerPage < totalResult &&
-      currentPage != 0
-      // !isLoading
-    ) {
+    } else if (!destinationList[currentPage * dataPerPage]) {
       handleRefetchData();
     }
   }, [currentPage]);
@@ -143,13 +149,12 @@ const DestinationGrid = ({ filter }) => {
     slidesToScroll: 1,
   };
   if (isLoading) return <p>Loading...</p>;
-  if (destinationFilteredError)
-    return <p>Error: {destinationFilteredError.message}</p>;
+  if (destinationFilteredError || err) return <p>Error loading destination</p>;
   console.log("Destination list", destinationList);
   return (
     <>
       {destinationList
-        ?.slice((currentPage - 1) * dataPerPage, currentPage * dataPerPage)
+        ?.slice(currentPage * dataPerPage, (currentPage + 1) * dataPerPage)
         .map((item, index) => (
           <div
             className="col-lg-4 col-sm-6"
@@ -159,10 +164,12 @@ const DestinationGrid = ({ filter }) => {
           >
             <Link
               href={{
-                pathname: `/destinations/${createSlug(item.destinationName)}`,
-                query: { id: item.id }, // passing the ID as a query parameter
+                pathname: `/destinations/${createSlug(
+                  item?.destinationName || ""
+                )}`,
+                query: { id: item?.id }, // passing the ID as a query parameter
               }}
-              key={item.id}
+              key={item?.id}
               className="tourCard -type-1 rounded-4 position-relative"
             >
               <div className="tourCard__image">
@@ -181,7 +188,7 @@ const DestinationGrid = ({ filter }) => {
                           width={300}
                           height={300}
                           className="rounded-4 col-12 js-lazy"
-                          src={item.bannerImage}
+                          src={item?.bannerImage || ""}
                           alt="image"
                         />
                       </Swiper>

@@ -8,25 +8,7 @@ import { useTourFilterStore } from "../../../lib/store";
 import CountryContinentFilter from "../../attraction-list/sidebar/CountryContinentFilter";
 
 const Sidebar = () => {
-  const { tourCCData,tourCCLoading } = useData();
-  if (tourCCLoading) return <div>Loading...</div>;
-  // Extract unique countries and continents using a Set
-  const uniqueCountries = [
-    ...new Set(
-      tourCCData?.getCountriesAndContinentsForTours.map(
-        (item) => item.country
-      )
-    ),
-  ].sort();
-  const uniqueContinents = [
-    ...new Set(
-      tourCCData?.getCountriesAndContinentsForTours.map(
-        (item) => item.continent
-      )
-    ),
-  ].sort();
-  const { tagNameList } = useData();
-  const [categories, setCategories] = React.useState([]);
+  const { tourCCData, tourCCLoading } = useData();
   const {
     setTag,
     setLocation,
@@ -37,7 +19,23 @@ const Sidebar = () => {
     removeCountry,
     continent: selectedContinents,
   } = useTourFilterStore();
-  
+  const [categories, setCategories] = React.useState([]);
+
+  // Extract unique countries and continents using a Set
+  const uniqueCountries = [
+    ...new Set(
+      tourCCData?.getCountriesAndContinentsForTours.map((item) => item.country)
+    ),
+  ].sort();
+  const uniqueContinents = [
+    ...new Set(
+      tourCCData?.getCountriesAndContinentsForTours.map(
+        (item) => item.continent
+      )
+    ),
+  ].sort();
+  const { tagNameList } = useData();
+
   // const [category,setCategory]=React.useState("")
   const continent = countryData.map((el) => el.continent);
   React.useEffect(() => {
@@ -77,14 +75,16 @@ const Sidebar = () => {
     )
     .map((item) => item.country);
 
+  const countsByContinent = {};
+  const countsByCountry = {};
 
-    const countsByContinent = {};
-    const countsByCountry = {};
-  
-    tourCCData?.getCountriesAndContinentsForTours.forEach((item) => {
-      countsByContinent[item.continent] = item.tourCount + (countsByContinent[item.continent] || 0);
-      countsByCountry[item.country] = item.tourCount + (countsByCountry[item.country] || 0);
-    });
+  tourCCData?.getCountriesAndContinentsForTours.forEach((item) => {
+    countsByContinent[item.continent] =
+      item.tourCount + (countsByContinent[item.continent] || 0);
+    countsByCountry[item.country] =
+      item.tourCount + (countsByCountry[item.country] || 0);
+  });
+  if (tourCCLoading) return <div>Loading...</div>;
   return (
     <>
       <div className="sidebar__item -no-border">
@@ -115,7 +115,6 @@ const Sidebar = () => {
               categories={uniqueContinents}
               handleChange={handleChangeContinent}
               continentCounts={countsByContinent}
-
             />
           </div>
         </div>
@@ -128,7 +127,6 @@ const Sidebar = () => {
               categories={filteredCountries}
               handleChange={handleChangeCountry}
               countryCounts={countsByCountry}
-
             />
           </div>
         </div>
