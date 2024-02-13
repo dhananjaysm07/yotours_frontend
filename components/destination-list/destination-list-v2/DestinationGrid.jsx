@@ -64,6 +64,7 @@ const DestinationGrid = ({ filter }) => {
         loadCount,
         filter,
       });
+      console.log("filter---", filter);
       // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
       // console.log("data new", dataNew);
       setIsLoading(dataNew.loading);
@@ -90,7 +91,7 @@ const DestinationGrid = ({ filter }) => {
     } else if (!destinationList[currentPage * dataPerPage]) {
       handleRefetchData();
     }
-  }, [currentPage]);
+  }, [currentPage, filter]);
 
   React.useEffect(() => {
     setDestinationPaginationData(0, 0, 0, 0, []);

@@ -42,7 +42,8 @@ const Tour = () => {
     priceMin,
     tagName,
     continent,
-    country
+    country,
+    resetData,
   } = useAttractionFilterStore();
   const [filter, setFilter] = React.useState({
     priceMin: null,
@@ -51,9 +52,12 @@ const Tour = () => {
     location: null,
     endDate: null,
     continent: [],
-    country:[],
+    country: [],
     tagName: [],
   });
+  React.useEffect(() => {
+    resetData();
+  }, []);
 
   // console.log("tag elected", tagName, priceMax, priceMin, location);
   React.useEffect(() => {
@@ -66,9 +70,18 @@ const Tour = () => {
       endDate: endTime,
       tagName: tagName,
       continent: continent,
-      country:country
+      country: country,
     });
-  }, [priceMax, priceMin, startTime, endTime, location, tagName, continent,country]);
+  }, [
+    priceMax,
+    priceMin,
+    startTime,
+    endTime,
+    location,
+    tagName,
+    continent,
+    country,
+  ]);
   return (
     <>
       <Seo pageTitle="Attraction Tickets" />

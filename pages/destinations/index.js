@@ -7,7 +7,7 @@ import TopHeaderFilter from "../../components/destination-list/destination-list-
 import Pagination from "../../components/destination-list/common/Pagination";
 import {
   useDestinationFilterStore,
-  useDestinationPaginationStore
+  useDestinationPaginationStore,
 } from "../../lib/store";
 import React from "react";
 import DestinationGrid from "../../components/destination-list/destination-list-v2/DestinationGrid";
@@ -15,7 +15,7 @@ import DestinationSidebar from "../../components/destination-list/destination-li
 
 const Destination = () => {
   const { setCurrentPage, totalPage, currentPage, dataPerPage } =
-  useDestinationPaginationStore();
+    useDestinationPaginationStore();
   // const [startTime, setStartTime] = React.useState(null);
   // const [endTime, setEndTime] = React.useState(null);
   // const [priceMax, setPriceMax] = React.useState(null);
@@ -30,7 +30,8 @@ const Destination = () => {
     priceMin,
     tagName,
     continent,
-    country
+    country,
+    resetData,
   } = useDestinationFilterStore();
   const [filter, setFilter] = React.useState({
     priceMin: null,
@@ -39,9 +40,13 @@ const Destination = () => {
     location: null,
     endDate: null,
     continent: [],
-    country:[],
+    country: [],
     tagName: [],
   });
+
+  React.useEffect(() => {
+    resetData();
+  }, []);
 
   // console.log("tag elected", tagName, priceMax, priceMin, location);
   React.useEffect(() => {
@@ -54,9 +59,18 @@ const Destination = () => {
       endDate: endTime,
       tagName: tagName,
       continent: continent,
-      country:country
+      country: country,
     });
-  }, [priceMax, priceMin, startTime, endTime, location, tagName, continent,country]);
+  }, [
+    priceMax,
+    priceMin,
+    startTime,
+    endTime,
+    location,
+    tagName,
+    continent,
+    country,
+  ]);
   return (
     <>
       <Seo pageTitle="Destinations" />

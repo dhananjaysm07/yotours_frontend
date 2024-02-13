@@ -110,7 +110,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
     ) {
       handleRefetchData();
     }
-  }, [currentPage]);
+  }, [currentPage, filter]);
 
   React.useEffect(() => {
     setAttractionPaginationData(0, 0, 0, 0, []);

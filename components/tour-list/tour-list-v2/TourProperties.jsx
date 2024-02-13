@@ -100,7 +100,7 @@ const TourProperties = ({ filter, setFilter }) => {
     } else if (!tourList[currentPage * dataPerPage]) {
       handleRefetchData();
     }
-  }, [currentPage]);
+  }, [currentPage, filter]);
 
   React.useEffect(() => {
     setTourPaginationData(0, 0, 0, 0, []);
