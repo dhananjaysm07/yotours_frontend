@@ -160,7 +160,7 @@ const TourProperties = ({ filter, setFilter }) => {
   };
   if (isLoading) return <p>Loading...</p>;
   if (tourFilteredError || err) return <p>Error Loading</p>;
-  console.log("tour list", tourList);
+  // console.log("tour list", tourList);
   return (
     <>
       {tourList

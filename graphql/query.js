@@ -1,43 +1,34 @@
 import { gql } from "@apollo/client";
 
-
 export const GET_COUNTRIES_CONTINENTS_QUERY = gql`
   query GetCountriesAndContinents {
-  getCountriesAndContinents {
-    country
-    continent
-    destinationCount
+    getCountriesAndContinents {
+      country
+      continent
+      destinationCount
+    }
   }
-}
 `;
-
 
 export const GET_COUNTRIES_CONTINENTS_TOURS_QUERY = gql`
   query GetCountriesAndContinentsForTours {
-  getCountriesAndContinentsForTours {
-    country
-    continent
-    tourCount
+    getCountriesAndContinentsForTours {
+      country
+      continent
+      tourCount
+    }
   }
-
-}
 `;
-
 
 export const GET_COUNTRIES_CONTINENTS_ATTRACTIONS_QUERY = gql`
   query GetCountriesAndContinentsForAttractions {
-  getCountriesAndContinentsForAttractions {
-    country
-    continent
-    attractionCount
-  
-}
-
-}
+    getCountriesAndContinentsForAttractions {
+      country
+      continent
+      attractionCount
+    }
+  }
 `;
-
-
-
 
 export const GET_DESTINATIONS_QUERY = gql`
   query GetDestinations {
@@ -228,6 +219,7 @@ export const GET_TOURS_QUERY = gql`
         id
         destinationName
         continent
+        country
       }
       price
       currency
@@ -292,6 +284,7 @@ export const GET_ATTRACTIONS_QUERY = gql`
         id
         destinationName
         continent
+        country
       }
       price
       currency

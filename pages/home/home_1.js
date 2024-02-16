@@ -57,6 +57,8 @@ const Home_1 = () => {
     filterOptionAsia,
     setFilterOptionEurope,
     setFilterOptionAsia,
+    filterOptionIndia,
+    setFilterOptionIndia,
   } = useFilterStore();
   return (
     <>
@@ -223,7 +225,7 @@ const Home_1 = () => {
                               : "/attractions?continent=Europe"
                           }
                           className="button -md -pink-1 bg-pink-1-05 text-pink-1"
-                          style={{ whiteSpace: 'nowrap' }}
+                          style={{ whiteSpace: "nowrap" }}
                         >
                           View All{" "}
                           {filterOptionEurope == "tour"
@@ -272,25 +274,24 @@ const Home_1 = () => {
               {/* End relative */}
             </div>
             <p className=" d-none sm:d-block sectionTitle__text mt-5 sm:mt-0">
-                      {/* Our best selling {filterOption} */}
-                      <div className="col-auto ml-auto">
-                        <Link
-                          href={
-                            filterOptionEurope == "tour"
-                              ? "/tours?continent=Europe"
-                              : "/attractions?continent=Europe"
-                          }
-                          className="button -md  bg-pink-1 text-white"
-                          
-                        >
-                          View All{" "}
-                          {filterOptionEurope == "tour"
-                            ? "Tours in Europe"
-                            : "Attractions in Europe"}
-                          <div className="icon-arrow-top-right ml-15" />
-                        </Link>
-                      </div>
-                    </p>
+              {/* Our best selling {filterOption} */}
+              <div className="col-auto ml-auto">
+                <Link
+                  href={
+                    filterOptionEurope == "tour"
+                      ? "/tours?continent=Europe"
+                      : "/attractions?continent=Europe"
+                  }
+                  className="button -md  bg-pink-1 text-white"
+                >
+                  View All{" "}
+                  {filterOptionEurope == "tour"
+                    ? "Tours in Europe"
+                    : "Attractions in Europe"}
+                  <div className="icon-arrow-top-right ml-15" />
+                </Link>
+              </div>
+            </p>
           </section>
         </>
       ) : (
@@ -311,6 +312,146 @@ const Home_1 = () => {
           </div>
         </div>
       </section>
+      {/* ////////////////////////////////Start of India/////////////////////////////////////////////////// */}
+      {/* /////////////////////////////////////////////////////////////////////////////////////////////////// */}
+      {destinationGroup?.Asia?.filter(
+        (destination) => destination.country == "India"
+      ).length ? (
+        <>
+          <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
+            <div className="container">
+              <div className="row y-gap-20 justify-between items-end">
+                <div className="col-auto">
+                  <div className="sectionTitle -md">
+                    <h2 className="sectionTitle__title">
+                      Popular Destinations In India{" "}
+                    </h2>
+                    {/* <h2 className="sectionTitle__title">Popular Destinations in {el}</h2> */}
+
+                    <p className=" sectionTitle__text mt-5 sm:mt-0">
+                      These popular destinations in India have a lot to offer
+                    </p>
+                  </div>
+                </div>
+                {/* End col-auto */}
+
+                <div className="col-auto">
+                  <Link
+                    href="/destinations"
+                    className="button -md -pink-1 bg-pink-1-05 text-pink-1"
+                  >
+                    View All Destinations
+                    <div className="icon-arrow-top-right ml-15" />
+                  </Link>
+                </div>
+                {/* End col-auto */}
+              </div>
+              {/* End .row */}
+              <div className="relative pt-40 sm:pt-20">
+                {destinationGroup.Asia ? (
+                  <PopularDestinations
+                    popularDestinations={destinationGroup.Asia.filter(
+                      (destination) => destination.country == "India"
+                    )}
+                    destinationError={destinationError}
+                    destinationLoading={destinationLoading}
+                    id={10014092955}
+                  />
+                ) : (
+                  "No Popular destination in India"
+                )}
+
+                {/* <PopularDestinations /> */}
+              </div>
+            </div>
+            {/* End .container */}
+          </section>
+
+          {/* TOURS IN ASIA */}
+          <section className="layout-pt-md layout-pb-lg">
+            <div className="container">
+              <div className="row y-gap-10 justify-between items-end">
+                <div className="col-auto">
+                  <div className="sectionTitle -md">
+                    <h2 className="sectionTitle__title">
+                      Best Tours and Attraction Tickets in India
+                    </h2>
+                    <p className=" sectionTitle__text mt-5 sm:mt-0">
+                      {/* Our best selling {filterOption} */}
+                      <div className="col-4 md:d-none ml-auto">
+                        <Link
+                          href={
+                            filterOptionIndia == "tour"
+                              ? "/tours?continent=Asia"
+                              : "/attractions?country=India"
+                          }
+                          className="button -md -pink-1 bg-pink-1-05 text-pink-1"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          View All{" "}
+                          {filterOptionIndia == "tour"
+                            ? "Tours"
+                            : "Attractions"}
+                          <div className="icon-arrow-top-right ml-15" />
+                        </Link>
+                      </div>
+                    </p>
+                  </div>
+                </div>
+                <div className="col-auto tabs -pills-2 ">
+                  <FilterTabsHotelsForContinent
+                    filter={filterOptionIndia}
+                    setFilter={setFilterOptionIndia}
+                  />
+                </div>
+                <div className="relative overflow-hidden pt-40 sm:pt-20">
+                  <div className="row y-gap-30">
+                    <FilterTabContentContinent
+                      loading={destinationLoading}
+                      error={destinationError}
+                      dataToRender={
+                        filterOptionIndia == "tour"
+                          ? tourData?.getTours?.filter(
+                              (el) => el.destination.country == "India"
+                            )
+                          : attractionData?.getAttractions?.filter(
+                              (el) => el.destination.country == "India"
+                            )
+                      }
+                      filter={filterOptionIndia}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className=" d-none sm:d-block sectionTitle__text mt-5 sm:mt-0">
+              {/* Our best selling {filterOption} */}
+              <div className="col-auto ml-auto">
+                <Link
+                  href={
+                    filterOptionIndia == "tour"
+                      ? "/tours?continent=India"
+                      : "/attractions?continent=India"
+                  }
+                  className="button -md  bg-pink-1 text-white"
+                >
+                  View All{" "}
+                  {filterOptionIndia == "tour"
+                    ? "Tours in India"
+                    : "Attractions in India"}
+                  <div className="icon-arrow-top-right ml-15" />
+                </Link>
+              </div>
+            </p>
+          </section>
+        </>
+      ) : (
+        ""
+      )}
+
+      {/* //////////////////////////////////////////End of India///////////////////////////////////////////// */}
+      {/* /////////////////////////////////////////////////////////////////////////////////////////////// */}
+
       {destinationGroup.Asia ? (
         <>
           <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
@@ -345,7 +486,9 @@ const Home_1 = () => {
               <div className="relative pt-40 sm:pt-20">
                 {destinationGroup.Asia ? (
                   <PopularDestinations
-                    popularDestinations={destinationGroup.Asia}
+                    popularDestinations={destinationGroup.Asia.filter(
+                      (destination) => destination.country !== "India"
+                    )}
                     destinationError={destinationError}
                     destinationLoading={destinationLoading}
                     id={10014092955}
@@ -359,7 +502,6 @@ const Home_1 = () => {
             </div>
             {/* End .container */}
           </section>
-
 
           {/* TOURS IN ASIA */}
           <section className="layout-pt-md layout-pb-lg">
@@ -380,8 +522,7 @@ const Home_1 = () => {
                               : "/attractions?continent=Asia"
                           }
                           className="button -md -pink-1 bg-pink-1-05 text-pink-1"
-                          style={{ whiteSpace: 'nowrap' }}
-                          
+                          style={{ whiteSpace: "nowrap" }}
                         >
                           View All{" "}
                           {filterOptionAsia == "tour" ? "Tours" : "Attractions"}
@@ -391,49 +532,55 @@ const Home_1 = () => {
                     </p>
                   </div>
                 </div>
-                
-
-                <div className="relative overflow-hidden pt-40 sm:pt-20">
-                  <div className="row y-gap-30">
-                  <FilterTabContentContinent
-                    loading={destinationLoading}
-                    error={destinationError}
-                    dataToRender={
-                      filterOptionAsia == "tour"
-                        ? tourData?.getTours?.filter(
-                            (el) => el.destination.continent == "Asia"
-                          )
-                        : attractionData?.getAttractions?.filter(
-                            (el) => el.destination.continent == "Asia"
-                          )
-                    }
+                <div className="col-auto tabs -pills-2 ">
+                  <FilterTabsHotelsForContinent
                     filter={filterOptionAsia}
+                    setFilter={setFilterOptionAsia}
                   />
                 </div>
+                <div className="relative overflow-hidden pt-40 sm:pt-20">
+                  <div className="row y-gap-30">
+                    <FilterTabContentContinent
+                      loading={destinationLoading}
+                      error={destinationError}
+                      dataToRender={
+                        filterOptionAsia == "tour"
+                          ? tourData?.getTours?.filter(
+                              (el) =>
+                                el.destination.continent == "Asia" &&
+                                el.destination.country != "India"
+                            )
+                          : attractionData?.getAttractions?.filter(
+                              (el) =>
+                                el.destination.continent == "Asia" &&
+                                el.destination.country != "India"
+                            )
+                      }
+                      filter={filterOptionAsia}
+                    />
+                  </div>
                 </div>
               </div>
-
-           
             </div>
             <p className=" d-none sm:d-block sectionTitle__text mt-5 sm:mt-0">
-                      {/* Our best selling {filterOption} */}
-                      <div className="col-auto ml-auto">
-                        <Link
-                          href={
-                            filterOptionAsia == "tour"
-                              ? "/tours?continent=Asia"
-                              : "/attractions?continent=Asia"
-                          }
-                          className="button -md  bg-pink-1 text-white"
-                        >
-                          View All{" "}
-                          {filterOptionAsia == "tour"
-                            ? "Tours in Asia"
-                            : "Attractions in Asia"}
-                          <div className="icon-arrow-top-right ml-15" />
-                        </Link>
-                      </div>
-                    </p>
+              {/* Our best selling {filterOption} */}
+              <div className="col-auto ml-auto">
+                <Link
+                  href={
+                    filterOptionAsia == "tour"
+                      ? "/tours?continent=Asia"
+                      : "/attractions?continent=Asia"
+                  }
+                  className="button -md  bg-pink-1 text-white"
+                >
+                  View All{" "}
+                  {filterOptionAsia == "tour"
+                    ? "Tours in Asia"
+                    : "Attractions in Asia"}
+                  <div className="icon-arrow-top-right ml-15" />
+                </Link>
+              </div>
+            </p>
           </section>
         </>
       ) : (

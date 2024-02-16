@@ -48,66 +48,60 @@ const AttractionProperties = ({ filter, setFilter }) => {
   } = useAttractionPaginationStore();
 
   const handleRefetchData = async () => {
-    const dataNew = await refetchAttraction({
-      page: totalPageLoaded + 1,
-      loadCount,
-      filter,
-    });
-    // console.log("data new", dataNew);
-    // console.log("new data", dataNew?.data?.getFilteredTours?.tours);
-    setIsLoading(dataNew.loading);
-    // if (dataNew?.data?.getFilteredTours) {
-    //   setIsLoading(false);
-    // } else {
-    //   setTimeout(() => {
-    //     setIsLoading(false);
-    //   }, 2000);
-    // }
-    setAttractionData(
-      dataNew?.data?.getFilteredAttractions?.attractions,
-      totalPageLoaded + 1
-    );
+    try {
+      setIsLoading(true);
+      const pageToBeLoaded =
+        Math.floor(currentPage / (loadCount / dataPerPage)) + 1;
+      const dataNew = await refetchAttraction({
+        page: totalPageLoaded + 1,
+        loadCount,
+        filter,
+      });
+      setAttractionData(
+        dataNew?.data?.getFilteredAttractions?.attractions,
+        pageToBeLoaded
+      );
+    } catch (err) {
+      setErr("Unable to fetch data");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRefetchDataForFirstTime = async () => {
-    setIsLoading(true);
-    const dataNew = await refetchAttraction({
-      page: 1,
-      loadCount,
-      filter,
-    });
-    console.log("new data", dataNew?.data?.getFilteredAttractions?.attractions);
-    setIsLoading(dataNew.loading);
-    setAttractionPaginationData(
-      Math.ceil(
-        dataNew?.data?.getFilteredAttractions?.totalCount / dataPerPage
-      ),
-      1, ///current page
-      1, ////page loaded from api
-      dataNew?.data?.getFilteredAttractions?.totalCount,
-      dataNew?.data?.getFilteredAttractions?.attractions
-    );
+    try {
+      setIsLoading(true);
+      const dataNew = await refetchAttraction({
+        page: 1,
+        loadCount,
+        filter,
+      });
+      console.log(
+        "new data",
+        dataNew?.data?.getFilteredAttractions?.attractions
+      );
+      // setIsLoading(dataNew.loading);
+      setAttractionPaginationData(
+        Math.ceil(
+          dataNew?.data?.getFilteredAttractions?.totalCount / dataPerPage
+        ),
+        0, ///current page
+        1, ////page loaded from api
+        dataNew?.data?.getFilteredAttractions?.totalCount,
+        dataNew?.data?.getFilteredAttractions?.attractions
+      );
+    } catch (err) {
+      setErr("Unable to fetch data");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   React.useEffect(() => {
-    // console.log("inside use effect");
-    // console.log(
-    //   "total result",
-    //   totalResult,
-    //   currentPage * dataPerPage < totalResult,
-    //   currentPage * dataPerPage >= loadCount * totalPageLoaded,
-    //   currentPage,
-    //   totalPageLoaded
-    // );
     if (currentPage == 0) {
       // console.log("called for the first tiime😚", filter);
       handleRefetchDataForFirstTime();
-    } else if (
-      currentPage * dataPerPage >= loadCount * totalPageLoaded &&
-      // currentPage * dataPerPage < totalResult &&
-      currentPage != 0
-      // !isLoading
-    ) {
+    } else if (!attractionList[currentPage * dataPerPage]) {
       handleRefetchData();
     }
   }, [currentPage, filter]);
@@ -175,7 +169,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
   return (
     <>
       {attractionList
-        ?.slice((currentPage - 1) * dataPerPage, currentPage * dataPerPage)
+        ?.slice(currentPage * dataPerPage, (currentPage + 1) * dataPerPage)
         .map((item, index) => (
           <div
             // className="col-lg-4 col-sm-6"
