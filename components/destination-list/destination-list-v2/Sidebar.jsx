@@ -11,25 +11,26 @@ import {
 import CountryContinentFilter from "../../attraction-list/sidebar/CountryContinentFilter";
 
 const DestinationSidebar = () => {
-  const { destCCData,destCCLoading } = useData();
-  if (destCCLoading) return <div>Loading...</div>;
-  // Extract unique countries and continents using a Set
-  const uniqueCountries = [
-    ...new Set(destCCData?.getCountriesAndContinents.map((item) => item.country)),
-  ].sort();
-  const uniqueContinents = [
-    ...new Set(destCCData?.getCountriesAndContinents.map((item) => item.continent)),
-  ].sort();
-
+  const { destCCData, destCCLoading } = useData();
   const {
-   
     setContinent,
     removeContinent,
     setCountry,
     removeCountry,
     continent: selectedContinents,
   } = useDestinationFilterStore();
- 
+  if (destCCLoading) return <div>Loading...</div>;
+  // Extract unique countries and continents using a Set
+  const uniqueCountries = [
+    ...new Set(
+      destCCData?.getCountriesAndContinents.map((item) => item.country)
+    ),
+  ].sort();
+  const uniqueContinents = [
+    ...new Set(
+      destCCData?.getCountriesAndContinents.map((item) => item.continent)
+    ),
+  ].sort();
 
   function handleChangeContinent(event, category) {
     if (event.target.checked) {
@@ -37,7 +38,6 @@ const DestinationSidebar = () => {
     } else {
       removeContinent(category);
     }
-
   }
 
   function handleChangeCountry(event, category) {
@@ -49,16 +49,22 @@ const DestinationSidebar = () => {
   }
 
   // Filter countries based on the selected continents
-const filteredCountries = destCCData?.getCountriesAndContinents
-.filter((item) => selectedContinents.length ? selectedContinents.includes(item.continent) : true)
-.map((item) => item.country);
+  const filteredCountries = destCCData?.getCountriesAndContinents
+    .filter((item) =>
+      selectedContinents.length
+        ? selectedContinents.includes(item.continent)
+        : true
+    )
+    .map((item) => item.country);
 
-const countsByContinent = {};
-const countsByCountry = {};
-destCCData?.getCountriesAndContinents.forEach((item) => {
-  countsByContinent[item.continent] = item.destinationCount + (countsByContinent[item.continent] || 0);
-  countsByCountry[item.country] = item.destinationCount + (countsByCountry[item.country] || 0);
-});
+  const countsByContinent = {};
+  const countsByCountry = {};
+  destCCData?.getCountriesAndContinents.forEach((item) => {
+    countsByContinent[item.continent] =
+      item.destinationCount + (countsByContinent[item.continent] || 0);
+    countsByCountry[item.country] =
+      item.destinationCount + (countsByCountry[item.country] || 0);
+  });
   return (
     <>
       {uniqueContinents && (
