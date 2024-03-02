@@ -8,9 +8,32 @@ import { useData } from "../../../lib/datacontext";
 import React from "react";
 import { countryData } from "../../../utils/country";
 import { useAttractionFilterStore } from "../../../lib/store";
-import CountryContinentFilter from '../sidebar/CountryContinentFilter'
+import CountryContinentFilter from "../sidebar/CountryContinentFilter";
 const Sidebar = () => {
-  const { attCCData,attCCLoading,tagNameList } = useData();
+  const { attCCData, attCCLoading, tagNameList } = useData();
+  const [categories, setCategories] = React.useState([]);
+  const {
+    setTag,
+    setLocation,
+    removeTag,
+    setContinent,
+    removeContinent,
+    setCountry,
+    removeCountry,
+    continent: selectedContinents,
+  } = useAttractionFilterStore();
+  // const [category,setCategory]=React.useState("")
+  const continent = countryData.map((el) => el.continent);
+  React.useEffect(() => {
+    setCategories(tagNameList?.getAllTags?.map((tag) => tag.name));
+  }, [tagNameList]);
+  function handleChangeTag(event, category) {
+    if (event.target.checked) {
+      setTag(category);
+    } else {
+      removeTag(category);
+    }
+  }
   if (attCCLoading) return <div>Loading...</div>;
   // Extract unique countries and continents using a Set
   const uniqueCountries = [
@@ -27,32 +50,16 @@ const Sidebar = () => {
       )
     ),
   ].sort();
-  const [categories, setCategories] = React.useState([]);
-  const { setTag,setLocation, removeTag, setContinent, removeContinent, setCountry,removeCountry,continent:selectedContinents } =
-    useAttractionFilterStore();
-  // const [category,setCategory]=React.useState("")
-  const continent = countryData.map((el) => el.continent);
-  React.useEffect(() => {
-    setCategories(tagNameList?.getAllTags?.map((tag) => tag.name));
-  }, [tagNameList]);
-  function handleChangeTag(event, category) {
-    if (event.target.checked) {
-      setTag(category);
-    } else {
-      removeTag(category);
-    }
-  }
+
   function handleChangeContinent(event, category) {
     setLocation("");
     if (event.target.checked) {
       setContinent(category);
-      
     } else {
       removeContinent(category);
     }
   }
 
-  
   function handleChangeCountry(event, category) {
     setLocation("");
     if (event.target.checked) {
@@ -71,15 +78,15 @@ const Sidebar = () => {
     )
     .map((item) => item.country);
 
+  const countsByContinent = {};
+  const countsByCountry = {};
 
-
-    const countsByContinent = {};
-    const countsByCountry = {};
-  
-    attCCData?.getCountriesAndContinentsForAttractions.forEach((item) => {
-      countsByContinent[item.continent] = item.attractionCount + (countsByContinent[item.continent] || 0);
-      countsByCountry[item.country] = item.attractionCount + (countsByCountry[item.country] || 0);
-    });
+  attCCData?.getCountriesAndContinentsForAttractions.forEach((item) => {
+    countsByContinent[item.continent] =
+      item.attractionCount + (countsByContinent[item.continent] || 0);
+    countsByCountry[item.country] =
+      item.attractionCount + (countsByCountry[item.country] || 0);
+  });
   return (
     <>
       <div className="sidebar__item -no-border">
@@ -110,7 +117,6 @@ const Sidebar = () => {
               categories={uniqueContinents}
               handleChange={handleChangeContinent}
               continentCounts={countsByContinent}
-
             />
           </div>
         </div>
@@ -123,7 +129,6 @@ const Sidebar = () => {
               categories={filteredCountries}
               handleChange={handleChangeCountry}
               countryCounts={countsByCountry}
-
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useData } from "../../../lib/datacontext";
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
-const index = () => {
+const Index = () => {
   const { contentData, contentLoading, contentError } = useData();
   //handle error
   if (contentError) {
@@ -12,7 +12,7 @@ const index = () => {
     return <div>loading...</div>;
   }
 
-  //firebase 
+  //firebase
 
   return (
     <section className="masthead -type-1 z-5">
@@ -25,7 +25,7 @@ const index = () => {
               : "/img/masthead/1/bg.webp"
           }
           className="js-lazy"
-          //Opacity to modify 
+          //Opacity to modify
           //TODO:
         />
       </div>
@@ -68,4 +68,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

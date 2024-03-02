@@ -25,7 +25,10 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/tours/actionType.js"
+    "pages/tours/actionType.js",
+    "components/attraction-list/sidebar/CountryContinentFilter.tsx",
+    "components/destination-list/destination-list-v2/CountryContinentFilter.jsx",
+    "components/tour-list/tour-list-v2/CountryContinentFilter.jsx"
   ],
   "exclude": ["node_modules"]
 }
