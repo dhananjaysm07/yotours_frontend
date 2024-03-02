@@ -27,7 +27,7 @@
     "**/*.tsx",
     "pages/tours/actionType.js",
     "components/attraction-list/sidebar/CountryContinentFilter.tsx",
-    "components/destination-list/destination-list-v2/CountryContinentFilter.jsx",
+    "components/destination-list/destination-list-v2/CountryContinentFilter.tsx",
     "components/tour-list/tour-list-v2/CountryContinentFilter.jsx"
   ],
   "exclude": ["node_modules"]
