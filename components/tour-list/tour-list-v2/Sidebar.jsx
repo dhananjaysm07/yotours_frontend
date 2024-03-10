@@ -17,6 +17,8 @@ const Sidebar = () => {
     removeContinent,
     setCountry,
     removeCountry,
+    tagName,
+    country: selectedCountry,
     continent: selectedContinents,
   } = useTourFilterStore();
   const [categories, setCategories] = React.useState([]);
@@ -49,7 +51,7 @@ const Sidebar = () => {
     }
   }
   function handleChangeContinent(event, category) {
-    setLocation("");
+    // setLocation("");
     if (event.target.checked) {
       setContinent(category);
     } else {
@@ -58,7 +60,7 @@ const Sidebar = () => {
   }
 
   function handleChangeCountry(event, category) {
-    setLocation("");
+    // setLocation("");
     if (event.target.checked) {
       setCountry(category);
     } else {
@@ -115,6 +117,7 @@ const Sidebar = () => {
               categories={uniqueContinents}
               handleChange={handleChangeContinent}
               continentCounts={countsByContinent}
+              selectedList={selectedContinents}
             />
           </div>
         </div>
@@ -127,6 +130,7 @@ const Sidebar = () => {
               categories={filteredCountries}
               handleChange={handleChangeCountry}
               countryCounts={countsByCountry}
+              selectedList={selectedCountry}
             />
           </div>
         </div>

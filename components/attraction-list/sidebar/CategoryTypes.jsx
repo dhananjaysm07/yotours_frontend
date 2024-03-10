@@ -1,4 +1,7 @@
+import { useAttractionFilterStore } from "../../../lib/store";
+
 const CategoryTypes = ({ categories, handleChange }) => {
+  const { tagName } = useAttractionFilterStore();
   return (
     <>
       {categories?.map((category) => (
@@ -11,6 +14,7 @@ const CategoryTypes = ({ categories, handleChange }) => {
               <input
                 type="checkbox"
                 onChange={(event) => handleChange(event, category)}
+                checked={tagName.includes(category)}
               />
               <div className="form-checkbox__mark">
                 <div className="form-checkbox__icon icon-check" />

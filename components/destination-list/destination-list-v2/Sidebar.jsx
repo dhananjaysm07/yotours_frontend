@@ -18,6 +18,7 @@ const DestinationSidebar = () => {
     setCountry,
     removeCountry,
     continent: selectedContinents,
+    country: selectedCountry,
   } = useDestinationFilterStore();
   if (destCCLoading) return <div>Loading...</div>;
   // Extract unique countries and continents using a Set
@@ -67,6 +68,15 @@ const DestinationSidebar = () => {
   });
   return (
     <>
+      <div className="sidebar__item -no-border">
+        <div className="px-20 py-20 bg-light-2 rounded-4">
+          <h5 className="text-18 fw-500 mb-10">Search Tours</h5>
+
+          <div className="row y-gap-20 pt-20">
+            <MainFilterSearchBox />
+          </div>
+        </div>
+      </div>
       {uniqueContinents && (
         <div className="sidebar__item -no-border">
           <h5 className="text-18 fw-500 mb-10">Continents</h5>
@@ -75,6 +85,7 @@ const DestinationSidebar = () => {
               categories={uniqueContinents}
               handleChange={handleChangeContinent}
               continentCounts={countsByContinent}
+              selectedList={selectedContinents}
             />
           </div>
         </div>
@@ -87,6 +98,7 @@ const DestinationSidebar = () => {
               categories={filteredCountries}
               handleChange={handleChangeCountry}
               countryCounts={countsByCountry}
+              selectedList={selectedCountry}
             />
           </div>
         </div>

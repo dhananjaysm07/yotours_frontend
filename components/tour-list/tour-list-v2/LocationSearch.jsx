@@ -1,40 +1,42 @@
 import { useState } from "react";
 import { countryData } from "../../../utils/country";
 import { useData } from "../../../lib/datacontext";
+import { useQuery } from "@apollo/client";
+import { GET_TOUR_LOCATIONS } from "../../../graphql/query";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const { tourData, tourLoading } = useData();
-
-  if (tourLoading) return <div>Loading...</div>;
+  // const { tourData, tourLoading } = useData();
+  const { data, error, loading } = useQuery(GET_TOUR_LOCATIONS);
+  if (loading) return <div>Loading...</div>;
   // Create a Map to store unique destinations based on id
-  const uniqueDestinationsMap = new Map();
+  // const uniqueDestinationsMap = new Map();
 
   // Iterate through tourData and add each destination to the Map
-  tourData?.getTours.forEach((tour) => {
-    const destination = tour.destination;
-    if (destination && destination.id) {
-      uniqueDestinationsMap.set(destination.id, {
-        destinationName: destination.destinationName,
-        id: destination.id,
-      });
-    }
-  });
+  // tourData?.getTours.forEach((tour) => {
+  //   const destination = tour.destination;
+  //   if (destination && destination.id) {
+  //     uniqueDestinationsMap.set(destination.id, {
+  //       destinationName: destination.destinationName,
+  //       id: destination.id,
+  //     });
+  //   }
+  // });
 
   // Convert Map values to an array
-  const uniqueDestinations = Array.from(uniqueDestinationsMap.values());
+  // const uniqueDestinations = Array.from(uniqueDestinationsMap.values());
   // console.log("unique dest",uniqueDestinations)
   const handleOptionClick = (item) => {
-    setSearchValue(item.destinationName);
+    setSearchValue(item);
     setSelectedItem(item);
   };
 
   // Filter destinations based on the search input
-  const filteredDestinations = uniqueDestinations
-    .filter((item) =>
-      item.destinationName.toLowerCase().includes(searchValue.toLowerCase())
-    )
-    .sort((a, b) => a.destinationName.localeCompare(b.destinationName));
+  // const filteredDestinations = uniqueDestinations
+  //   .filter((item) =>
+  //     item.destinationName.toLowerCase().includes(searchValue.toLowerCase())
+  //   )
+  //   .sort((a, b) => a.destinationName.localeCompare(b.destinationName));
   return (
     <>
       <div className="searchMenu-loc px-20 py-10 bg-white rounded-4 js-form-dd js-liverSearch">
@@ -67,12 +69,12 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
         <div className="shadow-2 dropdown-menu min-width-400">
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
             <ul className="y-gap-5 js-results">
-              {filteredDestinations.map((item) => (
+              {data?.getUniqueTourLocations?.map((item, index) => (
                 <li
                   className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
-                    selectedItem && selectedItem.id === item.id ? "active" : ""
+                    selectedItem && selectedItem === item ? "active" : ""
                   }`}
-                  key={item.id}
+                  key={index}
                   role="button"
                   onClick={() => handleOptionClick(item)}
                 >
@@ -80,7 +82,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
                     <div className="icon-location-2 text-light-1 text-20 pt-4" />
                     <div className="ml-10">
                       <div className="text-15 lh-12 fw-500 js-search-option-target">
-                        {item.destinationName}
+                        {item}
                       </div>
                       {/* Additional details if needed */}
                     </div>

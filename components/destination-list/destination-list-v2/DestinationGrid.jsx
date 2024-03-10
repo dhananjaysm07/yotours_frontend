@@ -14,6 +14,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_FILTERED_TOURS } from "../../../graphql/query";
 import { createSlug } from "../../../utils/slugify";
+import LoadingCard from "../../Loading/LoadingCard";
 const DestinationGrid = ({ filter }) => {
   const {
     contentData,
@@ -149,9 +150,16 @@ const DestinationGrid = ({ filter }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <>
+        {new Array(6).fill(0).map((_, index) => (
+          <LoadingCard key={index} />
+        ))}
+      </>
+    );
   if (destinationFilteredError || err) return <p>Error loading destination</p>;
-  console.log("Destination list", destinationList);
+  // console.log("Destination list", destinationList);
   return (
     <>
       {destinationList

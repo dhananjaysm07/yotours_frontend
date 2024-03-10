@@ -3,6 +3,7 @@ const CountryContinentFilter = ({
   handleChange,
   continentCounts,
   countryCounts,
+  selectedList,
 }) => {
   return (
     <>
@@ -16,6 +17,7 @@ const CountryContinentFilter = ({
               <input
                 type="checkbox"
                 onChange={(event) => handleChange(event, category)}
+                checked={selectedList.includes(category)}
               />
               <div className="form-checkbox__mark">
                 <div className="form-checkbox__icon icon-check" />

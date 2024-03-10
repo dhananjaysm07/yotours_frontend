@@ -8,7 +8,7 @@ const MainFilterSearchBox = () => {
   const { setLocation } = useDestinationFilterStore();
 
   //TODO: Destinations ONLY Which are in db
-  
+
   return (
     <>
       <div className="col-12">
@@ -38,7 +38,7 @@ const MainFilterSearchBox = () => {
       <div className="col-12">
         <div className="button-item h-full">
           <button
-            className="button -dark-1 py-15 px-40 h-full col-12 rounded-0 bg-blue-1 text-white"
+            className="button -dark-1 py-15 px-40 h-full col-12 rounded-0 bg-pink-1 text-white"
             onClick={() => {
               setLocation(searchValue);
             }}

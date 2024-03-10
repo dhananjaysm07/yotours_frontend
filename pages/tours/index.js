@@ -145,7 +145,7 @@ const Tour = () => {
             </div>
             {/* End col */}
 
-            <div className="col-xl-9 ">
+            <div className="col-xl-9">
               <TopHeaderFilter />
               <div className="mt-30"></div>
               {/* End mt--30 */}

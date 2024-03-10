@@ -39,6 +39,7 @@ const Home_1 = () => {
   }, [destinationData]);
   const [destinationGroup, setDestinationGroup] = React.useState({});
   React.useEffect(() => {
+    setDestinationGroup({});
     if (destinationData?.getDestinations?.length) {
       setDestinationGroup((prev) => {
         destinationData?.getDestinations.forEach((destination) => {
@@ -51,7 +52,7 @@ const Home_1 = () => {
       });
     }
   }, [destinationData]);
-  console.log("destination data", destinationGroup);
+  // console.log("destination Group Data:--", destinationGroup, destinationData);
   const {
     filterOptionEurope,
     filterOptionAsia,

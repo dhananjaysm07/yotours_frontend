@@ -17,13 +17,21 @@ import { useData } from "../../lib/datacontext";
 import Things from "../../components/things/Things";
 import IntroTown from "../../components/destinations/components/IntroTown";
 import Categories from "../../components/destinations/components/Categories";
+import ActivityCar from "../../components/activity/ActivityCar";
 
 const Destinations = () => {
   const router = useRouter();
   const { query } = router;
   const { id, destinationSlug } = query;
 
-  const { destinationData, tourData, attractionData, thingsData } = useData();
+  const {
+    destinationData,
+    tourData,
+    attractionData,
+    thingsData,
+    carsData,
+    destinationLoading,
+  } = useData();
 
   console.log(destinationData);
   // Assuming destinationData and tourData contain arrays of destinations and tours respectively
@@ -39,8 +47,9 @@ const Destinations = () => {
   const things = thingsData?.getThings?.filter(
     (thing) => thing.destination.id === id
   );
-  console.log("Things are", things);
-
+  const cars = carsData?.getCars?.filter((car) => car.destination.id === id);
+  // console.log("Things are", cars, carsData);
+  if (destinationLoading) return <p>Destination Loading...</p>;
   if (!destination) return <p>Destination not found.</p>;
   return (
     <>
@@ -180,17 +189,21 @@ TODO:
       <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
-            <div className="col-auto">
-              <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">
-                  Trending Attraction Tickets
-                </h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Following are the attraction tickets for{" "}
-                  {destination.destinationName}
-                </p>
+            {attractions?.length ? (
+              <div className="col-auto">
+                <div className="sectionTitle -md">
+                  <h2 className="sectionTitle__title">
+                    Trending Attraction Tickets
+                  </h2>
+                  <p className=" sectionTitle__text mt-5 sm:mt-0">
+                    Following are the attraction tickets for{" "}
+                    {destination.destinationName}
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
             {/* End .col */}
 
             {/* <div className="col-auto">
@@ -204,14 +217,38 @@ TODO:
             {/* End .col */}
           </div>
           {/* End .row */}
+          {attractions?.length ? (
+            <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
+              {attractions ? (
+                <Activity attractions={attractions} />
+              ) : (
+                <h2 className="text-center">No Attractions</h2>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
 
-          <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-            {attractions ? (
-              <Activity attractions={attractions} />
-            ) : (
-              <h2 className="text-center">No Attractions</h2>
-            )}
-          </div>
+          {cars?.length ? (
+            <div className="col-auto">
+              <div className="sectionTitle -md">
+                <h2 className="sectionTitle__title">Trending Cars</h2>
+                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                  Following are the cars for {destination.destinationName}
+                </p>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {cars?.length ? (
+            <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
+              {cars ? <ActivityCar attractions={cars} /> : ""}
+            </div>
+          ) : (
+            ""
+          )}
           {/* End .row */}
         </div>
         {/* End .container */}

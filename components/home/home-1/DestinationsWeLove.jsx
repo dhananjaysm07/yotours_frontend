@@ -13,6 +13,7 @@ const DestinationsWeLove = () => {
     { label: "Europe", value: "europe" },
     // add more options as needed
   ];
+
   const filteredDestinations = destinationData?.getDestinations?.filter(
     (destination) => {
       if (filterOption === "india") {
@@ -28,6 +29,7 @@ const DestinationsWeLove = () => {
       }
     }
   );
+  console.log("filtered destination Data", filteredDestinations);
   return (
     <>
       <div className="tabs__controls d-flex js-tabs-controls">
@@ -49,36 +51,30 @@ const DestinationsWeLove = () => {
         <div className="tabs__pane -tab-item-1 is-tab-el-active">
           <div className="row y-gap-20">
             {filteredDestinations &&
-              filteredDestinations
-                .slice()
-                .sort((a, b) =>
-                  a.destinationName.localeCompare(b.destinationName)
-                )
-                .map((item) => (
-                  <div
-                    className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2"
-                    key={item.id}
-                  >
-                    <Link 
+              filteredDestinations.slice().map((item) => (
+                <div className="w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2" key={item.id}>
+                  <Link
                     href={{
-                      pathname: `/destinations/${createSlug(item.destinationName)}`,
+                      pathname: `/destinations/${createSlug(
+                        item.destinationName
+                      )}`,
                       query: { id: item.id }, // passing the ID as a query parameter
                     }}
-                    className="d-block">
-                      <div className="text-15 fw-500">
-                        {item.destinationName}
-                      </div>
-                      <div className="text-14 text-light-1">
-                        {(item.tours?.filter((tour) => tour.active).length ||
-                          0) +
-                          (item.attractions?.filter(
-                            (attraction) => attraction.active
-                          ).length || 0)}{" "}
-                        tours
-                      </div>
-                    </Link>
-                  </div>
-                ))}
+                    className="d-block"
+                  >
+                    <div className="text-15 fw-500">{item.destinationName}</div>
+                    <div className="text-14 text-light-1">
+                      {
+                        item.tours?.filter((tour) => tour.active).length || 0
+                        // (item.attractions?.filter(
+                        //   (attraction) => attraction.active
+                        // ).length || 0)
+                      }{" "}
+                      tours
+                    </div>
+                  </Link>
+                </div>
+              ))}
           </div>
         </div>
       </div>

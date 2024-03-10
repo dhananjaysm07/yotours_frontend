@@ -378,10 +378,52 @@ export const GET_THINGS_QUERY = gql`
   }
 `;
 
+export const GET_CARS_QUERY = gql`
+  query GetCars {
+    getCars {
+      id
+      carTitle
+      carDescription
+      carHyperlink
+      carBokunId
+      destination {
+        id
+        destinationName
+      }
+      images {
+        id
+        imageUrl
+      }
+      tag {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const GET_ALL_TAGS = gql`
   query GetAllTags {
     getAllTags {
       name
     }
+  }
+`;
+
+export const GET_TOUR_LOCATIONS = gql`
+  query Query {
+    getUniqueTourLocations
+  }
+`;
+
+export const GET_ATTRACTION_LOCATIONS = gql`
+  query Query {
+    getUniqueAttractionLocations
+  }
+`;
+
+export const GET_DESTINATION_LOCATIONS = gql`
+  query Query {
+    getUniqueDestinationLocations
   }
 `;

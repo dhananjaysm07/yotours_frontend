@@ -10,6 +10,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 // import { GET_FILTERED_TOURS } from "../../../graphql/query";
 import { useRouter } from "next/router";
+import LoadingCard from "../../Loading/LoadingCard";
 const AttractionProperties = ({ filter, setFilter }) => {
   const {
     contentData,
@@ -162,10 +163,18 @@ const AttractionProperties = ({ filter, setFilter }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  if (isLoading) return <p>Loading...</p>;
+  // if (isLoading) return <p>Loading...</p>;
   if (attractionFilteredError)
     return <p>Error: {attractionFilteredError.message}</p>;
   console.log("tour list", attractionList);
+  if (isLoading)
+    return (
+      <>
+        {new Array(6).fill(0).map((_, index) => (
+          <LoadingCard key={index} />
+        ))}
+      </>
+    );
   return (
     <>
       {attractionList
