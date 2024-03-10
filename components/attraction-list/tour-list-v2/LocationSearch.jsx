@@ -86,27 +86,32 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
 
         <div className="shadow-2 dropdown-menu min-width-400">
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
-            <ul className="y-gap-5 js-results">
-              {data?.getUniqueAttractionLocations?.map((item, index) => (
-                <li
-                  className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
-                    selectedItem && selectedItem === item ? "active" : ""
-                  }`}
-                  key={index}
-                  role="button"
-                  onClick={() => handleOptionClick(item)}
-                >
-                  <div className="d-flex">
-                    <div className="icon-location-2 text-light-1 text-20 pt-4" />
-                    <div className="ml-10">
-                      <div className="text-15 lh-12 fw-500 js-search-option-target">
-                        {item}
+            <ul
+              className="y-gap-5 js-results"
+              style={{ overflowY: "scroll", height: "30rem" }}
+            >
+              {data?.getUniqueAttractionLocations
+                ?.filter((el) => (el ? true : false))
+                .map((item, index) => (
+                  <li
+                    className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
+                      selectedItem && selectedItem === item ? "active" : ""
+                    }`}
+                    key={index}
+                    role="button"
+                    onClick={() => handleOptionClick(item)}
+                  >
+                    <div className="d-flex">
+                      <div className="icon-location-2 text-light-1 text-20 pt-4" />
+                      <div className="ml-10">
+                        <div className="text-15 lh-12 fw-500 js-search-option-target">
+                          {item}
+                        </div>
+                        {/* Additional details if needed */}
                       </div>
-                      {/* Additional details if needed */}
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
