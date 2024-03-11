@@ -1,42 +1,39 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { countryData } from "../../../utils/country";
-import { useData } from "../../../lib/datacontext";
+import { GET_DESTINATION_LOCATIONS } from "../../../graphql/query";
 import { useQuery } from "@apollo/client";
-import { GET_TOUR_LOCATIONS } from "../../../graphql/query";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const [selectedItem, setSelectedItem] = useState(null);
-  // const { tourData, tourLoading } = useData();
-  const { data, error, loading } = useQuery(GET_TOUR_LOCATIONS);
-  if (loading) return <div>Loading...</div>;
-  // Create a Map to store unique destinations based on id
-  // const uniqueDestinationsMap = new Map();
-
-  // Iterate through tourData and add each destination to the Map
-  // tourData?.getTours.forEach((tour) => {
-  //   const destination = tour.destination;
-  //   if (destination && destination.id) {
-  //     uniqueDestinationsMap.set(destination.id, {
-  //       destinationName: destination.destinationName,
-  //       id: destination.id,
-  //     });
-  //   }
+  const { data, error, loading } = useQuery(GET_DESTINATION_LOCATIONS);
+  const [searchList, setSearchList] = useState([]);
+  React.useEffect(() => {
+    // console.log(data?.getUniqueDestinationLocations);
+    setSearchList(
+      data?.getUniqueDestinationLocations?.filter((el) => {
+        if (!searchValue) return true;
+        else return el.toLowerCase().includes(searchValue.toLowerCase());
+      }) || []
+    );
+  }, [data, searchValue]);
+  // let locationData = [];
+  // countryData.forEach((data) => {
+  //   const newArray = data.countries.map((el, index) => ({
+  //     id: index + Math.random(),
+  //     name: el.name,
+  //     address: data.continent,
+  //   }));
+  //   // console.log("neww array", newArray);
+  //   locationData = [...locationData, ...newArray];
   // });
-
-  // Convert Map values to an array
-  // const uniqueDestinations = Array.from(uniqueDestinationsMap.values());
-  // console.log("unique dest",uniqueDestinations)
+  // console.log("locaiion array", locationData);
+  // const locationSearchContent = [...locationData];
+  // console.log("location array", locationSearchContent);
   const handleOptionClick = (item) => {
     setSearchValue(item);
     setSelectedItem(item);
   };
-
-  // Filter destinations based on the search input
-  // const filteredDestinations = uniqueDestinations
-  //   .filter((item) =>
-  //     item.destinationName.toLowerCase().includes(searchValue.toLowerCase())
-  //   )
-  //   .sort((a, b) => a.destinationName.localeCompare(b.destinationName));
+  if (loading) return <div>Loading...</div>;
   return (
     <>
       <div className="searchMenu-loc px-20 py-10 bg-white rounded-4 js-form-dd js-liverSearch">
@@ -72,9 +69,9 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
               className="y-gap-5 js-results"
               style={{ overflowY: "scroll", height: "30rem" }}
             >
-              {data?.getUniqueTourLocations
+              {searchList
                 ?.filter((el) => (el ? true : false))
-                .map((item, index) => (
+                ?.map((item, index) => (
                   <li
                     className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
                       selectedItem && selectedItem === item ? "active" : ""
@@ -89,7 +86,9 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
                         <div className="text-15 lh-12 fw-500 js-search-option-target">
                           {item}
                         </div>
-                        {/* Additional details if needed */}
+                        {/* <div className="text-14 lh-12 text-light-1 mt-5">
+                        {item.address}
+                      </div> */}
                       </div>
                     </div>
                   </li>

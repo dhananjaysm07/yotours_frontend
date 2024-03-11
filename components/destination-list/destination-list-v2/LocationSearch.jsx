@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { countryData } from "../../../utils/country";
 import { GET_DESTINATION_LOCATIONS } from "../../../graphql/query";
 import { useQuery } from "@apollo/client";
@@ -6,6 +6,16 @@ import { useQuery } from "@apollo/client";
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const { data, error, loading } = useQuery(GET_DESTINATION_LOCATIONS);
+  const [searchList, setSearchList] = useState([]);
+  React.useEffect(() => {
+    // console.log(data?.getUniqueDestinationLocations);
+    setSearchList(
+      data?.getUniqueDestinationLocations?.filter((el) => {
+        if (!searchValue) return true;
+        else return el.toLowerCase().includes(searchValue.toLowerCase());
+      }) || []
+    );
+  }, [data, searchValue]);
   // let locationData = [];
   // countryData.forEach((data) => {
   //   const newArray = data.countries.map((el, index) => ({
@@ -59,7 +69,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
               className="y-gap-5 js-results"
               style={{ overflowY: "scroll", height: "30rem" }}
             >
-              {data?.getUniqueDestinationLocations
+              {searchList
                 ?.filter((el) => (el ? true : false))
                 ?.map((item, index) => (
                   <li
