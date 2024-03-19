@@ -398,6 +398,8 @@ export const GET_CARS_QUERY = gql`
         id
         name
       }
+      price
+      currency
     }
   }
 `;

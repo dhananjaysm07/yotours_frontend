@@ -166,7 +166,7 @@ const AttractionProperties = ({ filter, setFilter }) => {
   // if (isLoading) return <p>Loading...</p>;
   if (attractionFilteredError)
     return <p>Error: {attractionFilteredError.message}</p>;
-  console.log("tour list", attractionList);
+  console.log("------attraction list-------", attractionList);
   if (isLoading)
     return (
       <>

@@ -8,9 +8,9 @@ const Index = () => {
     return <div>failed to load</div>;
   }
   //handle loading
-  if (contentLoading) {
-    return <div>loading...</div>;
-  }
+  // if (contentLoading) {
+  //   return <div>loading...</div>;
+  // }
 
   //firebase
 
@@ -21,10 +21,12 @@ const Index = () => {
           alt="image"
           src={
             contentData
-              ? contentData.getContent.heroImage
-              : "/img/masthead/1/bg.webp"
+              ? contentData?.getContent.heroImage
+              : "https://firebasestorage.googleapis.com/v0/b/marketingform-d32c3.appspot.com/o/heroImages%2Flandingpage1.jpg?alt=media&token=b72345ca-3a3c-4e97-b13c-9ed069684e54"
           }
-          className="js-lazy"
+          // height={750}
+          // width={1100}
+          // className="js-lazy"
           //Opacity to modify
           //TODO:
         />
@@ -37,7 +39,7 @@ const Index = () => {
                 className="text-60 lg:text-40 md:text-30 text-white"
                 data-aos="fade-up"
               >
-                {contentData.getContent
+                {contentData?.getContent
                   ? contentData.getContent.heroHeading
                   : "Find Next Place To Visit"}
               </h1>
@@ -46,7 +48,7 @@ const Index = () => {
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                {contentData.getContent
+                {contentData?.getContent
                   ? contentData.getContent.heroSubheading
                   : "Discover amzaing places at exclusive deals"}
               </p>

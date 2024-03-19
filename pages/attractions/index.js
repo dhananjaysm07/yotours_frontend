@@ -3,7 +3,7 @@ import CallToActions from "../../components/common/CallToActions";
 import Seo from "../../components/common/Seo";
 import DefaultHeader from "../../components/header/default-header";
 import DefaultFooter from "../../components/footer/default";
-import Tours from "../../components/tours/Tours";
+// import Tours from "../../components/tours/Tours";
 import { useData } from "../../lib/datacontext";
 import Activity from "../../components/activity/Activity";
 import parse from "html-react-parser";
@@ -14,7 +14,7 @@ import TopHeaderFilter from "../../components/attraction-list/tour-list-v2/TopHe
 // import { Sidebar } from "react-pro-sidebar";
 import Pagination from "../../components/attraction-list/common/Pagination";
 import Sidebar from "../../components/attraction-list/tour-list-v2/Sidebar";
-import MainFilterSearchBox from "../../components/attraction-list/tour-list-v1/MainFilterSearchBox";
+// import MainFilterSearchBox from "../../components/attraction-list/tour-list-v1/MainFilterSearchBox";
 import {
   useAttractionFilterStore,
   useAttractionPaginationStore,
