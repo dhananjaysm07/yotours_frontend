@@ -11,14 +11,30 @@ import { useQuery } from "@apollo/client";
 // import { GET_FILTERED_TOURS } from "../../../graphql/query";
 import { useRouter } from "next/router";
 import LoadingCard from "../../Loading/LoadingCard";
+import { GET_FILTERED_ATTRACTIONs } from "../../../graphql/query";
 const AttractionProperties = ({ filter, setFilter }) => {
+  const { contentData } = useData();
+
   const {
-    contentData,
-    refetchAttraction,
-    attractionFilteredData,
-    attractionFilteredError,
-    attractionFilteredLoading,
-  } = useData();
+    loading: attractionFilteredLoading,
+    error: attractionFilteredError,
+    refetch: refetchAttraction,
+  } = useQuery(GET_FILTERED_ATTRACTIONs, {
+    variables: {
+      page: 0,
+      loadCount: 0,
+      filter: {
+        priceMin: null,
+        startDate: null,
+        priceMax: null,
+        location: null,
+        endDate: null,
+        tagName: [],
+        continent: [],
+      },
+    },
+    skip: true,
+  });
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
   const { continent } = router.query;

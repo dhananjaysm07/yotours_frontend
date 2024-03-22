@@ -75,26 +75,10 @@ export const GET_FILTERED_DESTINATION = gql`
       destinations {
         id
         destinationName
-        description
         bannerImage
-        isPopular
-        continent
-        country
-        bannerHeading
-        fromDate
-        toDate
-        fromOccasion
-        toOccasion
-        introduction
         images {
           id
           imageUrl
-        }
-        tours {
-          id
-        }
-        attractions {
-          id
         }
       }
       totalCount
@@ -246,15 +230,8 @@ export const GET_FILTERED_TOURS = gql`
           id
           imageUrl
         }
-        tourHyperlink
         tourBokunId
         location
-        destination {
-          id
-          destinationName
-          fromDate
-          toDate
-        }
         price
         currency
         tag {
@@ -317,11 +294,6 @@ export const GET_FILTERED_ATTRACTIONs = gql`
         location
         attractionBokunId
         attractionHyperlink
-        destination {
-          id
-          destinationName
-          continent
-        }
         price
         currency
         tag {

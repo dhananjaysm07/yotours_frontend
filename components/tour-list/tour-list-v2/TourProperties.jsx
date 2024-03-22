@@ -16,13 +16,35 @@ import { GET_FILTERED_TOURS } from "../../../graphql/query";
 import { useRouter } from "next/router";
 import LoadingCard from "./../../Loading/LoadingCard";
 const TourProperties = ({ filter, setFilter }) => {
+  // const {
+  //   contentData,
+  //   refetch,
+  //   tourFilteredData,
+  //   tourFilteredError,
+  //   tourFilteredLoading,
+  // } = useData();
+  const { contentData } = useData();
   const {
-    contentData,
+    loading: tourFilteredLoading,
+    error: tourFilteredError,
+    data: tourFilteredData,
     refetch,
-    tourFilteredData,
-    tourFilteredError,
-    tourFilteredLoading,
-  } = useData();
+  } = useQuery(GET_FILTERED_TOURS, {
+    variables: {
+      page: 0,
+      loadCount: 0,
+      filter: {
+        priceMin: null,
+        startDate: null,
+        priceMax: null,
+        location: null,
+        endDate: null,
+        tagName: [],
+        continent: [],
+      },
+    },
+    skip: true,
+  });
   const [isLoading, setIsLoading] = React.useState(false);
   const [err, setErr] = React.useState("");
   const router = useRouter();

@@ -12,17 +12,31 @@ import {
 } from "../../../lib/store";
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_FILTERED_TOURS } from "../../../graphql/query";
+import { GET_FILTERED_DESTINATION } from "../../../graphql/query";
 import { createSlug } from "../../../utils/slugify";
 import LoadingCard from "../../Loading/LoadingCard";
 const DestinationGrid = ({ filter }) => {
+  const { contentData } = useData();
   const {
-    contentData,
-    destinationFilteredLoading,
-    destinationFilteredError,
-    destinationFilteredData,
-    refetchFilteredDestination,
-  } = useData();
+    loading: destinationFilteredLoading,
+    error: destinationFilteredError,
+    refetch: refetchFilteredDestination,
+  } = useQuery(GET_FILTERED_DESTINATION, {
+    variables: {
+      page: 0,
+      loadCount: 0,
+      filter: {
+        priceMin: null,
+        startDate: null,
+        priceMax: null,
+        location: null,
+        endDate: null,
+        tagName: [],
+        continent: [],
+      },
+    },
+    skip: true,
+  });
   const [isLoading, setIsLoading] = React.useState(false);
   const [err, setErr] = React.useState("");
   const {
