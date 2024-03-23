@@ -45,14 +45,13 @@ function India() {
       loadCount: 8,
       filter: {
         activeValues: [true],
-        continent: ["Europe"],
+        continent: ["Asia"],
         country: ["India"],
-        ispopular: true,
       },
     },
   });
   const { filterOptionIndia, setFilterOptionIndia } = useFilterStore();
-
+  console.log("tour data india", tourData);
   return (
     <>
       {destinationData?.getFilteredDestination ? (
@@ -63,12 +62,12 @@ function India() {
                 <div className="col-auto">
                   <div className="sectionTitle -md">
                     <h2 className="sectionTitle__title">
-                      Popular Destinations In Europe{" "}
+                      Popular Destinations In India{" "}
                     </h2>
                     {/* <h2 className="sectionTitle__title">Popular Destinations in {el}</h2> */}
 
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
-                      These popular destinations in Europe have a lot to offer
+                      These popular destinations in India have a lot to offer
                     </p>
                   </div>
                 </div>
@@ -97,7 +96,7 @@ function India() {
                     id={100140929}
                   />
                 ) : (
-                  "No Destination in Europe"
+                  "No Destination in India"
                 )}
               </div>
             </div>
@@ -110,7 +109,7 @@ function India() {
                   <div className="sectionTitle -md">
                     <h2 className="sectionTitle__title">
                       {" "}
-                      Best Tours and Attraction Tickets in Europe
+                      Best Tours and Attraction Tickets in India
                     </h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
                       {/* Our best selling {filterOption} */}
@@ -118,8 +117,8 @@ function India() {
                         <Link
                           href={
                             filterOptionIndia == "tour"
-                              ? "/tours?continent=Europe"
-                              : "/attractions?continent=Europe"
+                              ? "/tours?continent=India"
+                              : "/attractions?continent=India"
                           }
                           className="button -md -pink-1 bg-pink-1-05 text-pink-1"
                           style={{ whiteSpace: "nowrap" }}
@@ -145,8 +144,7 @@ function India() {
                 {/* End .col-auto */}
               </div>
               {/* End .row */}
-              {tourData?.getFilteredTours?.tours.length &&
-              attractionData?.getFilteredAttractions?.attractions.length ? (
+              {tourData?.getFilteredTours?.tours.length ? (
                 <div className="relative overflow-hidden pt-40 sm:pt-20">
                   <div className="row y-gap-30">
                     <FilterTabContentContinent
@@ -172,15 +170,15 @@ function India() {
                 <Link
                   href={
                     filterOptionIndia == "tour"
-                      ? "/tours?continent=Europe"
-                      : "/attractions?continent=Europe"
+                      ? "/tours?continent=Asia"
+                      : "/attractions?continent=Asia"
                   }
                   className="button -md  bg-pink-1 text-white"
                 >
                   View All{" "}
                   {filterOptionIndia == "tour"
-                    ? "Tours in Europe"
-                    : "Attractions in Europe"}
+                    ? "Tours in India"
+                    : "Attractions in India "}
                   <div className="icon-arrow-top-right ml-15" />
                 </Link>
               </div>

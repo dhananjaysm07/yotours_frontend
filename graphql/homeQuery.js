@@ -13,6 +13,7 @@ export const GetDestinationsInHome = gql`
     ) {
       totalCount
       destinations {
+        id
         bannerImage
         bannerHeading
         attractions {
@@ -44,6 +45,7 @@ export const GetToursInHome = gql`
     getFilteredTours(page: $page, loadCount: $loadCount, filter: $filter) {
       totalCount
       tours {
+        id
         active
         currency
         destination {

@@ -81,8 +81,13 @@ const PopularDestinations = ({
                 <div className="citiesCard__bg" />
                 <div className="citiesCard__top">
                   <div className="text-14 text-white">
-                    {item.tours ? item.tours.length : 0} {" Tours"}{" "}
-                    {item.attractions ? item.attractions.length : 0}{" "}
+                    {item.tours
+                      ? item.tours.filter((el) => el.active).length
+                      : 0}{" "}
+                    {" Tours"}{" "}
+                    {item.attractions
+                      ? item.attractions.filter((el) => el.active).length
+                      : 0}{" "}
                     {" Attractions"}
                   </div>
                 </div>

@@ -1,14 +1,16 @@
 import { useQuery } from "@apollo/client";
 import { GET_CONTENT_QUERY } from "../../../graphql/query";
 import MainFilterSearchBox from "./MainFilterSearchBox";
+import { useData } from "../../../lib/datacontext";
 
 const Index = () => {
-  const {
-    loading: contentLoading,
-    error: contentError,
-    data: contentData,
-  } = useQuery(GET_CONTENT_QUERY);
+  // const {
+  //   loading: contentLoading,
+  //   error: contentError,
+  //   data: contentData,
+  // } = useQuery(GET_CONTENT_QUERY);
   //handle error
+  const { contentData, contentLoading, contentError } = useData();
   if (contentError) {
     return <div>failed to load</div>;
   }
@@ -34,7 +36,7 @@ const Index = () => {
                 data-aos="fade-up"
               >
                 {contentData?.getContent
-                  ? contentData.getContent.heroHeading
+                  ? contentData?.getContent?.heroHeading
                   : "Find Next Place To Visit"}
               </h1>
               <p
@@ -43,7 +45,7 @@ const Index = () => {
                 data-aos-delay="100"
               >
                 {contentData?.getContent
-                  ? contentData.getContent.heroSubheading
+                  ? contentData?.getContent?.heroSubheading
                   : "Discover amzaing places at exclusive deals"}
               </p>
             </div>

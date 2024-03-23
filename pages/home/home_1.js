@@ -18,7 +18,7 @@ import AddBanner from "../../components/add-banner/AddBanner";
 import DestinationsWeLove from "../../components/home/home-1/DestinationsWeLove";
 import Europe from "./../../components/destinationGroup/Europe";
 import Asia from "../../components/destinationGroup/Asia";
-import India from "../../components/destinationGroup/Asia";
+import India from "../../components/destinationGroup/India";
 const Home_1 = () => {
   const { filterOption } = useFilterStore();
   // const { destinationData, destinationLoading, destinationError } = useData();

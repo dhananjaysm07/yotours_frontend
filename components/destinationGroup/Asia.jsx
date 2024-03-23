@@ -93,7 +93,7 @@ function Asia() {
                     id={100140929}
                   />
                 ) : (
-                  "No Destination in Europe"
+                  "No Destination in Asia"
                 )}
               </div>
             </div>
@@ -106,7 +106,7 @@ function Asia() {
                   <div className="sectionTitle -md">
                     <h2 className="sectionTitle__title">
                       {" "}
-                      Best Tours and Attraction Tickets in Europe
+                      Best Tours and Attraction Tickets in Asia
                     </h2>
                     <p className=" sectionTitle__text mt-5 sm:mt-0">
                       {/* Our best selling {filterOption} */}
@@ -139,8 +139,7 @@ function Asia() {
                 {/* End .col-auto */}
               </div>
               {/* End .row */}
-              {tourData?.getFilteredTours?.tours.length &&
-              attractionData?.getFilteredAttractions?.attractions.length ? (
+              {tourData?.getFilteredTours?.tours.length ? (
                 <div className="relative overflow-hidden pt-40 sm:pt-20">
                   <div className="row y-gap-30">
                     <FilterTabContentContinent

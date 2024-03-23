@@ -26,6 +26,7 @@ function Europe() {
       },
     },
   });
+  //   console.log("----destinations data----", destinationData);
   const { data: tourData } = useQuery(GetToursInHome, {
     variables: {
       page: 1,

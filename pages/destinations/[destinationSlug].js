@@ -18,6 +18,7 @@ import Things from "../../components/things/Things";
 import IntroTown from "../../components/destinations/components/IntroTown";
 import Categories from "../../components/destinations/components/Categories";
 import ActivityCar from "../../components/activity/ActivityCar";
+import { GET_SINGLE_DESTINATION } from "../../graphql/singleQuery";
 
 const Destinations = () => {
   const router = useRouter();
@@ -25,32 +26,41 @@ const Destinations = () => {
   const { id, destinationSlug } = query;
 
   const {
-    destinationData,
-    tourData,
-    attractionData,
-    thingsData,
-    carsData,
-    destinationLoading,
-  } = useData();
+    data: destinationData,
+    loading: destinationLoading,
+    error: destinationError,
+  } = useQuery(GET_SINGLE_DESTINATION, {
+    variables: { getDestinationId: id },
+  });
+  // const {
+  //   destinationData,
+  //   tourData,
+  //   attractionData,
+  //   thingsData,
+  //   carsData,
+  //   destinationLoading,
+  // } = useData();
 
   console.log(destinationData);
   // Assuming destinationData and tourData contain arrays of destinations and tours respectively
-  const destination = destinationData?.getDestinations?.find(
-    (dest) => dest.id === id
-  );
-  const tours = tourData?.getTours?.filter(
-    (tour) => tour.destination.id === id
-  );
-  const attractions = attractionData?.getAttractions?.filter(
-    (attraction) => attraction.destination.id === id
-  );
-  const things = thingsData?.getThings?.filter(
-    (thing) => thing.destination.id === id
-  );
-  const cars = carsData?.getCars?.filter((car) => car.destination.id === id);
+  // const destination = destinationData?.getDestinations?.find(
+  //   (dest) => dest.id === id
+  // );
+  // const tours = tourData?.getTours?.filter(
+  //   (tour) => tour.destination.id === id
+  // );
+  // const attractions = attractionData?.getAttractions?.filter(
+  //   (attraction) => attraction.destination.id === id
+  // );
+  // const things = thingsData?.getThings?.filter(
+  //   (thing) => thing.destination.id === id
+  // );
+  // const cars = carsData?.getCars?.filter((car) => car.destination.id === id);
   // console.log("Things are", cars, carsData);
   if (destinationLoading) return <p>Destination Loading...</p>;
-  if (!destination) return <p>Destination not found.</p>;
+  if (destinationError) return <p>Destination not found.</p>;
+  const destination = destinationData?.getDestination;
+  console.log("get destinations", destination);
   return (
     <>
       <Seo pageTitle="Destinations" />
@@ -137,8 +147,8 @@ TODO:
           {/* End .row */}
 
           <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-            {things ? (
-              <Things things={things} />
+            {destination.things ? (
+              <Things things={destination.things} />
             ) : (
               <h2 className="text-center">No Things</h2>
             )}
@@ -174,8 +184,8 @@ TODO:
           {/* End .row */}
 
           <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-            {tours ? (
-              <Tours tours={tours} />
+            {destination.tours ? (
+              <Tours tours={destination.tours.filter((el) => el.active)} />
             ) : (
               <h2 className="text-center">No Tours</h2>
             )}
@@ -189,7 +199,7 @@ TODO:
       <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
-            {attractions?.length ? (
+            {destination.attractions?.length ? (
               <div className="col-auto">
                 <div className="sectionTitle -md">
                   <h2 className="sectionTitle__title">
@@ -217,10 +227,10 @@ TODO:
             {/* End .col */}
           </div>
           {/* End .row */}
-          {attractions?.length ? (
+          {destination.attractions?.length ? (
             <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-              {attractions ? (
-                <Activity attractions={attractions} />
+              {destination.attractions ? (
+                <Activity attractions={destination.attractions} />
               ) : (
                 <h2 className="text-center">No Attractions</h2>
               )}
@@ -229,7 +239,7 @@ TODO:
             ""
           )}
 
-          {cars?.length ? (
+          {destination.cars?.length ? (
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Trending Cars</h2>
@@ -242,9 +252,13 @@ TODO:
             ""
           )}
 
-          {cars?.length ? (
+          {destination.cars?.length ? (
             <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
-              {cars ? <ActivityCar attractions={cars} /> : ""}
+              {destination.cars ? (
+                <ActivityCar attractions={destination.cars} />
+              ) : (
+                ""
+              )}
             </div>
           ) : (
             ""
