@@ -6,9 +6,19 @@ import React from "react";
 import { countryData } from "../../../utils/country";
 import { useTourFilterStore } from "../../../lib/store";
 import CountryContinentFilter from "../../attraction-list/sidebar/CountryContinentFilter";
+import { useQuery } from "@apollo/client";
+import {
+  GET_ALL_TAGS,
+  GET_COUNTRIES_CONTINENTS_TOURS_QUERY,
+} from "../../../graphql/query";
 
 const Sidebar = () => {
-  const { tourCCData, tourCCLoading } = useData();
+  const { data: tourCCData, loading: tourCCLoading } = useQuery(
+    GET_COUNTRIES_CONTINENTS_TOURS_QUERY
+  );
+
+  const { data: tagNameList } = useQuery(GET_ALL_TAGS);
+
   const {
     setTag,
     setLocation,
@@ -36,7 +46,7 @@ const Sidebar = () => {
       )
     ),
   ].sort();
-  const { tagNameList } = useData();
+  // const { tagNameList } = useData();
 
   // const [category,setCategory]=React.useState("")
   const continent = countryData.map((el) => el.continent);

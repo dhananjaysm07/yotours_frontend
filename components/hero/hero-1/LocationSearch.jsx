@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useData } from "../../../lib/datacontext";
 import { useSearchStore } from "../../../lib/store";
+import { GET_DESTINATIONS_QUERY } from "../../../graphql/query";
+import { gql, useQuery } from "@apollo/client";
 
 const SearchBar = ({ searchValue, setSearchValue }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -33,14 +35,29 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
     },
   ];
 
-  const {destinationData,destinationLoading, destinationError} = useData();
-const {setDestinationId} = useSearchStore();
-if (destinationLoading) return <p>Loading destinations...</p>;
-if (destinationError) return <p>Error loading destinations</p>;
+  const query = gql`
+    query GetDestinations {
+      getDestinations {
+        id
+        destinationName
+      }
+    }
+  `;
+  const {
+    loading: destinationLoading,
+    error: destinationError,
+    data: destinationData,
+  } = useQuery(query);
+
+  console.log("destination loading---", destinationData, destinationError);
+  // const {destinationData,destinationLoading, destinationError} = useData();
+  const { setDestinationId } = useSearchStore();
+  if (destinationLoading) return <p>Loading...</p>;
+  if (destinationError) return <p>Error loading destinations</p>;
   const handleOptionClick = (item) => {
     setSearchValue(item.destinationName);
     setSelectedItem(item);
-    setDestinationId(item.id)
+    setDestinationId(item.id);
   };
 
   const filteredDestinations = destinationData?.getDestinations
@@ -73,10 +90,13 @@ if (destinationError) return <p>Error loading destinations</p>;
 
         <div className="shadow-2 dropdown-menu min-width-400">
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
-            <ul className="y-gap-5 js-results">
+            <ul
+              className="y-gap-5 js-results"
+              style={{ height: "20rem", overflowY: "auto" }}
+            >
               {filteredDestinations.map((item) => (
                 <li
-                  className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1 ${
+                  className={`-link d-block col-12 text-left rounded-4 px-20 py-15 js-search-option mb-1${
                     selectedItem && selectedItem.id === item.id ? "active" : ""
                   }`}
                   key={item.id}

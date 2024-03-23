@@ -3,10 +3,31 @@ import { useState } from "react";
 import { destinations1 } from "../../../data/desinations";
 import { useData } from "../../../lib/datacontext";
 import { createSlug } from "../../../utils/slugify";
+import { gql, useQuery } from "@apollo/client";
+
+const query = gql`
+  query GetDestinations {
+    getDestinations {
+      id
+      destinationName
+      country
+      continent
+      tours {
+        id
+        active
+      }
+    }
+  }
+`;
 
 const DestinationsWeLove = () => {
   const [filterOption, setFilterOption] = useState("india");
-  const { destinationData, destinationLoading, destinationError } = useData();
+  const {
+    data: destinationData,
+    loading: destinationLoading,
+    error: destinationError,
+  } = useQuery(query);
+  // const { destinationData, destinationLoading, destinationError } = useData();
   const filterOptions = [
     { label: "India", value: "india" },
     { label: "Asia", value: "asia" },

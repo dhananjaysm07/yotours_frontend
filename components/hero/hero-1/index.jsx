@@ -11,9 +11,9 @@ const Index = () => {
   // } = useQuery(GET_CONTENT_QUERY);
   //handle error
   const { contentData, contentLoading, contentError } = useData();
-  if (contentError) {
-    return <div>failed to load</div>;
-  }
+  // if (contentError) {
+  //   return <div>failed to load</div>;
+  // }
 
   return (
     <section className="masthead -type-1 z-5">
@@ -56,7 +56,7 @@ const Index = () => {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              {/* <MainFilterSearchBox /> */}
+              <MainFilterSearchBox />
             </div>
             {/* End tab-filter */}
           </div>

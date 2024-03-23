@@ -9,9 +9,13 @@ import {
   useTourFilterStore,
 } from "../../../lib/store";
 import CountryContinentFilter from "../../attraction-list/sidebar/CountryContinentFilter";
+import { useQuery } from "@apollo/client";
+import { GET_COUNTRIES_CONTINENTS_QUERY } from "../../../graphql/query";
 
 const DestinationSidebar = () => {
-  const { destCCData, destCCLoading } = useData();
+  const { data: destCCData, loading: destCCLoading } = useQuery(
+    GET_COUNTRIES_CONTINENTS_QUERY
+  );
   const {
     setContinent,
     removeContinent,

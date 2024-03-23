@@ -35,7 +35,6 @@ function India() {
         activeValues: [true],
         continent: ["Asia"],
         country: ["India"],
-        ispopular: true,
       },
     },
   });

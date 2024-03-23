@@ -85,7 +85,7 @@ const Home_1 = () => {
 
       <Asia />
       {/* DESTINATIONS WE LOVE */}
-      {/* <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row">
             <div className="col-auto">
@@ -99,7 +99,7 @@ const Home_1 = () => {
             <DestinationsWeLove />
           </div>
         </div>
-      </section> */}
+      </section>
       <CallToActions />
       {/* End Call To Actions Section */}
 

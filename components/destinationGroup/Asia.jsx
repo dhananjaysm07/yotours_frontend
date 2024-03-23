@@ -22,6 +22,7 @@ function Asia() {
       filter: {
         activeValues: [true],
         continent: ["Asia"],
+        excludeCountry: ["India"],
         ispopular: true,
       },
     },
@@ -33,7 +34,7 @@ function Asia() {
       filter: {
         activeValues: [true],
         continent: ["Asia"],
-        ispopular: true,
+        excludeCountry: ["India"],
       },
     },
   });
@@ -44,7 +45,7 @@ function Asia() {
       filter: {
         activeValues: [true],
         continent: ["Asia"],
-        ispopular: true,
+        excludeCountry: ["India"],
       },
     },
   });

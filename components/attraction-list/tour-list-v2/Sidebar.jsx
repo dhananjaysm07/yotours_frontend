@@ -9,8 +9,16 @@ import React from "react";
 import { countryData } from "../../../utils/country";
 import { useAttractionFilterStore } from "../../../lib/store";
 import CountryContinentFilter from "../sidebar/CountryContinentFilter";
+import {
+  GET_ALL_TAGS,
+  GET_COUNTRIES_CONTINENTS_ATTRACTIONS_QUERY,
+} from "../../../graphql/query";
+import { useQuery } from "@apollo/client";
 const Sidebar = () => {
-  const { attCCData, attCCLoading, tagNameList } = useData();
+  const { data: attCCData, loading: attCCLoading } = useQuery(
+    GET_COUNTRIES_CONTINENTS_ATTRACTIONS_QUERY
+  );
+  const { data: tagNameList } = useQuery(GET_ALL_TAGS);
   const [categories, setCategories] = React.useState([]);
   const {
     setTag,

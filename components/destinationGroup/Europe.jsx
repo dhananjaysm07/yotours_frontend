@@ -18,7 +18,7 @@ function Europe() {
   } = useQuery(GetDestinationsInHome, {
     variables: {
       page: 1,
-      loadCount: 40,
+      loadCount: 30,
       filter: {
         activeValues: [true],
         continent: ["Europe"],
@@ -34,7 +34,6 @@ function Europe() {
       filter: {
         activeValues: [true],
         continent: ["Europe"],
-        ispopular: true,
       },
     },
   });
@@ -45,7 +44,6 @@ function Europe() {
       filter: {
         activeValues: [true],
         continent: ["Europe"],
-        ispopular: true,
       },
     },
   });
