@@ -184,7 +184,7 @@ const FilterTabContentContinent = ({
                 <span>{isTour ? item?.tourTitle : item?.attractionTitle}</span>
               </h4>
               <p className="text-light-1 lh-14 text-14 mt-5">
-                {item?.location + "," + item?.destination.destinationName}
+                {item?.location + ", " + item?.destination.country}
               </p>
               {/* <div className="d-flex items-center mt-20">
                 <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
