@@ -46,7 +46,7 @@ const SignUp = () => {
       </section>
       {/* End login section */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

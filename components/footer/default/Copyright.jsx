@@ -14,7 +14,7 @@ const Copyright = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                2024 Wanderung Guides Private Limited & Yo Tours BV.
+                2024 Wanderung Guides Private Limited.
               </a>
               All rights reserved.
             </div>

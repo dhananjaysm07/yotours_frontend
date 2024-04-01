@@ -24,3 +24,25 @@
     }
   }
 }
+.readtxt{
+  color: #3554d1;
+  font-weight: 900;
+  position: absolute;
+  bottom: -19px;
+  :hover{
+    cursor: pointer;
+  }
+}
+.intro-wrapper{
+  position: relative;
+}
+
+@media screen and (max-width:768px) {
+  .destination_cat{
+    .slick-slide{
+      button{
+        height:100px;
+      }
+    }
+  }
+}

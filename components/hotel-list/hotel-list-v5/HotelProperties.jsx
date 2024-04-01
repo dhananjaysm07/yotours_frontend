@@ -50,8 +50,8 @@ const HotelProperties = () => {
             href={`/hotel/hotel-single-v2/${item.id}`}
             className="hotelsCard -type-1 hover-inside-slider"
           >
-            <div className="hotelsCard__image">
-              <div className="cardImage inside-slider">
+            <div className="hotelsCard__image p0">
+              <div className="cardImage inside-slider uuu">
                 <Slider
                   {...itemSettings}
                   arrows={true}

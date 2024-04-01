@@ -51,7 +51,7 @@ const FilterHotels2 = () => {
             className="hotelsCard -type-1 hover-inside-slider"
           >
             <div className="hotelsCard__image">
-              <div className="cardImage inside-slider">
+              <div className="cardImage inside-slider bnbn">
                 <Slider
                   {...itemSettings}
                   arrows={true}

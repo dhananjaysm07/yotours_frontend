@@ -109,7 +109,7 @@ const Tour = () => {
       </section> */}
       {/* Top SearchBanner */}
 
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-30">
             <div className="col-xl-3">
@@ -170,7 +170,7 @@ const Tour = () => {
       </section>
       {/* End layout for listing sidebar and content */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

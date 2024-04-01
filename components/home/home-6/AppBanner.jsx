@@ -2,7 +2,7 @@ import AppBlock from "../../block/AppBlock";
 
 const AppBanner = () => {
   return (
-    <section className="layout-pt-md layout-pb-lg">
+    <section className="layout-pt-md layout-pb-md">
       <div className="container">
         <div className="row y-gap-30 items-center justify-between">
           <div className="col-xl-6">

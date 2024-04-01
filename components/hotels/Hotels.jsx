@@ -44,7 +44,7 @@ const Hotels = () => {
               data-aos="fade"
               data-aos-delay={item.delayAnimation}
             >
-              <div className="hotelsCard__image">
+              <div className="hotelsCard__image kkk">
                 <div className="cardImage ratio ratio-1:1">
                   <div className="cardImage__content">
                     <div className="cardImage-slider rounded-4 overflow-hidden custom_inside-slider">

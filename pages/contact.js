@@ -44,7 +44,7 @@ const Contact = () => {
       </section>
       {/* End contact section form */}
 
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row x-gap-80 y-gap-20 justify-between">
             <div className="col-12">
@@ -93,7 +93,7 @@ const Contact = () => {
       </section>
       {/* End Why Choose Us section */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

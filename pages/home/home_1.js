@@ -62,14 +62,14 @@ const Home_1 = () => {
 
       */}
       <Europe />
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-20 justify-between">
             <BlockGuide />
           </div>
         </div>
       </section>
-      <section className="layout-pt-md layout-pb-md">
+      <section className="py-5">
         <div className="container">
           <div className="row y-gap-20">
             <AddBanner />
@@ -85,7 +85,7 @@ const Home_1 = () => {
 
       <Asia />
       {/* DESTINATIONS WE LOVE */}
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row">
             <div className="col-auto">
@@ -100,7 +100,7 @@ const Home_1 = () => {
           </div>
         </div>
       </section>
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

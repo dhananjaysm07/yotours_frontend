@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-import { Scrollbar } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { destinations2 } from "../../data/desinations";
 import { GET_DESTINATIONS_QUERY } from "../../graphql/query";
 import { useQuery } from "@apollo/client";
@@ -29,12 +28,15 @@ const PopularDestinations = ({
     <>
       <Swiper
         spaceBetween={30}
-        className="overflow-visible"
+        className="overflow-visible swiperpagination"
         scrollbar={{
           el: `.js-popular-destination-scrollbar_${id}`,
           draggable: true,
         }}
-        modules={[Scrollbar, Navigation]}
+        modules={[Pagination, Navigation]}
+         pagination={{
+                        clickable: true,
+                      }}
         navigation={{
           nextEl: `.js-destination-next_${id}`,
           prevEl: `.js-destination-prev_${id}`,
@@ -65,7 +67,7 @@ const PopularDestinations = ({
               }}
               className="citiesCard -type-1 d-block rounded-4"
             >
-              <div className="citiesCard__image ratio ratio-3:4">
+              <div className="citiesCard__image ratio ratio-3:4 test34">
                 <Image
                   width={300}
                   quality={100}
@@ -116,9 +118,6 @@ const PopularDestinations = ({
         >
           <i className="icon icon-chevron-right text-12" />
         </button>
-        <div
-          className={`slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar_${id}`}
-        />
       </div>
     </>
   );
