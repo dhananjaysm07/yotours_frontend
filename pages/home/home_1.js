@@ -69,7 +69,7 @@ const Home_1 = () => {
           </div>
         </div>
       </section>
-      <section className="layout-pt-md layout-pb-md">
+      <section className="py-5">
         <div className="container">
           <div className="row y-gap-20">
             <AddBanner />
