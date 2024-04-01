@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import Slider from "react-slick";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 // import { hotelsData } from "../../data/hotels";
@@ -15,22 +14,9 @@ const FilterTabContentContinent = ({
   filter,
   loading,
   error,
-  id,
 }) => {
-  // console.log(dataToRender);
-  // var itemSettings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
 
   const { contentData } = useData();
-
-  // console.log("tourData", tourData);
-
-  // console.log("contentData", contentData);
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
 
@@ -47,13 +33,9 @@ const FilterTabContentContinent = ({
       document.body.appendChild(script);
 
       return () => {
-        // Cleanup script when the component unmounts
         document.body.removeChild(script);
       };
     }
-
-    // Log a message if Bokun Channel ID is not available
-    console.error("Bokun Channel ID is not available.");
   }, [contentData?.getContent.bokunChannelId]);
 
   // custom navigation
@@ -98,7 +80,7 @@ const FilterTabContentContinent = ({
           spaceBetween={30}
           className="overflow-visible swiperpagination"
           scrollbar={{
-            el: `.js-popular-destination-scrollbar_${id}`,
+            el: `.js-popular-destination-scrollbar`,
             draggable: true,
           }}
           modules={[Pagination, Navigation]}
@@ -106,8 +88,8 @@ const FilterTabContentContinent = ({
                           clickable: true,
                         }}
           navigation={{
-            nextEl: `.js-destination-next_${id}`,
-            prevEl: `.js-destination-prev_${id}`,
+            nextEl: `.js-destination-next`,
+            prevEl: `.js-destination-prev`,
           }}
           breakpoints={{
             500: {
@@ -150,12 +132,6 @@ const FilterTabContentContinent = ({
               >
                 <div className="hotelsCard__image">
                   <div className="cardImage inside-slider">
-                    {/* <Slider
-                      {...itemSettings}
-                      arrows={true}
-                      nextArrow={<ArrowSlick type="next" />}
-                      prevArrow={<ArrowSlick type="prev" />}
-                    > */}
                       {item?.images?.map((slide, i) => (
                         <div className="cardImage ratio ratio-1:1" key={i}>
                           <div className="cardImage__content ">
@@ -222,17 +198,6 @@ const FilterTabContentContinent = ({
                   <p className="text-light-1 lh-14 text-14 mt-5">
                     {item?.location + ", " + item?.destination.country}
                   </p>
-                  {/* <div className="d-flex items-center mt-20">
-                    <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                      {item?.ratings}
-                    </div>
-                    <div className="text-14 text-dark-1 fw-500 ml-10">
-                      Exceptional
-                    </div>
-                    <div className="text-14 text-light-1 ml-10">
-                      {item?.numberOfReviews} reviews
-                    </div>
-                  </div> */}
                   <div className="mt-5">
                     <div className="fw-500">
                       Starting from{" "}
@@ -254,12 +219,12 @@ const FilterTabContentContinent = ({
       
       <div>
           <button
-            className={`section-slider-nav  -prev flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-prev_${id}`}
+            className={`section-slider-nav  -prev flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-prev`}
           >
             <i className="icon icon-chevron-left text-12" />
           </button>
           <button
-            className={`section-slider-nav -next flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-next_${id}`}
+            className={`section-slider-nav -next flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-next`}
           >
             <i className="icon icon-chevron-right text-12" />
           </button>
