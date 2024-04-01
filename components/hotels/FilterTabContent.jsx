@@ -113,8 +113,8 @@ const FilterTabContent = ({
             //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
             //   className="hotelsCard -type-1 hover-inside-slider"
           >
-            <div className="hotelsCard__image iki">
-              <div className="cardImage inside-slider qa">
+            <div className="hotelsCard__image">
+              <div className="cardImage inside-slider">
                 <Slider
                   {...itemSettings}
                   arrows={true}
