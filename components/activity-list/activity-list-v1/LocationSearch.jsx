@@ -39,7 +39,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="searchMenu-loc pr-30 pl-20 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
+      <div className="searchMenu-loc pr-30 pl-20  lg:py-20 lg:px-0 js-form-dd js-liverSearch">
         <div
           data-bs-toggle="dropdown"
           data-bs-auto-close="true"

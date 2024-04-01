@@ -1,6 +1,6 @@
 const CallToActions = () => {
   return (
-    <section className="layout-pt-md layout-pb-lg">
+    <section className="layout-pt-md layout-pb-md">
       <div className="container">
         <div className="row y-gap-20 justify-between items-end">
           <div className="col-auto">

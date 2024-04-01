@@ -59,7 +59,7 @@ const AllAttractions = () => {
           </div>
         </div>
       </section>
-      <CallToActions />
+      {/* <CallToActions /> */}
       <DefaultFooter />
     </>
   );

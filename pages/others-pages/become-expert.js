@@ -117,7 +117,7 @@ const BecomeExpert = () => {
       <DefaultHeader />
       {/* End Header 1 */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

@@ -52,7 +52,7 @@ const About = () => {
       </section>
       {/* End About Banner Section */}
 
-      <section className="layout-pt-lg layout-pb-md">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row justify-center text-center">
             <div className="col-auto">
@@ -163,7 +163,7 @@ const About = () => {
       </section>
       {/* End testimonial section */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

@@ -65,7 +65,7 @@ const SearchedTours = () => {
           }
         </div>
       </section>
-      <CallToActions />
+      {/* <CallToActions /> */}
       <DefaultFooter />
     </>
   );

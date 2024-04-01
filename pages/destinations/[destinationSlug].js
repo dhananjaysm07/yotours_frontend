@@ -82,19 +82,19 @@ TODO:
 
 
 */}
-      <section className="layout-pb-md">
+      <section className="layout-pb-sm">
         <div className="container">
           <div className="row">
             <Banner props={destination} />
           </div>
           {/* End .row */}
 
-          <div className="row x-gap-20 y-gap-20 items-center pt-20 item_gap-x10">
+          <div className="row x-gap-20 y-gap-20 items-center pt-20 item_gap-x10 destination_cat">
             <Categories />
           </div>
           {/* End .row */}
           {destination.introduction ? (
-            <div className="row y-gap-20 pt-40">
+            <div className="row y-gap-20 pt-20">
               <div className="col-auto">
                 <h2>
                   What to know before visiting {destination.destinationName}
@@ -117,7 +117,7 @@ TODO:
             <Weather />
           </div> */}
 
-          <div className="pt-30 mt-30 border-top-light" />
+          <div className="pt-30 mt-45 border-top-light" />
           <div className="row y-gap-20">
             <div className="col-12">
               <h2 className="text-22 fw-500">General info</h2>
@@ -131,7 +131,7 @@ TODO:
         </div>
         {/* End .container */}
       </section>
-      <section className="layout-pt-md layout-pb-md">
+      <section className="layout-pb-sm">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
             <div className="col-auto">
@@ -146,7 +146,7 @@ TODO:
           </div>
           {/* End .row */}
 
-          <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
+          <div className="row y-gap-30 pt-0 sm:pt-20 item_gap-x30">
             {destination.things ? (
               <Things things={destination.things} />
             ) : (
@@ -158,7 +158,7 @@ TODO:
         {/* End .container */}
       </section>
 
-      <section className="layout-pt-md layout-pb-md">
+      <section className="layout-pt-sm layout-pb-sm">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
             <div className="col-auto">
@@ -183,7 +183,7 @@ TODO:
           </div>
           {/* End .row */}
 
-          <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
+          <div className="row y-gap-30 pt-10 sm:pt-20 item_gap-x30">
             {destination.tours ? (
               <Tours tours={destination.tours.filter((el) => el.active)} />
             ) : (
@@ -196,7 +196,7 @@ TODO:
       </section>
       {/* End Tours Sections */}
 
-      <section className="layout-pt-md layout-pb-md">
+      <section className="layout-pt-md layout-pb-md d-none">
         <div className="container">
           <div className="row y-gap-20 justify-between items-end">
             {destination.attractions?.length ? (
@@ -228,7 +228,7 @@ TODO:
           </div>
           {/* End .row */}
           {destination.attractions?.length ? (
-            <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
+            <div className="row y-gap-30 pt-10 sm:pt-20 item_gap-x30">
               {destination.attractions ? (
                 <Activity attractions={destination.attractions} />
               ) : (
@@ -253,7 +253,7 @@ TODO:
           )}
 
           {destination.cars?.length ? (
-            <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
+            <div className="row y-gap-30 pt-10 sm:pt-20 item_gap-x30">
               {destination.cars ? (
                 <ActivityCar attractions={destination.cars} />
               ) : (
@@ -320,7 +320,7 @@ TODO:
       </section> */}
       {/* End Faq Section */}
 
-      <CallToActions />
+      {/* <CallToActions /> */}
       {/* End Call To Actions Section */}
 
       <DefaultFooter />

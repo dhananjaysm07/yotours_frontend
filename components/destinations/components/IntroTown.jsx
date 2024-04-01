@@ -1,17 +1,44 @@
 // import { useData } from "../../../lib/datacontext";
-import parse from "html-react-parser";
+import React, { useState } from 'react';
+import parse from 'html-react-parser'
+
 const IntroTown = ({ introduction }) => {
   // const {} = useData();
+  const [showFullText, setShowFullText] = useState(false);
+  const countParagraphs = (text) => {
+    return text.split('<p>').length - 1;
+  };
+
+  const extractFirstParagraphs = (text) => {
+    const paragraphs = text.split('</p>').filter(Boolean); 
+    const firstParagraphs = paragraphs.slice(0, 3);
+    return firstParagraphs.join('</p>') + '</p>'; 
+  };
+
+  const handleReadMoreClick = () => {
+    setShowFullText(!showFullText);
+  };
+
+  const paragraphCount = countParagraphs(introduction);
+  const truncated = paragraphCount > 3;
   return (
     <>
-      <div className="col-xl-12">
-        <p className="text-15 text-dark-1">{parse(introduction)}</p>
+      <div className="col-xl-12 intro-wrapper">
+        <p className="text-15 text-dark-1">{parse(extractFirstParagraphs(introduction))}</p>
         {/* <a
           href="#"
           className="d-block text-14 fw-500 text-blue-1 underline mt-20"
         >
           Show More
         </a> */}
+        {truncated && (
+        <button  className="readtxt" onClick={handleReadMoreClick}>
+          {showFullText ? 'Read Less' : 'Read More'}
+        </button>
+      )}
+      {showFullText && (
+              <p className="text-15 text-dark-1">{parse(introduction)}</p>
+      )}
       </div>
       {/* End .col */}
 

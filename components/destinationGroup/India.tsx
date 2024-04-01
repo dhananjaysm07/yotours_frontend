@@ -55,7 +55,7 @@ function India() {
     <>
       {destinationData?.getFilteredDestination ? (
         <>
-          <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
+          <section className="layout-pt-md layout-pb-md" data-aos="fade-up">
             <div className="container">
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
@@ -101,7 +101,7 @@ function India() {
             </div>
             {/* End .container */}
           </section>
-          <section className="layout-pt-md layout-pb-lg">
+          <section className="layout-pt-sm layout-pb-sm">
             <div className="container">
               <div className="row y-gap-10 justify-between items-end">
                 <div className="col-auto">
@@ -144,7 +144,7 @@ function India() {
               </div>
               {/* End .row */}
               {tourData?.getFilteredTours?.tours.length ? (
-                <div className="relative overflow-hidden pt-40 sm:pt-20">
+                <div className="relative  tourattaraction pt-40 sm:pt-20">
                   <div className="row y-gap-30">
                     <FilterTabContentContinent
                       loading={destinationLoading}

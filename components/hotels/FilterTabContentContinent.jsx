@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import Slider from "react-slick";
+// import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper";
 // import { hotelsData } from "../../data/hotels";
 import isTextMatched from "../../utils/isTextMatched";
 // import { useQuery } from "@apollo/client";
@@ -13,15 +15,16 @@ const FilterTabContentContinent = ({
   filter,
   loading,
   error,
+  id,
 }) => {
   // console.log(dataToRender);
-  var itemSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  // var itemSettings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  // };
 
   const { contentData } = useData();
 
@@ -91,128 +94,176 @@ const FilterTabContentContinent = ({
 
   return (
     <>
-      {dataToRender?.slice(0, 8).map((item) => (
-        <div
-          className="col-xl-3 col-lg-3 col-sm-6"
-          key={item?.id}
-          data-aos="fade"
-          data-aos-delay="100"
+      <Swiper
+          spaceBetween={30}
+          className="overflow-visible swiperpagination"
+          scrollbar={{
+            el: `.js-popular-destination-scrollbar_${id}`,
+            draggable: true,
+          }}
+          modules={[Pagination, Navigation]}
+          pagination={{
+                          clickable: true,
+                        }}
+          navigation={{
+            nextEl: `.js-destination-next_${id}`,
+            prevEl: `.js-destination-prev_${id}`,
+          }}
+          breakpoints={{
+            500: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 22,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+            1200: {
+              slidesPerView: 4,
+            },
+          }}
         >
-          <div
-            style={{ cursor: "pointer" }}
-            className="bokunButton hotelsCard -type-1 hover-inside-slider"
-            //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
-            data-src={`https://widgets.bokun.io/online-sales/${
-              contentData?.getContent.bokunChannelId
-            }/experience/${
-              isTour ? item.tourBokunId : item.attractionBokunId
-            }?partialView=1`}
-            //  target="_blank"
-            //  rel="noopener noreferrer"
-            //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
-            //   className="hotelsCard -type-1 hover-inside-slider"
-          >
-            <div className="hotelsCard__image">
-              <div className="cardImage inside-slider">
-                <Slider
-                  {...itemSettings}
-                  arrows={true}
-                  nextArrow={<ArrowSlick type="next" />}
-                  prevArrow={<ArrowSlick type="prev" />}
-                >
-                  {item?.images?.map((slide, i) => (
-                    <div className="cardImage ratio ratio-1:1" key={i}>
-                      <div className="cardImage__content ">
-                        <Image
-                          width={300}
-                          height={300}
-                          quality={75}
-                          className="rounded-4 col-12"
-                          src={slide.imageUrl}
-                          alt="image"
-                          style={{ objectFit: "cover" }}
-                        />
+          {dataToRender?.slice(0, 8).map((item) => (
+            <SwiperSlide key={item.id}>
+            <div
+              className="col-12"
+              key={item?.id}
+              data-aos="fade"
+              data-aos-delay="100"
+            >
+              <div
+                style={{ cursor: "pointer" }}
+                className="bokunButton hotelsCard -type-1 hover-inside-slider"
+                //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
+                data-src={`https://widgets.bokun.io/online-sales/${
+                  contentData?.getContent.bokunChannelId
+                }/experience/${
+                  isTour ? item.tourBokunId : item.attractionBokunId
+                }?partialView=1`}
+                //  target="_blank"
+                //  rel="noopener noreferrer"
+                //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
+                //   className="hotelsCard -type-1 hover-inside-slider"
+              >
+                <div className="hotelsCard__image">
+                  <div className="cardImage inside-slider">
+                    {/* <Slider
+                      {...itemSettings}
+                      arrows={true}
+                      nextArrow={<ArrowSlick type="next" />}
+                      prevArrow={<ArrowSlick type="prev" />}
+                    > */}
+                      {item?.images?.map((slide, i) => (
+                        <div className="cardImage ratio ratio-1:1" key={i}>
+                          <div className="cardImage__content ">
+                            <Image
+                              width={300}
+                              height={300}
+                              quality={75}
+                              className="rounded-4 col-12"
+                              src={slide.imageUrl}
+                              alt="image"
+                              style={{ objectFit: "cover" }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    {/* </Slider> */}
+
+                    <div className="cardImage__wishlist">
+                      <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
+                        <i className="icon-heart text-12" />
+                      </button>
+                    </div>
+
+                    <div className="cardImage__leftBadge">
+                      <div
+                        className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500   uppercase ${
+                          isTextMatched(item?.tag?.name, "trending")
+                            ? "bg-dark-1 text-white"
+                            : ""
+                        } 
+                        ${
+                          isTextMatched(item?.tag?.name, "best seller")
+                            ? "bg-blue-1 text-white"
+                            : ""
+                        } 
+
+                        ${
+                          isTextMatched(item?.tag?.name, "Most Popular Tours")
+                            ? "bg-blue-1 text-white"
+                            : ""
+                        } 
+                        
+                    
+                        ${
+                          item?.tag?.name &&
+                          typeof item.tag?.name === "string" &&
+                          item.tag.name.toLowerCase().includes("sale")
+                            ? "bg-yellow-1 text-white"
+                            : ""
+                        }
+                        ${item.tag && "bg-pink-1 text-white"} 
+                                
+                        `}
+                      >
+                        {item?.tag?.name}
                       </div>
                     </div>
-                  ))}
-                </Slider>
-
-                <div className="cardImage__wishlist">
-                  <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
-                    <i className="icon-heart text-12" />
-                  </button>
+                  </div>
                 </div>
-
-                <div className="cardImage__leftBadge">
-                  <div
-                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500   uppercase ${
-                      isTextMatched(item?.tag?.name, "trending")
-                        ? "bg-dark-1 text-white"
-                        : ""
-                    } 
-                    ${
-                      isTextMatched(item?.tag?.name, "best seller")
-                        ? "bg-blue-1 text-white"
-                        : ""
-                    } 
-
-                    ${
-                      isTextMatched(item?.tag?.name, "Most Popular Tours")
-                        ? "bg-blue-1 text-white"
-                        : ""
-                    } 
-                    
-                 
-                    ${
-                      item?.tag?.name &&
-                      typeof item.tag?.name === "string" &&
-                      item.tag.name.toLowerCase().includes("sale")
-                        ? "bg-yellow-1 text-white"
-                        : ""
-                    }
-                    ${item.tag && "bg-pink-1 text-white"} 
-                             
-                     `}
-                  >
-                    {item?.tag?.name}
+                <div className="hotelsCard__content mt-10">
+                  <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
+                    <span>{isTour ? item?.tourTitle : item?.attractionTitle}</span>
+                  </h4>
+                  <p className="text-light-1 lh-14 text-14 mt-5">
+                    {item?.location + ", " + item?.destination.country}
+                  </p>
+                  {/* <div className="d-flex items-center mt-20">
+                    <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
+                      {item?.ratings}
+                    </div>
+                    <div className="text-14 text-dark-1 fw-500 ml-10">
+                      Exceptional
+                    </div>
+                    <div className="text-14 text-light-1 ml-10">
+                      {item?.numberOfReviews} reviews
+                    </div>
+                  </div> */}
+                  <div className="mt-5">
+                    <div className="fw-500">
+                      Starting from{" "}
+                      <span className="text-blue-1">
+                        {/* {item?.currency === "USD" && "$"}
+                        {item?.currency === "EUR" && "€"}
+                        {item?.currency === "GBP" && "£"}
+                        {item?.currency === "INR" && "₹"} */}
+                        {item?.currency} {item?.price}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="hotelsCard__content mt-10">
-              <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
-                <span>{isTour ? item?.tourTitle : item?.attractionTitle}</span>
-              </h4>
-              <p className="text-light-1 lh-14 text-14 mt-5">
-                {item?.location + ", " + item?.destination.country}
-              </p>
-              {/* <div className="d-flex items-center mt-20">
-                <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                  {item?.ratings}
-                </div>
-                <div className="text-14 text-dark-1 fw-500 ml-10">
-                  Exceptional
-                </div>
-                <div className="text-14 text-light-1 ml-10">
-                  {item?.numberOfReviews} reviews
-                </div>
-              </div> */}
-              <div className="mt-5">
-                <div className="fw-500">
-                  Starting from{" "}
-                  <span className="text-blue-1">
-                    {/* {item?.currency === "USD" && "$"}
-                    {item?.currency === "EUR" && "€"}
-                    {item?.currency === "GBP" && "£"}
-                    {item?.currency === "INR" && "₹"} */}
-                    {item?.currency} {item?.price}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+            </SwiperSlide>
+        ))}
+      </Swiper>
+      
+      <div>
+          <button
+            className={`section-slider-nav  -prev flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-prev_${id}`}
+          >
+            <i className="icon icon-chevron-left text-12" />
+          </button>
+          <button
+            className={`section-slider-nav -next flex-center button -pink-1 bg-white shadow-1 size-40 rounded-full  js-destination-next_${id}`}
+          >
+            <i className="icon icon-chevron-right text-12" />
+          </button>
+      </div>
     </>
   );
 };
