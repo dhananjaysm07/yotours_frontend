@@ -29,7 +29,7 @@ const FilterTabContentContinent = ({
 
   // console.log("contentData", contentData);
   useEffect(() => {
-    const bokunChannelId = contentData?.getContent.bokunChannelId;
+    const bokunChannelId = contentData?.getContent?.bokunChannelId;
 
     console.log("Bokun Channel ID:", bokunChannelId);
 

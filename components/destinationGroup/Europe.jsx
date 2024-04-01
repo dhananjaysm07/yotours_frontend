@@ -48,10 +48,10 @@ function Europe() {
     },
   });
   const { filterOptionEurope, setFilterOptionEurope } = useFilterStore();
-  console.log(
-    "filtered destinations-----",
-    destinationData?.getFilteredDestination
-  );
+  // console.log(
+  //   "filtered destinations-----",
+  //   destinationData?.getFilteredDestination
+  // );
   return (
     <>
       {destinationData?.getFilteredDestination ? (

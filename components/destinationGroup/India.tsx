@@ -50,7 +50,7 @@ function India() {
     },
   });
   const { filterOptionIndia, setFilterOptionIndia } = useFilterStore();
-  console.log("tour data india", tourData);
+  // console.log("tour data india", tourData);
   return (
     <>
       {destinationData?.getFilteredDestination ? (
