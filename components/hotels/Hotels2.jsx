@@ -81,7 +81,7 @@ const Hotels2 = () => {
               className="hotelsCard -type-1 hover-inside-slider"
             >
               <div className="hotelsCard__image">
-                <div className="cardImage inside-slider  ww">
+                <div className="cardImage inside-slider">
                   <Slider
                     {...itemSettings}
                     arrows={true}
