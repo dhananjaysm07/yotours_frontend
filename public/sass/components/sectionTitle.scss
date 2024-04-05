@@ -46,3 +46,18 @@
     }
   }
 }
+.socialurl{
+  position: absolute;
+  top: 5%;
+  left: 3%;
+  a, button{
+    font-size: 30px;
+    margin-left: 8px;
+  }
+  span{
+    margin-left: 8px;
+  }
+  @media screen and (max-width: 768px) {
+    top: 0;
+  }
+}

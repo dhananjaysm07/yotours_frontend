@@ -27,7 +27,8 @@ const PopularDestinations = ({
   return (
     <>
       <Swiper
-        spaceBetween={30}
+        spaceBetween={25}
+        slidesPerView = {1.1}
         className="overflow-visible swiperpagination"
         scrollbar={{
           el: `.js-popular-destination-scrollbar_${id}`,
