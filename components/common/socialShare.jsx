@@ -3,12 +3,10 @@ import Head from 'next/head';
 import { FaFacebook, FaWhatsapp, FaInstagram, FaCopy } from 'react-icons/fa';
 
 const SocialShareLink = ({ bokunWidgetUrl }) => {
+  const [copySuccess, setCopySuccess] = useState(false);
   if (!bokunWidgetUrl) {
     return null; // Return null if bokunWidgetUrl is not provided
   }
-
-  const [copySuccess, setCopySuccess] = useState(false);
-
   const copyToClipboard = () => {
     navigator.clipboard.writeText(bokunWidgetUrl);
     setCopySuccess(true);
