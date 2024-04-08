@@ -19,7 +19,7 @@ const SocialShareLink = ({ bokunWidgetUrl }) => {
 
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title)}`;
-  const instagramShareUrl = `https://www.instagram.com/add?url=${encodeURIComponent(url)}`;
+  // const instagramShareUrl = `https://www.instagram.com/share?url=${encodeURIComponent(url)}`;
 
   return (
     <div>
@@ -34,9 +34,9 @@ const SocialShareLink = ({ bokunWidgetUrl }) => {
       <a href={whatsappShareUrl} target="_blank" rel="noopener noreferrer">
         <FaWhatsapp />
       </a>
-      <a href={instagramShareUrl} target="_blank" rel="noopener noreferrer">
+      {/* <a href={instagramShareUrl} target="_blank" rel="noopener noreferrer">
         <FaInstagram />
-      </a>
+      </a> */}
       <button onClick={copyToClipboard}>
         <FaCopy />
         {copySuccess ? <span>Link copied!</span> : <span>Copy Link</span>}
