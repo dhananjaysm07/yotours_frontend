@@ -33,7 +33,12 @@ const FilterTabContentContinent = ({
             const socialDiv = document.createElement('div');
             socialDiv.className = 'socialurl';
             widgetContainer.appendChild(socialDiv);
-            ReactDOM.createRoot(socialDiv).render(<SocialShareLink bokunWidgetUrl={clickedDataSrc} />);
+            const socialLink = <SocialShareLink bokunWidgetUrl={clickedDataSrc} />;
+            if (socialLink.props.bokunWidgetUrl) {
+              ReactDOM.createRoot(socialDiv).render(socialLink);
+            } else {
+              widgetContainer.removeChild(socialDiv);
+            }
           } else {
             console.error("Widget container not found.");
           }
@@ -43,9 +48,10 @@ const FilterTabContentContinent = ({
         document.body.removeChild(script);
       };
     }
+    
     console.error("Bokun Channel ID is not available.");
    
-  }, [contentData?.getContent.bokunChannelId, clickedDataSrc]); // Include clickedDataSrc as a dependency
+  }, [contentData?.getContent.bokunChannelId, clickedDataSrc]); 
 
   const handleBokunButtonClick = (event) => {
     const dataSrc = event.currentTarget.getAttribute('data-src');
