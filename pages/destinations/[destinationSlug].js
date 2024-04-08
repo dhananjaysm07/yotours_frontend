@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic";
+import React, { useState } from 'react';
+import { FaChevronDown , FaChevronUp  } from 'react-icons/fa';
 import CallToActions from "../../components/common/CallToActions";
 import Seo from "../../components/common/Seo";
 import DefaultHeader from "../../components/header/default-header";
@@ -31,7 +33,6 @@ const Destinations = () => {
   const router = useRouter();
   const { query } = router;
   const { id, destinationSlug } = query;
-
   const {
     data: destinationData,
     loading: destinationLoading,
@@ -63,38 +64,22 @@ const Destinations = () => {
   } = useQuery(GET_ATTRACTION_CARS_FOR_DESTINATION, {
     variables: { getDestinationId: id },
   });
-  // const {
-  //   destinationData,
-  //   tourData,
-  //   attractionData,
-  //   thingsData,
-  //   carsData,
-  //   destinationLoading,
-  // } = useData();
-
-  console.log(destinationData);
-  // Assuming destinationData and tourData contain arrays of destinations and tours respectively
-  // const destination = destinationData?.getDestinations?.find(
-  //   (dest) => dest.id === id
-  // );
-  // const tours = tourData?.getTours?.filter(
-  //   (tour) => tour.destination.id === id
-  // );
-  // const attractions = attractionData?.getAttractions?.filter(
-  //   (attraction) => attraction.destination.id === id
-  // );
-  // const things = thingsData?.getThings?.filter(
-  //   (thing) => thing.destination.id === id
-  // );
-  // const cars = carsData?.getCars?.filter((car) => car.destination.id === id);
-  // console.log("Things are", cars, carsData);
-  // if (destinationLoading) return <p>Destination Loading...</p>;
-  // if (destinationError) return <p>Destination not found.</p>;
   const destination = destinationData?.getDestination;
   const tour = tourData?.getDestination;
   const attraction_car = attraction_cars_Data?.getDestination;
   const thing = thingData?.getDestination;
   // console.log("get destinations", destination);
+  const [expandedSections, setExpandedSections] = useState({
+    introduction: false,
+    generalInfo: false,
+    bestThings: false
+  });
+  const toggleSection = (section) => {
+    setExpandedSections(prevState => ({
+      ...prevState,
+      [section]: !prevState[section]
+    }));
+  };
   return (
     <>
       <Seo pageTitle="Destinations" />
@@ -132,12 +117,11 @@ TODO:
               {destination?.introduction ? (
                 <div className="row y-gap-20 pt-20">
                   <div className="col-auto">
-                    <h2>
-                      What to know before visiting {destination.destinationName}
-                    </h2>
+                  <h2 onClick={() => toggleSection('introduction')} className="expand">
+                     What to know before visiting {destination.destinationName} {expandedSections.introduction ? <FaChevronUp /> : <FaChevronDown />} 
+                  </h2>
                   </div>
-
-                  <IntroTown introduction={destination?.introduction} />
+                  {expandedSections.introduction && <IntroTown introduction={destination?.introduction} />}
                 </div>
               ) : (
                 ""
@@ -156,10 +140,12 @@ TODO:
               <div className="pt-30 mt-45 border-top-light" />
               <div className="row y-gap-20">
                 <div className="col-12">
-                  <h2 className="text-22 fw-500">General info</h2>
+                <h2 onClick={() => toggleSection('generalInfo')} className="expand">
+                        General info {expandedSections.generalInfo ? <FaChevronUp /> : <FaChevronDown />}   
+                </h2>                
                 </div>
                 {/* End .col */}
-                <GeneralInfo destination={destination} />
+                {expandedSections.generalInfo && <GeneralInfo destination={destination} />}
               </div>
               {/* End .row */}
               <div className="mt-30 border-top-light" />
@@ -172,23 +158,28 @@ TODO:
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
                   <div className="sectionTitle -md">
-                    <h2 className="sectionTitle__title">Best Things</h2>
-                    <p className=" sectionTitle__text mt-5 sm:mt-0">
-                      These are the best things available for{" "}
-                      {destination.destinationName}
-                    </p>
+                  <h2 onClick={() => toggleSection('bestThings')} className="sectionTitle__title expand">
+                        Best Things{expandedSections.bestThings ? <FaChevronUp  /> : <FaChevronDown />}
+                  </h2>                    
+                    
                   </div>
                 </div>
               </div>
               {/* End .row */}
 
+              {expandedSections.bestThings &&
               <div className="row y-gap-30 pt-0 sm:pt-20 item_gap-x30">
+                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                      These are the best things available for{" "}
+                      {destination.destinationName}
+                    </p>
                 {thing?.things ? (
                   <Things things={thing?.things} />
                 ) : (
                   <h2 className="text-center">No Things</h2>
                 )}
               </div>
+                }
               {/* End .row */}
             </div>
             {/* End .container */}

@@ -7,10 +7,11 @@ const SocialShareLink = ({ bokunWidgetUrl }) => {
   if (!bokunWidgetUrl) {
     return null; // Return null if bokunWidgetUrl is not provided
   }
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(bokunWidgetUrl);
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 3000);
+    setTimeout(() => setCopySuccess(false), 2000);
   };
 
   const url = bokunWidgetUrl;
@@ -38,12 +39,8 @@ const SocialShareLink = ({ bokunWidgetUrl }) => {
       </a>
       <button onClick={copyToClipboard}>
         <FaCopy />
+        {copySuccess ? <span>Link copied!</span> : <span>Copy Link</span>}
       </button>
-      {copySuccess ? (
-        <span>Link copied!</span>
-      ) : (
-        <span>Copy Link</span>
-      )}
     </div>
   );
 };
