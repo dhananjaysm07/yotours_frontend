@@ -34,9 +34,9 @@ const PopularDestinations = ({
           draggable: true,
         }}
         modules={[Pagination, Navigation]}
-         pagination={{
-                        clickable: true,
-                      }}
+        pagination={{
+          clickable: true,
+        }}
         navigation={{
           nextEl: `.js-destination-next_${id}`,
           prevEl: `.js-destination-prev_${id}`,
@@ -63,7 +63,7 @@ const PopularDestinations = ({
             <Link
               href={{
                 pathname: `/destinations/${createSlug(item.destinationName)}`,
-                query: { id: item.id }, // passing the ID as a query parameter
+                query: { city: item.destinationName }, // passing the ID as a query parameter
               }}
               className="citiesCard -type-1 d-block rounded-4"
             >

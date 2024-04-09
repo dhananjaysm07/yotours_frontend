@@ -30,14 +30,14 @@ import LoadingDestinationBanner from "../../components/Loading/LoadingDestinatio
 const Destinations = () => {
   const router = useRouter();
   const { query } = router;
-  const { id, destinationSlug } = query;
+  const { destinationSlug, city } = query;
 
   const {
     data: destinationData,
     loading: destinationLoading,
     error: destinationError,
   } = useQuery(GET_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
 
   const {
@@ -45,7 +45,7 @@ const Destinations = () => {
     loading: tourLoading,
     error: tourError,
   } = useQuery(GET_TOUR_FOR_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
 
   const {
@@ -53,7 +53,7 @@ const Destinations = () => {
     loading: thingLoading,
     error: thingError,
   } = useQuery(GET_THINGS_FOR_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
 
   const {
@@ -61,7 +61,7 @@ const Destinations = () => {
     loading: attractionLoading,
     error: attractionError,
   } = useQuery(GET_ATTRACTION_CARS_FOR_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
   // const {
   //   destinationData,
@@ -90,10 +90,10 @@ const Destinations = () => {
   // console.log("Things are", cars, carsData);
   // if (destinationLoading) return <p>Destination Loading...</p>;
   // if (destinationError) return <p>Destination not found.</p>;
-  const destination = destinationData?.getDestination;
-  const tour = tourData?.getDestination;
-  const attraction_car = attraction_cars_Data?.getDestination;
-  const thing = thingData?.getDestination;
+  const destination = destinationData?.getDestinationByCity;
+  const tour = tourData?.getDestinationByCity;
+  const attraction_car = attraction_cars_Data?.getDestinationByCity;
+  const thing = thingData?.getDestinationByCity;
   // console.log("get destinations", destination);
   return (
     <>
