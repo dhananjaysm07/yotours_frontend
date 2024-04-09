@@ -190,7 +190,7 @@ const DestinationGrid = ({ filter }) => {
                 pathname: `/destinations/${createSlug(
                   item?.destinationName || ""
                 )}`,
-                query: { city: item.destinationName }, // passing the ID as a query parameter
+                query: { city: item?.destinationName }, // passing the ID as a query parameter
               }}
               key={item?.id}
               className="tourCard -type-1 rounded-4 position-relative"

@@ -63,8 +63,8 @@ const PopularDestinations = ({
           <SwiperSlide key={item.id}>
             <Link
               href={{
-                pathname: `/destinations/${createSlug(item.destinationName)}`,
-                query: { city: item.destinationName }, // passing the ID as a query parameter
+                pathname: `/destinations/${createSlug(item?.destinationName)}`,
+                query: { city: item?.destinationName }, // passing the ID as a query parameter
               }}
               className="citiesCard -type-1 d-block rounded-4"
             >
