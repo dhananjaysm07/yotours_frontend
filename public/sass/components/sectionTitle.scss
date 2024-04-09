@@ -46,3 +46,28 @@
     }
   }
 }
+.socialurl{
+  position: absolute;
+  top: 5%;
+  left: 3%;
+  a, button{
+    font-size: 18px;
+    margin-left: 8px;
+  }
+  span{
+    margin-left: 8px;
+    font-size: 15px;
+  }
+  @media screen and (max-width: 767px) {
+    top: 15px;
+  }
+}
+.expand {
+  svg {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

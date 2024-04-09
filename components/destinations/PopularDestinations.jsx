@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Scrollbar } from "swiper";
 import { destinations2 } from "../../data/desinations";
 import { GET_DESTINATIONS_QUERY } from "../../graphql/query";
 import { useQuery } from "@apollo/client";
@@ -27,13 +27,14 @@ const PopularDestinations = ({
   return (
     <>
       <Swiper
-        spaceBetween={30}
+        spaceBetween={25}
+        slidesPerView={1.1}
         className="overflow-visible swiperpagination"
         scrollbar={{
           el: `.js-popular-destination-scrollbar_${id}`,
           draggable: true,
         }}
-        modules={[Pagination, Navigation]}
+        modules={[Scrollbar, Navigation]}
         pagination={{
           clickable: true,
         }}
@@ -118,6 +119,9 @@ const PopularDestinations = ({
         >
           <i className="icon icon-chevron-right text-12" />
         </button>
+        <div
+          className={`slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar_${id}`}
+        />
       </div>
     </>
   );

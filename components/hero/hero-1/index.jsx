@@ -15,21 +15,21 @@ const Index = () => {
   // if (contentError) {
   //   return <div>failed to load</div>;
   // }
-  const [stickysearch, setStickySearch] = useState(false);
-  const stickySearch = () => {
-    if (window.scrollY >= 420) {
-      setStickySearch(true);
-    } else {
-      setStickySearch(false);
-    }
-  };
+  // const [stickysearch, setStickySearch] = useState(false);
+  // const stickySearch = () => {
+  //   if (window.scrollY >= 420) {
+  //     setStickySearch(true);
+  //   } else {
+  //     setStickySearch(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener("scroll", stickySearch);
-    return () => {
-      window.removeEventListener("scroll", stickySearch);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", stickySearch);
+  //   return () => {
+  //     window.removeEventListener("scroll", stickySearch);
+  //   };
+  // }, []);
 
   return (
     <section className="masthead -type-1 z-5">
@@ -68,7 +68,7 @@ const Index = () => {
             {/* End hero title */}
 
             <div
-              className={`tabs -underline mt-60 js-tabs ${stickysearch ? "stickysearch" : ""}`}
+              className="tabs -underline mt-60 js-tabs"
               data-aos="fade-up"
               data-aos-delay="200"
             >

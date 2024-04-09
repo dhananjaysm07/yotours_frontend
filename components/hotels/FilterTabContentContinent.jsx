@@ -2,43 +2,63 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-// import { hotelsData } from "../../data/hotels";
 import isTextMatched from "../../utils/isTextMatched";
-// import { useQuery } from "@apollo/client";
-// import { GET_TOURS_QUERY } from "../../graphql/query";
 import { useData } from "../../lib/datacontext";
-// import { useFilterStore } from "../../lib/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
+
+import SocialShareLink from "../../components/common/socialShare";
 const FilterTabContentContinent = ({
   dataToRender,
   filter,
   loading,
   error,
 }) => {
-
   const { contentData } = useData();
+  const [clickedDataSrc, setClickedDataSrc] = useState(null);
   useEffect(() => {
-    const bokunChannelId = contentData?.getContent?.bokunChannelId;
-
-    console.log("Bokun Channel ID:", bokunChannelId);
-
+    const bokunChannelId = contentData?.getContent.bokunChannelId;
+   
     if (bokunChannelId) {
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
       script.async = true;
-
-      console.log("Bokun Widget Script URL:", script.src);
-
       document.body.appendChild(script);
-
+      script.onload = () => {
+        setTimeout(() => {
+          const widgetContainer = document.getElementById('bokun-modal-container');
+          if (widgetContainer) {
+            const socialDiv = document.createElement('div');
+            socialDiv.className = 'socialurl';
+            widgetContainer.appendChild(socialDiv);
+            const socialLink = <SocialShareLink bokunWidgetUrl={clickedDataSrc} />;
+            if (socialLink.props.bokunWidgetUrl) {
+              ReactDOM.createRoot(socialDiv).render(socialLink);
+            } else {
+              widgetContainer.removeChild(socialDiv);
+            }
+          } else {
+            console.error("Widget container not found.");
+          }
+        }, 2000); 
+      };
       return () => {
         document.body.removeChild(script);
       };
     }
-  }, [contentData?.getContent.bokunChannelId]);
+    
+    console.error("Bokun Channel ID is not available.");
+   
+  }, [contentData?.getContent.bokunChannelId, clickedDataSrc]); 
 
-  // custom navigation
+  const handleBokunButtonClick = (event) => {
+    const dataSrc = event.currentTarget.getAttribute('data-src');
+    setClickedDataSrc(dataSrc);
+  };
+  
+
   function ArrowSlick(props) {
     let className =
       props.type === "next"
@@ -77,7 +97,8 @@ const FilterTabContentContinent = ({
   return (
     <>
       <Swiper
-          spaceBetween={30}
+          spaceBetween={20}
+          slidesPerView = {1.1}
           className="overflow-visible swiperpagination"
           scrollbar={{
             el: `.js-popular-destination-scrollbar`,
@@ -93,12 +114,12 @@ const FilterTabContentContinent = ({
           }}
           breakpoints={{
             500: {
-              slidesPerView: 2,
-              spaceBetween: 20,
+              slidesPerView: 1.1,
+              centeredSlides: true,
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 22,
+              centeredSlides: true,
             },
             1024: {
               slidesPerView: 3,
@@ -124,7 +145,7 @@ const FilterTabContentContinent = ({
                   contentData?.getContent.bokunChannelId
                 }/experience/${
                   isTour ? item.tourBokunId : item.attractionBokunId
-                }?partialView=1`}
+                }?partialView=1`} onClick={handleBokunButtonClick}
                 //  target="_blank"
                 //  rel="noopener noreferrer"
                 //  href={isTour ? item?.tourHyperlink || "#" : item?.attractionHyperlink || "#"}
