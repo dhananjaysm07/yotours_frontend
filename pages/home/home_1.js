@@ -12,26 +12,29 @@ import Link from "next/link";
 import { useFilterStore } from "../../lib/store";
 import { useData } from "../../lib/datacontext";
 import React from "react";
-import FilterTabsHotelsForContinent from "../../components/hotels/filter-tabs/FilterHotelsContinent";
-import FilterTabContentContinent from "../../components/hotels/FilterTabContentContinent";
 import AddBanner from "../../components/add-banner/AddBanner";
 import DestinationsWeLove from "../../components/home/home-1/DestinationsWeLove";
 import Europe from "./../../components/destinationGroup/Europe";
 import Asia from "../../components/destinationGroup/Asia";
 import India from "../../components/destinationGroup/India";
+import CookieConsent from "react-cookie-consent";
 const Home_1 = () => {
   const { filterOption } = useFilterStore();
-  // const { destinationData, destinationLoading, destinationError } = useData();
-  // const { attractionData, attractionLoading, attractionError } = useData();
-  // const { tourData, tourLoading, tourError } = useData();
-  // React.useState(() => {
-  //   if (destinationData?.getDestinations?.length) {
-  //     setDestinations(destinationData.getDestinations);
-  //   }
-  // }, [destinationData]);
 
   return (
     <>
+      <CookieConsent
+        location="bottom"
+        buttonText="Accept"
+        declineButtonText="Decline"
+        cookieName="myAwesomeCookieName2"
+        style={{ background: "rgb(201, 48, 95)" }}
+        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+        expires={150}
+        buttonClasses="tabs__button text-14 fw-500 px-20 py-10 rounded-4 bg-light-2 js-tabs-button"
+      >
+        This website uses cookies to enhance the user experience.{" "}
+      </CookieConsent>
       <Seo pageTitle="Home" />
       {/* End Page Title */}
 
@@ -42,22 +45,6 @@ const Home_1 = () => {
       {/* End Hero 1 */}
 
       {/* 
-
-      Logo: Company Name
-      Header : Work with Us Button
-      Footer: Agent Login
-
-
-      LENGTH: 3 (Europe, Asia)
-      Popular Destination in Europe
-      Top Tours and Attraction Tickets in Europe
-
-      Popular Destination in Asia
-      Top Tours and Attraction Tickets in Asia
-      
-
-
-      TODO: Destinations We Love, Continent Wise Tabs
 
 
       */}

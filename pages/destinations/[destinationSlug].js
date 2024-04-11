@@ -32,13 +32,14 @@ import LoadingDestinationBanner from "../../components/Loading/LoadingDestinatio
 const Destinations = () => {
   const router = useRouter();
   const { query } = router;
-  const { id, destinationSlug } = query;
+  const { destinationSlug, city } = query;
+
   const {
     data: destinationData,
     loading: destinationLoading,
     error: destinationError,
   } = useQuery(GET_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
 
   const {
@@ -46,7 +47,7 @@ const Destinations = () => {
     loading: tourLoading,
     error: tourError,
   } = useQuery(GET_TOUR_FOR_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
 
   const {
@@ -54,7 +55,7 @@ const Destinations = () => {
     loading: thingLoading,
     error: thingError,
   } = useQuery(GET_THINGS_FOR_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
 
   const {
@@ -62,12 +63,39 @@ const Destinations = () => {
     loading: attractionLoading,
     error: attractionError,
   } = useQuery(GET_ATTRACTION_CARS_FOR_DESTINATION, {
-    variables: { getDestinationId: id },
+    variables: { destinationName: city },
   });
-  const destination = destinationData?.getDestination;
-  const tour = tourData?.getDestination;
-  const attraction_car = attraction_cars_Data?.getDestination;
-  const thing = thingData?.getDestination;
+  // const {
+  //   destinationData,
+  //   tourData,
+  //   attractionData,
+  //   thingsData,
+  //   carsData,
+  //   destinationLoading,
+  // } = useData();
+
+  console.log(destinationData);
+  // Assuming destinationData and tourData contain arrays of destinations and tours respectively
+  // const destination = destinationData?.getDestinations?.find(
+  //   (dest) => dest.id === id
+  // );
+  // const tours = tourData?.getTours?.filter(
+  //   (tour) => tour.destination.id === id
+  // );
+  // const attractions = attractionData?.getAttractions?.filter(
+  //   (attraction) => attraction.destination.id === id
+  // );
+  // const things = thingsData?.getThings?.filter(
+  //   (thing) => thing.destination.id === id
+  // );
+  // const cars = carsData?.getCars?.filter((car) => car.destination.id === id);
+  // console.log("Things are", cars, carsData);
+  // if (destinationLoading) return <p>Destination Loading...</p>;
+  // if (destinationError) return <p>Destination not found.</p>;
+  const destination = destinationData?.getDestinationByCity;
+  const tour = tourData?.getDestinationByCity;
+  const attraction_car = attraction_cars_Data?.getDestinationByCity;
+  const thing = thingData?.getDestinationByCity;
   // console.log("get destinations", destination);
   const [expandedSections, setExpandedSections] = useState({
     introduction: false,

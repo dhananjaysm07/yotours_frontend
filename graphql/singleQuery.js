@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_SINGLE_DESTINATION = gql`
-  query GetDestination($getDestinationId: String!) {
-    getDestination(id: $getDestinationId) {
+  query GetDestinationByCity($destinationName: String!) {
+    getDestinationByCity(destinationName: $destinationName) {
       id
       destinationName
       continent
@@ -103,8 +103,8 @@ export const GET_SINGLE_DESTINATION = gql`
 `;
 
 export const GET_DESTINATION = gql`
-  query GetDestination($getDestinationId: String!) {
-    getDestination(id: $getDestinationId) {
+  query GetDestinationByCity($destinationName: String!) {
+    getDestinationByCity(destinationName: $destinationName) {
       id
       destinationName
       continent
@@ -127,8 +127,8 @@ export const GET_DESTINATION = gql`
 `;
 
 export const GET_TOUR_FOR_DESTINATION = gql`
-  query GetDestination($getDestinationId: String!) {
-    getDestination(id: $getDestinationId) {
+  query GetDestinationByCity($destinationName: String!) {
+    getDestinationByCity(destinationName: $destinationName) {
       tours {
         id
         active
@@ -154,8 +154,8 @@ export const GET_TOUR_FOR_DESTINATION = gql`
 `;
 
 export const GET_ATTRACTION_CARS_FOR_DESTINATION = gql`
-  query GetDestination($getDestinationId: String!) {
-    getDestination(id: $getDestinationId) {
+  query GetDestinationByCity($destinationName: String!) {
+    getDestinationByCity(destinationName: $destinationName) {
       attractions {
         id
         active
@@ -198,8 +198,8 @@ export const GET_ATTRACTION_CARS_FOR_DESTINATION = gql`
 `;
 
 export const GET_THINGS_FOR_DESTINATION = gql`
-  query GetDestination($getDestinationId: String!) {
-    getDestination(id: $getDestinationId) {
+  query GetDestinationByCity($destinationName: String!) {
+    getDestinationByCity(destinationName: $destinationName) {
       things {
         active
         id

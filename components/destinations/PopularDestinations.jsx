@@ -28,16 +28,16 @@ const PopularDestinations = ({
     <>
       <Swiper
         spaceBetween={25}
-        slidesPerView = {1.1}
+        slidesPerView={1.1}
         className="overflow-visible swiperpagination"
         scrollbar={{
           el: `.js-popular-destination-scrollbar_${id}`,
           draggable: true,
         }}
         modules={[Scrollbar, Navigation]}
-         pagination={{
-                        clickable: true,
-                      }}
+        pagination={{
+          clickable: true,
+        }}
         navigation={{
           nextEl: `.js-destination-next_${id}`,
           prevEl: `.js-destination-prev_${id}`,
@@ -63,8 +63,8 @@ const PopularDestinations = ({
           <SwiperSlide key={item.id}>
             <Link
               href={{
-                pathname: `/destinations/${createSlug(item.destinationName)}`,
-                query: { id: item.id }, // passing the ID as a query parameter
+                pathname: `/destinations/${createSlug(item?.destinationName)}`,
+                query: { city: item?.destinationName }, // passing the ID as a query parameter
               }}
               className="citiesCard -type-1 d-block rounded-4"
             >
@@ -119,7 +119,9 @@ const PopularDestinations = ({
         >
           <i className="icon icon-chevron-right text-12" />
         </button>
-        <div className={`slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar_${id}`}  />
+        <div
+          className={`slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar_${id}`}
+        />
       </div>
     </>
   );
