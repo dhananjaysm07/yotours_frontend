@@ -252,7 +252,7 @@ TODO:
           </section>
           {/* End Tours Sections */}
 
-          <section className="layout-pt-md layout-pb-md d-none">
+          <section className="layout-pt-md layout-pb-md">
             <div className="container">
               <div className="row y-gap-20 justify-between items-end">
                 {attraction_car?.attractions?.length ? (
