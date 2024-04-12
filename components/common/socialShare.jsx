@@ -4,6 +4,7 @@ import { FaFacebook, FaWhatsapp, FaInstagram, FaCopy } from 'react-icons/fa';
 
 const SocialShareLink = ({ bokunWidgetUrl }) => {
   const [copySuccess, setCopySuccess] = useState(false);
+
   if (!bokunWidgetUrl) {
     return null; // Return null if bokunWidgetUrl is not provided
   }
@@ -39,7 +40,7 @@ const SocialShareLink = ({ bokunWidgetUrl }) => {
       </a> */}
       <button onClick={copyToClipboard}>
         <FaCopy />
-        {copySuccess ? <span>Link copied!</span> : <span>Copy Link</span>}
+        {copySuccess ? <span>Link Copied!</span> : <span>Copy Link</span>}
       </button>
     </div>
   );
