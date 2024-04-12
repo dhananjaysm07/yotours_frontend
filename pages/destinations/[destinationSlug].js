@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { useState } from 'react';
+import Loader from "../../components/common/loader"
 import { FaChevronDown , FaChevronUp  } from 'react-icons/fa';
 import CallToActions from "../../components/common/CallToActions";
 import Seo from "../../components/common/Seo";
@@ -65,43 +66,28 @@ const Destinations = () => {
   } = useQuery(GET_ATTRACTION_CARS_FOR_DESTINATION, {
     variables: { destinationName: city },
   });
-  // const {
-  //   destinationData,
-  //   tourData,
-  //   attractionData,
-  //   thingsData,
-  //   carsData,
-  //   destinationLoading,
-  // } = useData();
-
-  console.log(destinationData);
-  // Assuming destinationData and tourData contain arrays of destinations and tours respectively
-  // const destination = destinationData?.getDestinations?.find(
-  //   (dest) => dest.id === id
-  // );
-  // const tours = tourData?.getTours?.filter(
-  //   (tour) => tour.destination.id === id
-  // );
-  // const attractions = attractionData?.getAttractions?.filter(
-  //   (attraction) => attraction.destination.id === id
-  // );
-  // const things = thingsData?.getThings?.filter(
-  //   (thing) => thing.destination.id === id
-  // );
-  // const cars = carsData?.getCars?.filter((car) => car.destination.id === id);
-  // console.log("Things are", cars, carsData);
-  // if (destinationLoading) return <p>Destination Loading...</p>;
-  // if (destinationError) return <p>Destination not found.</p>;
   const destination = destinationData?.getDestinationByCity;
   const tour = tourData?.getDestinationByCity;
   const attraction_car = attraction_cars_Data?.getDestinationByCity;
   const thing = thingData?.getDestinationByCity;
-  // console.log("get destinations", destination);
   const [expandedSections, setExpandedSections] = useState({
     introduction: false,
     generalInfo: false,
     bestThings: false
   });
+  const [visibleTours, setVisibleTours] = useState(8);
+  const [loading, setLoading] = useState(false); // Initialize loading state
+
+  const handleLoadMore = () => {
+    setLoading(true); // Set loading to true when "Show More" button is clicked
+    // Simulate loading with a delay
+    setTimeout(() => {
+      setVisibleTours(prevCount => prevCount + 8);
+      setLoading(false); // Set loading to false after data is loaded (replace this with actual loading logic)
+    }, 500); // Adjust the delay as needed
+  };
+
+  const allTours = tour?.tours?.filter(el => el.active) || [];
   const toggleSection = (section) => {
     setExpandedSections(prevState => ({
       ...prevState,
@@ -240,11 +226,26 @@ TODO:
               {/* End .row */}
 
               <div className="row y-gap-30 pt-10 sm:pt-20 item_gap-x30">
-                {tour?.tours ? (
-                  <Tours tours={tour.tours.filter((el) => el.active)} />
-                ) : (
-                  <h2 className="text-center">No Tours</h2>
-                )}
+                    <>
+                          {allTours.length > 0 ? (
+                            <>
+                              {/* Render tours */}
+                              <Tours tours={allTours.slice(0, visibleTours)} />
+                              {allTours.length > visibleTours && (
+                                <div className="show-more-container">
+                                  {/* Render "Show More" button or loader based on loading state */}
+                                  {loading ? (
+                                     <Loader />
+                                  ) : (
+                                    <button className="showmore" onClick={handleLoadMore}>Show More</button>
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          ) : (
+                            <h2 className="text-center">No Tours</h2>
+                          )}
+                        </>
               </div>
               {/* End .row */}
             </div>
