@@ -7,8 +7,8 @@ import { useData } from "../../lib/datacontext";
 import { useEffect, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import ReactDOM from 'react-dom';
-
 import SocialShareLink from "../../components/common/socialShare";
+
 const FilterTabContentContinent = ({
   dataToRender,
   filter,

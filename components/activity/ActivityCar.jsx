@@ -3,11 +3,16 @@ import Link from "next/link";
 import Slider from "react-slick";
 import activityData from "../../data/activity";
 import isTextMatched from "../../utils/isTextMatched";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useData } from "../../lib/datacontext";
+import { createRoot } from 'react-dom/client';
+import SocialShareLink from "../../components/common/socialShare";
 
+import ReactDOM from 'react-dom';
 const ActivityCar = ({ attractions }) => {
   const { contentData } = useData();
+  const [clickedDataSrc, setClickedDataSrc] = useState(null);
+
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
 
@@ -18,20 +23,38 @@ const ActivityCar = ({ attractions }) => {
       script.type = "text/javascript";
       script.src = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bokunChannelId}`;
       script.async = true;
-
-      console.log("Bokun Widget Script URL:", script.src);
-
       document.body.appendChild(script);
-
+      script.onload = () => {
+        setTimeout(() => {
+          const widgetContainer = document.getElementById('bokun-modal-container');
+          if (widgetContainer) {
+            const socialDiv = document.createElement('div');
+            socialDiv.className = 'socialurl';
+            widgetContainer.appendChild(socialDiv);
+            const socialLink = <SocialShareLink bokunWidgetUrl={clickedDataSrc} />;
+            if (socialLink.props.bokunWidgetUrl) {
+              ReactDOM.createRoot(socialDiv).render(socialLink);
+            } else {
+              widgetContainer.removeChild(socialDiv);
+            }
+          } else {
+            console.error("Widget container not found.");
+          }
+        }, 2000); 
+      };
       return () => {
-        // Cleanup script when the component unmounts
         document.body.removeChild(script);
       };
     }
+    
 
-    // Log a message if Bokun Channel ID is not available
     console.error("Bokun Channel ID is not available.");
-  }, [contentData?.getContent.bokunChannelId]);
+  }, [contentData?.getContent.bokunChannelId, clickedDataSrc]); 
+
+  const handleBokunButtonClick = (event) => {
+    const dataSrc = event.currentTarget.getAttribute('data-src');
+    setClickedDataSrc(dataSrc);
+  };
   var settings = {
     dots: true,
     infinite: false,
@@ -114,7 +137,7 @@ const ActivityCar = ({ attractions }) => {
                 style={{ cursor: "pointer" }}
                 className="bokunButton tourCard -type-1 rounded-4 hover-inside-slider"
                 //  data-src={`https://widgets.bokun.io/online-sales/3bdde112-69ab-4048-8c0e-db68a5080978/experience/795431`}
-                data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item?.carBokunId}?partialView=1`}
+                data-src={`https://widgets.bokun.io/online-sales/${contentData?.getContent.bokunChannelId}/experience/${item?.carBokunId}?partialView=1`} onClick={handleBokunButtonClick}
               >
                 <div className="activityCard__image position-relative">
                   <div className="inside-slider">
