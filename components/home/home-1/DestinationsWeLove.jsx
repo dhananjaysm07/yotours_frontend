@@ -79,7 +79,7 @@ const DestinationsWeLove = () => {
                       pathname: `/destinations/${createSlug(
                         item.destinationName
                       )}`,
-                      query: { id: item.id }, // passing the ID as a query parameter
+                      query: { city: item.destinationName }, // passing the ID as a query parameter
                     }}
                     className="d-block"
                   >

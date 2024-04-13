@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
-import React, { useState } from 'react';
-import { FaChevronDown , FaChevronUp  } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import CallToActions from "../../components/common/CallToActions";
 import Seo from "../../components/common/Seo";
 import DefaultHeader from "../../components/header/default-header";
@@ -65,6 +65,7 @@ const Destinations = () => {
   } = useQuery(GET_ATTRACTION_CARS_FOR_DESTINATION, {
     variables: { destinationName: city },
   });
+
   // const {
   //   destinationData,
   //   tourData,
@@ -96,16 +97,17 @@ const Destinations = () => {
   const tour = tourData?.getDestinationByCity;
   const attraction_car = attraction_cars_Data?.getDestinationByCity;
   const thing = thingData?.getDestinationByCity;
+  console.log("car data----", attraction_car);
   // console.log("get destinations", destination);
   const [expandedSections, setExpandedSections] = useState({
     introduction: false,
     generalInfo: false,
-    bestThings: false
+    bestThings: false,
   });
   const toggleSection = (section) => {
-    setExpandedSections(prevState => ({
+    setExpandedSections((prevState) => ({
       ...prevState,
-      [section]: !prevState[section]
+      [section]: !prevState[section],
     }));
   };
   return (
@@ -145,11 +147,21 @@ TODO:
               {destination?.introduction ? (
                 <div className="row y-gap-20 pt-20">
                   <div className="col-auto">
-                  <h2 onClick={() => toggleSection('introduction')} className="expand">
-                     What to know before visiting {destination.destinationName} {expandedSections.introduction ? <FaChevronUp /> : <FaChevronDown />} 
-                  </h2>
+                    <h2
+                      onClick={() => toggleSection("introduction")}
+                      className="expand"
+                    >
+                      What to know before visiting {destination.destinationName}{" "}
+                      {expandedSections.introduction ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
+                    </h2>
                   </div>
-                  {expandedSections.introduction && <IntroTown introduction={destination?.introduction} />}
+                  {expandedSections.introduction && (
+                    <IntroTown introduction={destination?.introduction} />
+                  )}
                 </div>
               ) : (
                 ""
@@ -168,12 +180,22 @@ TODO:
               <div className="pt-30 mt-45 border-top-light" />
               <div className="row y-gap-20">
                 <div className="col-12">
-                <h2 onClick={() => toggleSection('generalInfo')} className="expand">
-                        General info {expandedSections.generalInfo ? <FaChevronUp /> : <FaChevronDown />}   
-                </h2>                
+                  <h2
+                    onClick={() => toggleSection("generalInfo")}
+                    className="expand"
+                  >
+                    General info{" "}
+                    {expandedSections.generalInfo ? (
+                      <FaChevronUp />
+                    ) : (
+                      <FaChevronDown />
+                    )}
+                  </h2>
                 </div>
                 {/* End .col */}
-                {expandedSections.generalInfo && <GeneralInfo destination={destination} />}
+                {expandedSections.generalInfo && (
+                  <GeneralInfo destination={destination} />
+                )}
               </div>
               {/* End .row */}
               <div className="mt-30 border-top-light" />
@@ -186,28 +208,35 @@ TODO:
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
                   <div className="sectionTitle -md">
-                  <h2 onClick={() => toggleSection('bestThings')} className="sectionTitle__title expand">
-                        Best Things{expandedSections.bestThings ? <FaChevronUp  /> : <FaChevronDown />}
-                  </h2>                    
-                    
+                    <h2
+                      onClick={() => toggleSection("bestThings")}
+                      className="sectionTitle__title expand"
+                    >
+                      Best Things
+                      {expandedSections.bestThings ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
+                    </h2>
                   </div>
                 </div>
               </div>
               {/* End .row */}
 
-              {expandedSections.bestThings &&
-              <div className="row y-gap-30 pt-0 sm:pt-20 item_gap-x30">
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                      These are the best things available for{" "}
-                      {destination.destinationName}
-                    </p>
-                {thing?.things ? (
-                  <Things things={thing?.things} />
-                ) : (
-                  <h2 className="text-center">No Things</h2>
-                )}
-              </div>
-                }
+              {expandedSections.bestThings && (
+                <div className="row y-gap-30 pt-0 sm:pt-20 item_gap-x30">
+                  <p className=" sectionTitle__text mt-5 sm:mt-0">
+                    These are the best things available for{" "}
+                    {destination.destinationName}
+                  </p>
+                  {thing?.things ? (
+                    <Things things={thing?.things} />
+                  ) : (
+                    <h2 className="text-center">No Things</h2>
+                  )}
+                </div>
+              )}
               {/* End .row */}
             </div>
             {/* End .container */}
@@ -252,7 +281,7 @@ TODO:
           </section>
           {/* End Tours Sections */}
 
-          <section className="layout-pt-md layout-pb-md d-none">
+          <section className="layout-pt-md layout-pb-md">
             <div className="container">
               <div className="row y-gap-20 justify-between items-end">
                 {attraction_car?.attractions?.length ? (
