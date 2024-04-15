@@ -76,15 +76,14 @@ const Destinations = () => {
     bestThings: false
   });
   const [visibleTours, setVisibleTours] = useState(8);
-  const [loading, setLoading] = useState(false); // Initialize loading state
+  const [loading, setLoading] = useState(false); 
 
   const handleLoadMore = () => {
-    setLoading(true); // Set loading to true when "Show More" button is clicked
-    // Simulate loading with a delay
+    setLoading(true); 
     setTimeout(() => {
       setVisibleTours(prevCount => prevCount + 8);
-      setLoading(false); // Set loading to false after data is loaded (replace this with actual loading logic)
-    }, 500); // Adjust the delay as needed
+      setLoading(false);
+    }, 500);
   };
 
   const allTours = tour?.tours?.filter(el => el.active) || [];
@@ -229,11 +228,9 @@ TODO:
                     <>
                           {allTours.length > 0 ? (
                             <>
-                              {/* Render tours */}
                               <Tours tours={allTours.slice(0, visibleTours)} />
                               {allTours.length > visibleTours && (
                                 <div className="show-more-container">
-                                  {/* Render "Show More" button or loader based on loading state */}
                                   {loading ? (
                                      <Loader />
                                   ) : (
