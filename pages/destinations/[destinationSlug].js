@@ -73,7 +73,7 @@ const Destinations = () => {
   const [expandedSections, setExpandedSections] = useState({
     introduction: false,
     generalInfo: false,
-    bestThings: false
+    bestThings: false,
   });
   const [visibleTours, setVisibleTours] = useState(8);
   const [loading, setLoading] = useState(false); // Initialize loading state
@@ -89,9 +89,9 @@ const Destinations = () => {
 
   const allTours = tour?.tours?.filter(el => el.active) || [];
   const toggleSection = (section) => {
-    setExpandedSections(prevState => ({
+    setExpandedSections((prevState) => ({
       ...prevState,
-      [section]: !prevState[section]
+      [section]: !prevState[section],
     }));
   };
   return (
@@ -131,11 +131,21 @@ TODO:
               {destination?.introduction ? (
                 <div className="row y-gap-20 pt-20">
                   <div className="col-auto">
-                  <h2 onClick={() => toggleSection('introduction')} className="expand">
-                     What to know before visiting {destination.destinationName} {expandedSections.introduction ? <FaChevronUp /> : <FaChevronDown />} 
-                  </h2>
+                    <h2
+                      onClick={() => toggleSection("introduction")}
+                      className="expand"
+                    >
+                      What to know before visiting {destination.destinationName}{" "}
+                      {expandedSections.introduction ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
+                    </h2>
                   </div>
-                  {expandedSections.introduction && <IntroTown introduction={destination?.introduction} />}
+                  {expandedSections.introduction && (
+                    <IntroTown introduction={destination?.introduction} />
+                  )}
                 </div>
               ) : (
                 ""
@@ -154,12 +164,22 @@ TODO:
               <div className="pt-30 mt-45 border-top-light" />
               <div className="row y-gap-20">
                 <div className="col-12">
-                <h2 onClick={() => toggleSection('generalInfo')} className="expand">
-                        General info {expandedSections.generalInfo ? <FaChevronUp /> : <FaChevronDown />}   
-                </h2>                
+                  <h2
+                    onClick={() => toggleSection("generalInfo")}
+                    className="expand"
+                  >
+                    General info{" "}
+                    {expandedSections.generalInfo ? (
+                      <FaChevronUp />
+                    ) : (
+                      <FaChevronDown />
+                    )}
+                  </h2>
                 </div>
                 {/* End .col */}
-                {expandedSections.generalInfo && <GeneralInfo destination={destination} />}
+                {expandedSections.generalInfo && (
+                  <GeneralInfo destination={destination} />
+                )}
               </div>
               {/* End .row */}
               <div className="mt-30 border-top-light" />
@@ -172,28 +192,35 @@ TODO:
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
                   <div className="sectionTitle -md">
-                  <h2 onClick={() => toggleSection('bestThings')} className="sectionTitle__title expand">
-                        Best Things{expandedSections.bestThings ? <FaChevronUp  /> : <FaChevronDown />}
-                  </h2>                    
-                    
+                    <h2
+                      onClick={() => toggleSection("bestThings")}
+                      className="sectionTitle__title expand"
+                    >
+                      Best Things
+                      {expandedSections.bestThings ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
+                    </h2>
                   </div>
                 </div>
               </div>
               {/* End .row */}
 
-              {expandedSections.bestThings &&
-              <div className="row y-gap-30 pt-0 sm:pt-20 item_gap-x30">
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                      These are the best things available for{" "}
-                      {destination.destinationName}
-                    </p>
-                {thing?.things ? (
-                  <Things things={thing?.things} />
-                ) : (
-                  <h2 className="text-center">No Things</h2>
-                )}
-              </div>
-                }
+              {expandedSections.bestThings && (
+                <div className="row y-gap-30 pt-0 sm:pt-20 item_gap-x30">
+                  <p className=" sectionTitle__text mt-5 sm:mt-0">
+                    These are the best things available for{" "}
+                    {destination.destinationName}
+                  </p>
+                  {thing?.things ? (
+                    <Things things={thing?.things} />
+                  ) : (
+                    <h2 className="text-center">No Things</h2>
+                  )}
+                </div>
+              )}
               {/* End .row */}
             </div>
             {/* End .container */}
