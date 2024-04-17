@@ -7,11 +7,14 @@ import { useEffect, useState } from "react";
 import { useData } from "../../lib/datacontext";
 import { createRoot } from 'react-dom/client';
 import SocialShareLink from "../../components/common/socialShare";
-
+import Loader from "../../components/common/loader"
 import ReactDOM from 'react-dom';
+
 const Activity = ({ attractions }) => {
   const { contentData } = useData();
   const [clickedDataSrc, setClickedDataSrc] = useState(null);
+  const [visibleAttractions, setVisibleAttractions] = useState(8);
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     const bokunChannelId = contentData?.getContent.bokunChannelId;
@@ -91,7 +94,13 @@ const Activity = ({ attractions }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
+  const handleLoadMore = () => {
+    setLoading(true); 
+    setTimeout(() => {
+      setVisibleAttractions(prevCount => Math.min(prevCount + 8, attractions.length));
+      setLoading(false);
+    }, 500);
+  };
   // custom navigation
   function Arrow(props) {
     let className =
@@ -121,7 +130,7 @@ const Activity = ({ attractions }) => {
       {/* <Slider {...settings}> */}
       <div className="relative overflow-hidden pt-40 sm:pt-20">
         <div className="row y-gap-30">
-          {attractions.map((item) => (
+        {attractions.slice(0, visibleAttractions).map((item) => (
             // <div key={item?.id} data-aos="fade" data-aos-delay={100}>
             <div
               className="col-xl-3 col-lg-3 col-sm-6"
@@ -232,6 +241,15 @@ const Activity = ({ attractions }) => {
               </div>
             </div>
           ))}
+           {visibleAttractions < attractions.length && (
+                <div className="show-more-container">
+                {loading ? (
+                    <Loader />
+                ) : (
+                  <button className="showmore" onClick={handleLoadMore}>Show More</button>
+                )}
+              </div>
+           )}
         </div>
       </div>
       {/* </Slider> */}
