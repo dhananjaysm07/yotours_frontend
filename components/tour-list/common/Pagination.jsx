@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Pagination = ({
   setCurrentPage,
@@ -6,21 +6,26 @@ const Pagination = ({
   currentPage,
   dataPerPage,
 }) => {
-  // const [currentPage, setCurrentPage] = useState(1);
-
-  const handlePageClick = (pageNumber) => {
-    // setCurrentPage(pageNumber);
-    setCurrentPage(pageNumber - 1);
+  useEffect(() => {
+    // Scroll to the top of the page when the component mounts
     window.scrollTo({
       top: 0,
       behavior: "smooth", // Optional: Adds smooth scroll animation
     });
+  }, []);
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber - 1); // Adjust page number to 0-based index
   };
 
-  const renderPage = (pageNumber, isActive = false) => {
+  const renderPage = (pageNumber) => {
+    const isActive = pageNumber === currentPage + 1;
+    const isClickable = pageNumber <= totalPage;
+
     const className = `size-40 flex-center rounded-full cursor-pointer ${
       isActive ? "bg-dark-1 text-white" : ""
-    }`;
+    }${isClickable ? ' clickable' : ''}`;
+
     return (
       <div key={pageNumber} className="col-auto">
         <div className={className} onClick={() => handlePageClick(pageNumber)}>
@@ -29,43 +34,59 @@ const Pagination = ({
       </div>
     );
   };
-
   const renderPages = () => {
-    // const totalPages = 5; // Change this to the actual total number of pages
     const pageNumbers = [];
-    for (let i = 1; i <= totalPage; i++) {
+    let startPage, endPage;
+    if (totalPage <= 10) {
+      startPage = 1;
+      endPage = totalPage;
+    } else {
+      if (currentPage + 1 <= 7) {
+        startPage = 1;
+        endPage = 7;
+      } else if (currentPage + 1 >= totalPage - 4) {
+        startPage = totalPage - 9;
+        endPage = totalPage;
+      } else {
+        startPage = currentPage - 3;
+        endPage = currentPage + 3;
+      }
+    }
+    for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i);
     }
+  
     const pages = pageNumbers.map((pageNumber) =>
       renderPage(pageNumber, pageNumber === currentPage + 1)
     );
+  
+    if (totalPage > 10 && currentPage + 1 <= totalPage - 5) {
+      pages.push(
+        <div
+          key="ellipse"
+          className="col-auto ellipsepg"
+          onClick={() => setCurrentPage(currentPage + 7)}
+        >
+          <div className="size-40 flex-center rounded-full">...</div>
+        </div>
+      );
+    }
+ if (totalPage > 10 && currentPage + 1 <= totalPage - 5) {
+      for (let i = totalPage - 4; i <= totalPage; i++) {
+        pages.push(renderPage(i, i === currentPage + 1));
+      }
+    }
+  
     return pages;
   };
+  
 
   return (
     <div className="border-top-light mt-30 pt-30">
       <div className="row x-gap-10 y-gap-20 justify-between md:justify-center">
-        <div className="col-auto md:order-1">
-          <button
-            className="button -blue-1 size-40 rounded-full border-light"
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage == 0}
-          >
-            <i className="icon-chevron-left text-12" />
-          </button>
-        </div>
-
         <div className="col-md-auto md:order-3">
           <div className="row x-gap-20 y-gap-20 items-center md:d-none">
             {renderPages()}
-            <div className="col-auto">
-              {/* <div className="size-40 flex-center rounded-full">...</div> */}
-            </div>
-            <div className="col-auto">
-              {/* <div className="size-40 flex-center rounded-full">
-                {totalPage}
-              </div> */}
-            </div>
           </div>
 
           <div className="row x-gap-10 y-gap-20 justify-center items-center d-none md:d-flex">
@@ -77,16 +98,6 @@ const Pagination = ({
               {/* 1 – {totalPage} of 300+  */}
             </div>
           </div>
-        </div>
-
-        <div className="col-auto md:order-2">
-          <button
-            className="button -blue-1 size-40 rounded-full border-light"
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage == totalPage - 1}
-          >
-            <i className="icon-chevron-right text-12" />
-          </button>
         </div>
       </div>
     </div>
