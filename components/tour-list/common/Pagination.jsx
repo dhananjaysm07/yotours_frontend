@@ -36,6 +36,8 @@ const Pagination = ({
   };
   const renderPages = () => {
     const pageNumbers = [];
+  
+    // Logic to determine the range of page numbers to display
     let startPage, endPage;
     if (totalPage <= 10) {
       startPage = 1;
@@ -52,6 +54,8 @@ const Pagination = ({
         endPage = currentPage + 3;
       }
     }
+  
+    // Generate page numbers
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i);
     }
@@ -60,18 +64,33 @@ const Pagination = ({
       renderPage(pageNumber, pageNumber === currentPage + 1)
     );
   
+    // Add ellipse if needed
     if (totalPage > 10 && currentPage + 1 <= totalPage - 5) {
-      pages.push(
-        <div
-          key="ellipse"
-          className="col-auto ellipsepg"
-          onClick={() => setCurrentPage(currentPage + 7)}
-        >
-          <div className="size-40 flex-center rounded-full">...</div>
-        </div>
-      );
+      if (currentPage + 1 <= 7) {
+        pages.push(
+          <div
+            key="ellipse"
+            className="col-auto"
+            onClick={() => setCurrentPage(currentPage + 7)}
+          >
+            <div className="size-40 flex-center rounded-full">...</div>
+          </div>
+        );
+      } else {
+        pages.push(
+          <div
+            key="ellipse"
+            className="col-auto"
+            onClick={() => setCurrentPage(currentPage + 7)}
+          >
+            <div className="size-40 flex-center rounded-full">...</div>
+          </div>
+        );
+      }
     }
- if (totalPage > 10 && currentPage + 1 <= totalPage - 5) {
+  
+    // Add the last 5 page numbers if the total page count is more than 10 and the current page is not already within the last 5 pages
+    if (totalPage > 10 && currentPage + 1 <= totalPage - 5) {
       for (let i = totalPage - 4; i <= totalPage; i++) {
         pages.push(renderPage(i, i === currentPage + 1));
       }
