@@ -18,14 +18,14 @@ function WidgetPackageOffer() {
             <li className="package-sm">
               <div className="thumb">
                 <Link
-                 href="/PackageDetails"
+                 href="/packageDetails/PackageDetails"
                 >
                   <img src={"/img/package/package-sm4.png"} alt="PackageIMG" />
                 </Link>
               </div>
               <div className="info">
                 <h6>
-                  <Link href="/PackageDetails"
+                  <Link href="/packageDetails/PackageDetails"
                   >
                     San Francisco Golden Gate Bridge, cable cars &amp; fog
                   </Link>
@@ -41,14 +41,14 @@ function WidgetPackageOffer() {
             <li className="package-sm">
               <div className="thumb">
                 <Link
-                 href="/PackageDetails"
+                 href="/packageDetails/PackageDetails"
                 >
                   <img src={"/img/package/package-sm3.png"} alt="PackageIMG" />
                 </Link>
               </div>
               <div className="info">
                 <h6>
-                  <Link href="/PackageDetails"
+                  <Link href="/packageDetails/PackageDetails"
                   >
                     Praesent porttitor tellus sed ande ultrices pulvinar magna
                     mauris.
@@ -65,14 +65,14 @@ function WidgetPackageOffer() {
             <li className="package-sm">
               <div className="thumb">
                 <Link
-                 href="/PackageDetails"
+                 href="/packageDetails/PackageDetails"
                 >
                   <img src={"/img/package/package-sm2.png"} alt="PackageIMG" />
                 </Link>
               </div>
               <div className="info">
                 <h6>
-                  <Link href="/PackageDetails"
+                  <Link href="/packageDetails/PackageDetails"
                   >
                     Vestibulum luctus hendrerit Variusneque, et blandit orci
                     tincidunt.
@@ -89,14 +89,14 @@ function WidgetPackageOffer() {
             <li className="package-sm">
               <div className="thumb">
                 <Link
-                 href="/PackageDetails"
+                 href="/packageDetails/PackageDetails"
                 >
                   <img src={"/img/package/package-sm1.png"} alt="PackageIMG" />
                 </Link>
               </div>
               <div className="info">
                 <h6>
-                  <Link href="/PackageDetails"
+                  <Link href="/packageDetails/PackageDetails"
                   >
                     San Francisco Golden Gate Bridge, cable cars &amp; fog
                   </Link>
