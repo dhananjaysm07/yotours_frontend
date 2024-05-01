@@ -497,6 +497,24 @@ function PackageDetailsTab() {
                       himenaeos. Donec tristique commodo fringilla.
                     </p>
                     <ul>
+                      <li><h4>Meals</h4></li>
+                      <li>
+                        <i className="bi bi-check-lg" /> Specilaized Bilingual
+                        Guide
+                      </li>
+                      <li>
+                        <i className="bi bi-check-lg" /> Private Transport
+                      </li>
+                      <li>
+                        <i className="bi bi-check-lg" /> Entrance Fees
+                      </li>
+                      <li>
+                        <i className="bi bi-check-lg" /> Box Lunch,Water,Dinner
+                        and Snacks
+                      </li>
+                    </ul>
+                    <ul>
+                      <li><h4>Inclusion</h4></li>
                       <li>
                         <i className="bi bi-check-lg" /> Specilaized Bilingual
                         Guide
