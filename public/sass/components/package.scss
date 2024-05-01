@@ -628,7 +628,7 @@
             font-weight: 600;
             font-size: 20px;
             color: #2d373c;
-            padding: 8px 28px;
+            padding: 8px;
             transition: all 0.35s;
   
             &:hover {
@@ -636,7 +636,7 @@
               color: #fff;
             }
             i {
-              margin-right: 10px;
+              margin-right: 5px;
             }
   
             &.active {
@@ -884,7 +884,7 @@
       }
     }
   
-    .package-plan-tab {
+    .package-plan-tab, .siteseen {
       p {
         font-size: 16px;
         line-height: 28px;
@@ -907,7 +907,7 @@
   
             &::after {
               background-image: none;
-              content: "\ecad";
+              content: "\25be";
               font-size: 36px;
               font-family: boxicons;
               height: auto;
@@ -1030,11 +1030,10 @@
             appearance: none;
         }
         i {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 15px;
-            z-index: 1;
+          position: relative;
+          top: 56px;
+          left: 109px;
+          z-index: 9;
         }
        select {
             padding: 0 15px;
@@ -1059,4 +1058,6 @@
         }
     }
   }
-  .bi-chevron-down::before { content: "\f282"; }
+  .siteseen li{
+      text-align: left;
+  }
