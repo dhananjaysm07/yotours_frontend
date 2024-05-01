@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { SRLWrapper } from "simple-react-lightbox";
 import ModalVideo from "react-modal-video";
-
-function PackageDetailsTab() {
+import parse from "html-react-parser";
+function PackageDetailsTab({ data }) {
   const [isOpen, setOpen] = useState(false);
   return (
     <>
@@ -80,97 +80,73 @@ function PackageDetailsTab() {
             aria-labelledby="pills-package1"
           >
             <h3 className="d-subtitle">Package Details</h3>
-            <p>
-              Pellentesque accumsan magna in augue sagittis, non fringilla eros
-              molestie. Sed feugiat mi nec ex vehicula, nec vestibulum orci
-              semper. Class aptent taciti sociosqu ad litora torquent per
-              conubia nostra, per inceptos himenaeos. Donec tristique commodo
-              fringilla. Duis aliquet varius mauris eget rutrum. Nullam sit amet
-              justo consequat, bibendum orci in, convallis enim. Proin convallis
-              neque viverra finibus cursus. Mauris lacinia lacinia erat in
-              finibus. In non enim libero.Pellentesque accumsan magna in augue
-              sagittis, non fringilla eros molestie. Sed feugiat mi nec ex
-              vehicula, nec vestibulum orci semper. Class aptent taciti sociosqu
-              ad litora torquent per conubia nostra, per inceptos himenaeos.
-              Donec tristique commodo fringilla. Duis aliquet varius mauris eget
-              rutrum. Nullam sit amet justo consequat, bibendum orci in,
-              convallis enim. Proin convallis neque viverra finibus cursus.
-              Mauris lacinia lacinia erat in finibus. In non enim libero.
-            </p>
+            <p>{parse(data?.summaryData?.summary)}</p>
             <div className="p-info-featured-img row position-relative g-3  row-cols-1 row-cols-sm-2">
-              <div className="col">
-                <div className="featured-img">
-                  <img
-                    src={
-                      "/img/package/feat-img1.png"
-                    }
-                    alt="PackageIMG"
-                  />
-                </div>
-              </div>
-              <div className="col">
-                <div className="featured-img">
-                  <img
-                    src={
-                      "/img/package/feat-img2.png"
-                    }
-                    alt="PackageIMG"
-                  />
-                </div>
-              </div>
-              <div className="featured-video position-absolute ">
-                <img
-                  src={"/img/package/feat-img3.png"}
-                  alt="PackageIMG"
-                />
+              {data?.summaryData?.photos?.slice(1, 3).map((photo) => {
+                return (
+                  <div className="col">
+                    <div className="featured-img">
+                      <img src={photo.url} alt="PackageIMG" />
+                    </div>
+                  </div>
+                );
+              })}
+              {/* <div className="featured-video position-absolute ">
+                <img src={"/img/package/feat-img3.png"} alt="PackageIMG" />
                 <div className="video-overlay">
                   <div className="play-icon video-popup">
-                    {/* <i className="bi bi-play-fill" /> */}
                     <i
                       onClick={() => setOpen(true)}
                       className="bi bi-play-fill"
                     ></i>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <table className="table package-info-table mb-0">
               <tbody>
                 <tr>
                   <th>Destination</th>
-                  <td>New York City</td>
+                  <td>
+                    {data?.destinations
+                      ?.map((el) => el.destinationName)
+                      .join(", ")}
+                  </td>
                 </tr>
                 <tr>
                   <th>Depature</th>
                   <td>Yes Required</td>
                 </tr>
                 <tr>
-                  <th>Departure Time</th>
-                  <td>01 April, 2021 10.00AM</td>
+                  <th>Departure Date</th>
+                  <td>
+                    {data?.datesData?.[0]?.travelDates?.[0].fromDate &&
+                      new Date(
+                        data?.datesData?.[0]?.travelDates?.[0].fromDate
+                      ).toDateString()}
+                  </td>
                 </tr>
                 <tr>
-                  <th>Return Time</th>
-                  <td>08 April, 2021 10.00AM</td>
+                  <th>Return Date</th>
+                  <td>
+                    {data?.datesData?.[0]?.travelDates?.[0].toDate &&
+                      new Date(
+                        data?.datesData?.[0]?.travelDates?.[0].toDate
+                      ).toDateString()}
+                  </td>
                 </tr>
                 <tr>
                   <th>Included</th>
                   <td>
                     <ul className="included-list">
-                      <li>
-                        <i className="bi bi-check2" />
-                        Specilaized Bilingual Guide
-                      </li>
-                      <li>
-                        <i className="bi bi-check2" />
-                        Private Transport
-                      </li>
-                      <li>
-                        <i className="bi bi-check2" /> Entrance Fees
-                      </li>
-                      <li>
-                        <i className="bi bi-check2" /> Box Lunch,Water,Dinner
-                        and Snacks
-                      </li>
+                      {data?.summaryData?.inclusions.map((inclusion) => {
+                        return (
+                          <li>
+                            <i className="bi bi-check2" />
+                            {inclusion}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </td>
                 </tr>
@@ -178,31 +154,24 @@ function PackageDetailsTab() {
                   <th>Excluded</th>
                   <td>
                     <ul className="excluded-list">
-                      <li>
-                        <i className="bi bi-x-lg" /> Additional Services
-                      </li>
-                      <li>
-                        <i className="bi bi-x-lg" /> Insurance
-                      </li>
-                      <li>
-                        <i className="bi bi-x-lg" /> Drink
-                      </li>
-                      <li>
-                        <i className="bi bi-x-lg" /> Tickets
-                      </li>
+                      {data?.summaryData?.exclusions.map((exclusion) => {
+                        return (
+                          <li>
+                            <i className="bi bi-check2" />
+                            {exclusion}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </td>
                 </tr>
                 <tr>
-                  <td colSpan={2} className="tour-transport-col">
+                  {/* <td colSpan={2} className="tour-transport-col">
                     <div className="tour-transport  d-flex align-items-center justify-content-center">
-                      <img
-                        src={"/img/icons/bus.svg"}
-                        alt="PackageIMG"
-                      />
+                      <img src={"/img/icons/bus.svg"} alt="PackageIMG" />
                       <span>Travel With Bus</span>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               </tbody>
             </table>
@@ -465,257 +434,60 @@ function PackageDetailsTab() {
               finibus.
             </p>
             <div className="accordion plans-accordion" id="planAccordion">
-              <div className="accordion-item plans-accordion-single">
-                <div className="accordion-header" id="planHeadingOne">
-                  <div
-                    className="accordion-button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#planCollapse1"
-                    role="navigation"
-                  >
-                    <div className="paln-index-circle">
-                      <h4>01</h4>
+              {data?.daywiseItinerary.map((single, index) => {
+                return (
+                  <div className="accordion-item plans-accordion-single">
+                    <div className="accordion-header" id="planHeadingOne">
+                      <div
+                        className="accordion-button collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#planCollapse${index + 1}`}
+                        role="navigation"
+                      >
+                        <div className="paln-index-circle">
+                          <h4>{index + 1}</h4>
+                        </div>
+                        <div className="plan-title">
+                          <h5>
+                            DAY {index + 1} {}
+                          </h5>
+                          {/* <h6>10.00 AM to 10.00 PM</h6> */}
+                        </div>
+                      </div>
                     </div>
-                    <div className="plan-title">
-                      <h5>DAY 1 : Departure And Small Tour</h5>
-                      <h6>10.00 AM to 10.00 PM</h6>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="planCollapse1"
-                  className="accordion-collapse collapse show"
-                  aria-labelledby="planHeadingOne"
-                  data-bs-parent="#planAccordion"
-                >
-                  <div className="accordion-body plan-info">
-                    <p>
-                      Pellentesque accumsan magna in augue sagittis, non
-                      fringilla eros molestie. Sed feugiat mi nec ex vehicula,
-                      nec vestibulum orci semper. Class aptent taciti sociosqu
-                      ad litora torquent per conubia nostra, per inceptos
-                      himenaeos. Donec tristique commodo fringilla.
-                    </p>
-                    <ul>
-                      <li>
-                        <i className="bi bi-check-lg" /> Specilaized Bilingual
-                        Guide
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Private Transport
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Entrance Fees
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Box Lunch,Water,Dinner
-                        and Snacks
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item plans-accordion-single">
-                <div className="accordion-header" id="planHeadingTwo">
-                  <div
-                    className="accordion-button collapsed"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#planCollapse2"
-                    role="navigation"
-                  >
-                    <div className="paln-index-circle">
-                      <h4>02</h4>
-                    </div>
-                    <div className="plan-title">
-                      <h5>DAY 1 : Departure And Small Tour</h5>
-                      <h6>10.00 AM to 10.00 PM</h6>
+                    <div
+                      id={`planCollapse${index + 1}`}
+                      className={`accordion-collapse collapse`}
+                      aria-labelledby="planHeadingTwo"
+                      data-bs-parent={`#planAccordion${index + 1}`}
+                    >
+                      <div className="accordion-body plan-info">
+                        <p>{single.description}</p>
+                        <ul>
+                          <li className="d-flex">
+                            <i className="bi bi-check-lg hidden" />{" "}
+                            <h4 className="">Meals</h4>
+                          </li>
+                          <li>
+                            <i className="bi bi-check-lg" /> Specilaized
+                            Bilingual Guide
+                          </li>
+                          <li>
+                            <i className="bi bi-check-lg" /> Private Transport
+                          </li>
+                          <li>
+                            <i className="bi bi-check-lg" /> Entrance Fees
+                          </li>
+                          <li>
+                            <i className="bi bi-check-lg" /> Box
+                            Lunch,Water,Dinner and Snacks
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  id="planCollapse2"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="planHeadingTwo"
-                  data-bs-parent="#planAccordion"
-                >
-                  <div className="accordion-body plan-info">
-                    <p>
-                      Pellentesque accumsan magna in augue sagittis, non
-                      fringilla eros molestie. Sed feugiat mi nec ex vehicula,
-                      nec vestibulum orci semper. Class aptent taciti sociosqu
-                      ad litora torquent per conubia nostra, per inceptos
-                      himenaeos. Donec tristique commodo fringilla.
-                    </p>
-                    <ul>
-                      <li>
-                        <i className="bi bi-check-lg" /> Specilaized Bilingual
-                        Guide
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Private Transport
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Entrance Fees
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Box Lunch,Water,Dinner
-                        and Snacks
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item plans-accordion-single">
-                <div className="accordion-header" id="planHeadingThree">
-                  <div
-                    className="accordion-button collapsed"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#planCollapse3"
-                    aria-controls="planCollapse1"
-                    role="navigation"
-                  >
-                    <div className="paln-index-circle">
-                      <h4>03</h4>
-                    </div>
-                    <div className="plan-title">
-                      <h5>DAY 1 : Departure And Small Tour</h5>
-                      <h6>10.00 AM to 10.00 PM</h6>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="planCollapse3"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="planHeadingThree"
-                  data-bs-parent="#planAccordion"
-                >
-                  <div className="accordion-body plan-info">
-                    <p>
-                      Pellentesque accumsan magna in augue sagittis, non
-                      fringilla eros molestie. Sed feugiat mi nec ex vehicula,
-                      nec vestibulum orci semper. Class aptent taciti sociosqu
-                      ad litora torquent per conubia nostra, per inceptos
-                      himenaeos. Donec tristique commodo fringilla.
-                    </p>
-                    <ul>
-                      <li>
-                        <i className="bi bi-check-lg" /> Specilaized Bilingual
-                        Guide
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Private Transport
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Entrance Fees
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Box Lunch,Water,Dinner
-                        and Snacks
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item plans-accordion-single">
-                <div className="accordion-header" id="planHeadingFour">
-                  <div
-                    className="accordion-button collapsed"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#planCollapse4"
-                    role="navigation"
-                  >
-                    <div className="paln-index-circle">
-                      <h4>04</h4>
-                    </div>
-                    <div className="plan-title">
-                      <h5>DAY 1 : Departure And Small Tour</h5>
-                      <h6>10.00 AM to 10.00 PM</h6>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="planCollapse4"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="planHeadingFour"
-                  data-bs-parent="#planAccordion"
-                >
-                  <div className="accordion-body plan-info">
-                    <p>
-                      Pellentesque accumsan magna in augue sagittis, non
-                      fringilla eros molestie. Sed feugiat mi nec ex vehicula,
-                      nec vestibulum orci semper. Class aptent taciti sociosqu
-                      ad litora torquent per conubia nostra, per inceptos
-                      himenaeos. Donec tristique commodo fringilla.
-                    </p>
-                    <ul>
-                      <li>
-                        <i className="bi bi-check-lg" /> Specilaized Bilingual
-                        Guide
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Private Transport
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Entrance Fees
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Box Lunch,Water,Dinner
-                        and Snacks
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item plans-accordion-single">
-                <div className="accordion-header" id="planHeadingFive">
-                  <div
-                    className="accordion-button collapsed"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#planCollapse5"
-                    role="navigation"
-                  >
-                    <div className="paln-index-circle">
-                      <h4>04</h4>
-                    </div>
-                    <div className="plan-title">
-                      <h5>DAY 1 : Departure And Small Tour</h5>
-                      <h6>10.00 AM to 10.00 PM</h6>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  id="planCollapse5"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="planHeadingFive"
-                  data-bs-parent="#planAccordion"
-                >
-                  <div className="accordion-body plan-info">
-                    <p>
-                      Pellentesque accumsan magna in augue sagittis, non
-                      fringilla eros molestie. Sed feugiat mi nec ex vehicula,
-                      nec vestibulum orci semper. Class aptent taciti sociosqu
-                      ad litora torquent per conubia nostra, per inceptos
-                      himenaeos. Donec tristique commodo fringilla.
-                    </p>
-                    <ul>
-                      <li>
-                        <i className="bi bi-check-lg" /> Specilaized Bilingual
-                        Guide
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Private Transport
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Entrance Fees
-                      </li>
-                      <li>
-                        <i className="bi bi-check-lg" /> Box Lunch,Water,Dinner
-                        and Snacks
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
           {/* package gallery tab */}
@@ -727,150 +499,22 @@ function PackageDetailsTab() {
           >
             <SRLWrapper>
               <div className="row g-4">
-                <div className="col-6">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg1.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgl-1.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg2.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgl-2.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg3.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgx-1.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg4.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgl-3.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg5.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgl-4.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg6.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgx-2.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg7.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgl-5.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg8.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgl-6.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="package-gallery-item">
-                     <Link
-                      href="/img/gallery/packageGallaryFullImg9.png"
-                      data-fancybox="gallery"
-                      data-caption="Caption Here"
-                    >
-                      <img
-                        src={
-                          "/img/gallery/pgx-3.png"
-                        }
-                        alt="PackageIMG"
-                      />
-                    </Link>
-                  </div>
-                </div>
+                {data?.summaryData?.photos?.map((photo, index) => {
+                  return (
+                    <div className={`col-${(index + 1) % 3 == 0 ? "12" : "6"}`}>
+                      <div
+                        className="package-gallery-item"
+                        style={{ height: "100%" }}
+                      >
+                        <img
+                          src={photo.url}
+                          alt="PackageIMG"
+                          style={{ objectFit: "cover", height: "100%" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </SRLWrapper>
           </div>
