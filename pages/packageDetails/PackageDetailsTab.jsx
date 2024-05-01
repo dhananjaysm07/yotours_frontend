@@ -67,7 +67,7 @@ function PackageDetailsTab({ data }) {
               aria-controls="pill-body4"
               aria-selected="false"
             >
-              <i className="bi bi-geo-alt" /> Location
+              <i className="bi bi-geo-alt" /> Travel Details
             </button>
           </li>
         </ul>
@@ -525,15 +525,125 @@ function PackageDetailsTab({ data }) {
             aria-labelledby="pills-package4"
           >
             <div className="mapouter">
-              <div className="gmap_canvas">
-                <iframe
-                  title="fs"
-                  id="gmap_canvas"
-                  src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=9&ie=UTF8&iwloc=&output=embed"
-                />
-                {/* <Link to={"https://123movies-to.org"} /> */}
-                <br />
-              </div>
+              <div className="siteseen"> <h4 className="site">Sightseeing</h4>
+                  <div className="accordion plans-accordion" id="planAccordion">
+                    <div className="accordion-item plans-accordion-single">
+                      <div className="accordion-header" id="planHeadingOne">
+                        <div
+                          className="accordion-button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#planCollapse1"
+                          role="navigation"
+                        >
+                          <div className="paln-index-circle">
+                            <h4>City</h4>
+                          </div>
+                          <div className="plan-title">
+                            <h5>Delhi</h5>
+                            <h6>Sightseeing</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        id="planCollapse1"
+                        className="accordion-collapse collapse show"
+                        aria-labelledby="planHeadingOne"
+                        data-bs-parent="#planAccordion"
+                      >
+                        <div className="accordion-body plan-info">
+                          <ul>
+                            <li>
+                              <i className="bi bi-check-lg" /> Sightseeing1
+                            </li>
+                            <li>
+                              <i className="bi bi-check-lg" /> Sightseeing2
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="accordion-item plans-accordion-single">
+                      <div className="accordion-header" id="planHeadingTwo">
+                        <div
+                          className="accordion-button collapsed"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#planCollapse2"
+                          role="navigation"
+                        >
+                          <div className="paln-index-circle">
+                            <h4>City</h4>
+                          </div>
+                          <div className="plan-title">
+                            <h5>Mumbai</h5>
+                            <h6>Sightseeing</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        id="planCollapse2"
+                        className="accordion-collapse collapse"
+                        aria-labelledby="planHeadingTwo"
+                        data-bs-parent="#planAccordion"
+                      >
+                        <div className="accordion-body plan-info">
+                          <ul>
+                            <li>
+                              <i className="bi bi-check-lg" /> Sightseeing1
+                            </li>
+                            <li>
+                              <i className="bi bi-check-lg" />Sightseeing2
+                            </li>
+                            <li>
+                              <i className="bi bi-check-lg" />Sightseeing3
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div className="hoteldetail mt-30"><h6 className="text-center">Hotel Details</h6>
+            <table className="table package-info-table mb-0">
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>City</th>
+                  <th>Duration</th>
+                </tr>
+                <tr>
+                  <td>Hote Taj</td>
+                  <td>4 Star</td>
+                  <td>Delhi</td>
+                  <td>4D 3N</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            <div className="transportdetail mt-30"><h6 className="text-center">Transportation Details</h6>
+            <table className="table package-info-table mb-0">
+              <tbody>
+                <tr>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Mode</th>
+                  <th>Discription</th>
+                </tr>
+                <tr>
+                  <td>Delhi</td>
+                  <td>Mumbai</td>
+                  <td>Air</td>
+                  <td>2 hours</td>
+                </tr>
+                <tr>
+                  <td>Mumbai</td>
+                  <td>Delhi</td>
+                  <td>Bus</td>
+                  <td>20 hours</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
             </div>
           </div>
         </div>
