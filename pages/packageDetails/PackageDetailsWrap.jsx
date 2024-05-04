@@ -40,7 +40,7 @@ function PackageDetailsWrap() {
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
-              <div className="tour-package-details">
+              <div className="tour-package-details mb-10">
                 <PackageHeader data={data.getHoliday} />
                 <PackageDetailsTab data={data.getHoliday} />
               </div>

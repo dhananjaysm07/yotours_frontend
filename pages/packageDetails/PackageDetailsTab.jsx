@@ -104,78 +104,80 @@ function PackageDetailsTab({ data }) {
                 </div>
               </div> */}
             </div>
-            <table className="table package-info-table mb-0">
-              <tbody>
-                <tr>
-                  <th>Destination</th>
-                  <td>
-                    {data?.destinations
-                      ?.map((el) => el.destinationName)
-                      .join(", ")}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Depature</th>
-                  <td>Yes Required</td>
-                </tr>
-                <tr>
-                  <th>Departure Date</th>
-                  <td>
-                    {data?.datesData?.[0]?.travelDates?.[0].fromDate &&
-                      new Date(
-                        data?.datesData?.[0]?.travelDates?.[0].fromDate
-                      ).toDateString()}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Return Date</th>
-                  <td>
-                    {data?.datesData?.[0]?.travelDates?.[0].toDate &&
-                      new Date(
-                        data?.datesData?.[0]?.travelDates?.[0].toDate
-                      ).toDateString()}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Included</th>
-                  <td>
-                    <ul className="included-list">
-                      {data?.summaryData?.inclusions.map((inclusion, index) => {
-                        return (
-                          <li key={index}>
-                            <i className="bi bi-check2" />
-                            {inclusion}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <th>Excluded</th>
-                  <td>
-                    <ul className="excluded-list">
-                      {data?.summaryData?.exclusions.map((exclusion, index) => {
-                        return (
-                          <li key={index}>
-                            <i className="bi bi-check2" />
-                            {exclusion}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  {/* <td colSpan={2} className="tour-transport-col">
-                    <div className="tour-transport  d-flex align-items-center justify-content-center">
-                      <img src={"/img/icons/bus.svg"} alt="PackageIMG" />
-                      <span>Travel With Bus</span>
-                    </div>
-                  </td> */}
-                </tr>
-              </tbody>
-            </table>
+            <div className="responsibletbl">
+              <table className="table package-info-table mb-0 text-center">
+                <tbody>
+                  <tr>
+                    <th className="cellpadding">Destination</th>
+                    <td className="cellpadding">
+                      {data?.destinations
+                        ?.map((el) => el.destinationName)
+                        .join(", ")}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="cellpadding">Depature</th>
+                    <td className="cellpadding">Yes Required</td>
+                  </tr>
+                  <tr>
+                    <th className="cellpadding">Departure Date</th>
+                    <td className="cellpadding">
+                      {data?.datesData?.[0]?.travelDates?.[0].fromDate &&
+                        new Date(
+                          data?.datesData?.[0]?.travelDates?.[0].fromDate
+                        ).toDateString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="cellpadding">Return Date</th>
+                    <td className="cellpadding">
+                      {data?.datesData?.[0]?.travelDates?.[0].toDate &&
+                        new Date(
+                          data?.datesData?.[0]?.travelDates?.[0].toDate
+                        ).toDateString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="cellpadding">Included</th>
+                    <td className="cellpadding">
+                      <ul className="included-list">
+                        {data?.summaryData?.inclusions.map((inclusion, index) => {
+                          return (
+                            <li key={index}>
+                              <i className="bi bi-check2" />
+                              {inclusion}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th className="cellpadding">Excluded</th>
+                    <td className="cellpadding">
+                      <ul className="excluded-list">
+                        {data?.summaryData?.exclusions.map((exclusion, index) => {
+                          return (
+                            <li key={index}>
+                              <i className="bi bi-check2" />
+                              {exclusion}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    {/* <td colSpan={2} className="tour-transport-col">
+                      <div className="tour-transport  d-flex align-items-center justify-content-center">
+                        <img src={"/img/icons/bus.svg"} alt="PackageIMG" />
+                        <span>Travel With Bus</span>
+                      </div>
+                    </td> */}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div className="rating-overview">
               <h3 className="d-subtitle">Overview</h3>
               <div className="rating-overview-row row g-0">
@@ -434,7 +436,7 @@ function PackageDetailsTab({ data }) {
               neque viverra finibus cursus. Mauris lacinia lacinia erat in
               finibus.
             </p>
-            <div className="accordion plans-accordion" id="planAccordion">
+            <div className="accordion plans-accordion mb-20" id="planAccordion">
               {data?.daywiseItinerary.map((single, index) => {
                 return (
                   <div
@@ -558,7 +560,7 @@ function PackageDetailsTab({ data }) {
             <div className="mapouter">
               <div className="siteseen">
                 {" "}
-                <h4 className="site">Sightseeing</h4>
+                <h4 className="site text-left">Sightseeing</h4>
                 <div className="accordion plans-accordion" id="planAccordion">
                   {data?.locationData?.sightData?.map((sightData, index) => {
                     return (
@@ -606,53 +608,57 @@ function PackageDetailsTab({ data }) {
               </div>
               <div className="hoteldetail mt-30">
                 <h6 className="text-center">Hotel Details</h6>
-                <table className="table package-info-table mb-0">
-                  <tbody>
-                    <tr>
-                      <th>Name</th>
-                      <th>Category</th>
-                      <th>City</th>
-                      <th>Duration</th>
-                    </tr>
-                    {data?.locationData?.hotels?.map((hotel, index) => {
-                      return (
-                        <tr key={index}>
-                          <td>{hotel.name}</td>
-                          <td>{hotel.rating}</td>
-                          <td>
-                            {hotel.cities?.map((city) => city.name).join(", ")}
-                          </td>
-                          <td>
-                            {hotel.days}D {hotel.nights}N
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                <div className="responsibletbl">
+                  <table className="table package-info-table mb-0 text-center">
+                    <tbody>
+                      <tr>
+                        <th className="cellpadding">Name</th>
+                        <th className="cellpadding">Category</th>
+                        <th className="cellpadding">City</th>
+                        <th className="cellpadding">Duration</th>
+                      </tr>
+                      {data?.locationData?.hotels?.map((hotel, index) => {
+                        return (
+                          <tr key={index}>
+                            <td className="cellpadding">{hotel.name}</td>
+                            <td className="cellpadding">{hotel.rating}</td>
+                            <td className="cellpadding">
+                              {hotel.cities?.map((city) => city.name).join(", ")}
+                            </td>
+                            <td className="cellpadding">
+                              {hotel.days}D {hotel.nights}N
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div className="transportdetail mt-30">
                 <h6 className="text-center">Transportation Details</h6>
-                <table className="table package-info-table mb-0">
-                  <tbody>
-                    <tr>
-                      <th>From</th>
-                      <th>To</th>
-                      <th>Mode</th>
-                      <th>Discription</th>
-                    </tr>
-                    {data?.locationData?.intercityData.map(
-                      (intercity, index) => (
-                        <tr key={index}>
-                          <td>{intercity?.fromCity?.name}</td>
-                          <td>{intercity?.toCity?.name}</td>
-                          <td>{intercity?.mode}</td>
-                          <td>{intercity?.description}</td>
-                        </tr>
-                      )
-                    )}
-                  </tbody>
-                </table>
+                <div className="responsibletbl">
+                  <table className="table package-info-table mb-0 text-center">
+                    <tbody>
+                      <tr>
+                        <th className="cellpadding">From</th>
+                        <th className="cellpadding">To</th>
+                        <th className="cellpadding">Mode</th>
+                        <th className="cellpadding">Discription</th>
+                      </tr>
+                      {data?.locationData?.intercityData.map(
+                        (intercity, index) => (
+                          <tr key={index}>
+                            <td className="cellpadding">{intercity?.fromCity?.name}</td>
+                            <td className="cellpadding">{intercity?.toCity?.name}</td>
+                            <td className="cellpadding">{intercity?.mode}</td>
+                            <td className="cellpadding">{intercity?.description}</td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
