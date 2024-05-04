@@ -81,7 +81,7 @@ function PackageDetailsTab({ data }) {
             aria-labelledby="pills-package1"
           >
             <h3 className="d-subtitle">Package Details</h3>
-            <p>{parse(data?.summaryData?.summary)}</p>
+            <p>{parse(data?.summaryData?.summary || "")}</p>
             <div className="p-info-featured-img row position-relative g-3  row-cols-1 row-cols-sm-2">
               {data?.summaryData?.photos?.slice(1, 3).map((photo, index) => {
                 return (
