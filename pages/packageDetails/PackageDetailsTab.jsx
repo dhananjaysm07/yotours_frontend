@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import { SRLWrapper } from "simple-react-lightbox";
@@ -82,9 +83,9 @@ function PackageDetailsTab({ data }) {
             <h3 className="d-subtitle">Package Details</h3>
             <p>{parse(data?.summaryData?.summary)}</p>
             <div className="p-info-featured-img row position-relative g-3  row-cols-1 row-cols-sm-2">
-              {data?.summaryData?.photos?.slice(1, 3).map((photo) => {
+              {data?.summaryData?.photos?.slice(1, 3).map((photo, index) => {
                 return (
-                  <div className="col">
+                  <div className="col" key={index}>
                     <div className="featured-img">
                       <img src={photo.url} alt="PackageIMG" />
                     </div>
@@ -139,9 +140,9 @@ function PackageDetailsTab({ data }) {
                   <th>Included</th>
                   <td>
                     <ul className="included-list">
-                      {data?.summaryData?.inclusions.map((inclusion) => {
+                      {data?.summaryData?.inclusions.map((inclusion, index) => {
                         return (
-                          <li>
+                          <li key={index}>
                             <i className="bi bi-check2" />
                             {inclusion}
                           </li>
@@ -154,9 +155,9 @@ function PackageDetailsTab({ data }) {
                   <th>Excluded</th>
                   <td>
                     <ul className="excluded-list">
-                      {data?.summaryData?.exclusions.map((exclusion) => {
+                      {data?.summaryData?.exclusions.map((exclusion, index) => {
                         return (
-                          <li>
+                          <li key={index}>
                             <i className="bi bi-check2" />
                             {exclusion}
                           </li>
@@ -436,7 +437,10 @@ function PackageDetailsTab({ data }) {
             <div className="accordion plans-accordion" id="planAccordion">
               {data?.daywiseItinerary.map((single, index) => {
                 return (
-                  <div className="accordion-item plans-accordion-single">
+                  <div
+                    className="accordion-item plans-accordion-single"
+                    key={index}
+                  >
                     <div className="accordion-header" id="planHeadingOne">
                       <div
                         className="accordion-button collapsed"
@@ -469,8 +473,8 @@ function PackageDetailsTab({ data }) {
                               <li className="d-flex">
                                 <h4 className="">Meals</h4>
                               </li>
-                              {single.meals.map((meal) => (
-                                <li>
+                              {single.meals.map((meal, key) => (
+                                <li key={key}>
                                   <i className="bi bi-check-lg" /> {meal}
                                 </li>
                               ))}
@@ -483,8 +487,8 @@ function PackageDetailsTab({ data }) {
                               <li className="d-flex">
                                 <h4 className="">Inclusions</h4>
                               </li>
-                              {single.inclusions.map((incl) => (
-                                <li>
+                              {single.inclusions.map((incl, index) => (
+                                <li key={index}>
                                   <i className="bi bi-check-lg" /> {incl}
                                 </li>
                               ))}
@@ -497,8 +501,8 @@ function PackageDetailsTab({ data }) {
                               <li className="d-flex">
                                 <h4 className="">Exclusions</h4>
                               </li>
-                              {single.exclusions.map((excl) => (
-                                <li>
+                              {single.exclusions.map((excl, index) => (
+                                <li key={index}>
                                   <i className="bi bi-x-lg" /> {excl}
                                 </li>
                               ))}
@@ -525,7 +529,10 @@ function PackageDetailsTab({ data }) {
               <div className="row g-4">
                 {data?.summaryData?.photos?.map((photo, index) => {
                   return (
-                    <div className={`col-${(index + 1) % 3 == 0 ? "12" : "6"}`}>
+                    <div
+                      className={`col-${(index + 1) % 3 == 0 ? "12" : "6"}`}
+                      key={index}
+                    >
                       <div
                         className="package-gallery-item"
                         style={{ height: "100%" }}
@@ -555,7 +562,10 @@ function PackageDetailsTab({ data }) {
                 <div className="accordion plans-accordion" id="planAccordion">
                   {data?.locationData?.sightData?.map((sightData, index) => {
                     return (
-                      <div className="accordion-item plans-accordion-single">
+                      <div
+                        className="accordion-item plans-accordion-single"
+                        key={index}
+                      >
                         <div className="accordion-header" id="planHeadingOne">
                           <div
                             className="accordion-button collapsed"
@@ -581,7 +591,7 @@ function PackageDetailsTab({ data }) {
                           <div className="accordion-body plan-info">
                             <ul>
                               {sightData.sights?.map((sight, index) => (
-                                <li>
+                                <li key={index}>
                                   <i className="bi bi-check-lg" key={index} />{" "}
                                   {sight}
                                 </li>
@@ -604,9 +614,9 @@ function PackageDetailsTab({ data }) {
                       <th>City</th>
                       <th>Duration</th>
                     </tr>
-                    {data?.locationData?.hotels?.map((hotel) => {
+                    {data?.locationData?.hotels?.map((hotel, index) => {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{hotel.name}</td>
                           <td>{hotel.rating}</td>
                           <td>
@@ -631,14 +641,16 @@ function PackageDetailsTab({ data }) {
                       <th>Mode</th>
                       <th>Discription</th>
                     </tr>
-                    {data?.locationData?.intercityData.map((intercity) => (
-                      <tr>
-                        <td>{intercity?.fromCity?.name}</td>
-                        <td>{intercity?.toCity?.name}</td>
-                        <td>{intercity?.mode}</td>
-                        <td>{intercity?.description}</td>
-                      </tr>
-                    ))}
+                    {data?.locationData?.intercityData.map(
+                      (intercity, index) => (
+                        <tr key={index}>
+                          <td>{intercity?.fromCity?.name}</td>
+                          <td>{intercity?.toCity?.name}</td>
+                          <td>{intercity?.mode}</td>
+                          <td>{intercity?.description}</td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
               </div>
