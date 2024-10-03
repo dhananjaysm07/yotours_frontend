@@ -1,7 +1,6 @@
 import React from "react";
 
-
-function PackageHeader() {
+function PackageHeader({ data }) {
   return (
     <>
       <div className="pd-header">
@@ -13,7 +12,7 @@ function PackageHeader() {
               </div>
               <div className="info">
                 <h6>Duration</h6>
-                <span>4 Days</span>
+                <span>{data?.durationData?.days || 0} Days</span>
               </div>
             </div>
           </div>
@@ -24,7 +23,10 @@ function PackageHeader() {
               </div>
               <div className="info">
                 <h6>Tour Type</h6>
-                <span>Daily Tour</span>
+                <span>
+                  {data?.type?.[0].toUpperCase() +
+                    data?.type?.slice(1).toLowerCase()}
+                </span>
               </div>
             </div>
           </div>
@@ -52,13 +54,13 @@ function PackageHeader() {
           </div>
         </div>
         <div className="pd-thumb">
-          <img src={"/img/package/pd-thumb.png"} alt="PackageIMG" />
+          <img src={data?.summaryData?.photos?.[0].url} alt="PackageIMG" />
         </div>
         <div className="header-bottom">
           <div className="pd-lavel d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h5 className="location">
+            {/* <h5 className="location">
               <i className="bi bi-geo-alt" /> Mount Dtna, Spain
-            </h5>
+            </h5> */}
             <ul className="d-flex align-items-center rating">
               <li>
                 <i className="bi bi-star-fill" />
@@ -77,7 +79,7 @@ function PackageHeader() {
               </li>
             </ul>
           </div>
-          <h2 className="pd-title">San Francisco Golden Gate Bridge.</h2>
+          <h2 className="pd-title">{data?.title}</h2>
         </div>
       </div>
     </>

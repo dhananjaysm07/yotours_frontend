@@ -10,10 +10,10 @@ function PackageDetails() {
       <Seo pageTitle="Package" />
       <div className="header-margin"></div>
       <DefaultHeader />
-      <PackageDetailsWrap/>
+      <PackageDetailsWrap />
       <DefaultFooter />
     </>
-  )
+  );
 }
 
-export default PackageDetails
+export default PackageDetails;

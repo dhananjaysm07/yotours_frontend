@@ -99,6 +99,18 @@ const MobileMenu = () => {
             >
               Attraction Tickets
             </MenuItem>
+            <MenuItem
+              component={
+                <Link
+                  href="/package"
+                  className={
+                    router.pathname === "/package" ? "menu-active-link" : ""
+                  }
+                />
+              }
+            >
+             Package
+            </MenuItem>
             {/* End Contact  Menu */}
           </Menu>
         </Sidebar>
