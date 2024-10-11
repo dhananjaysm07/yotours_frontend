@@ -124,13 +124,14 @@ const Activity = ({ attractions }) => {
       </button>
     );
   }
+  const activeAttractions = attractions.filter(attraction => attraction.active);
 
   return (
     <>
       {/* <Slider {...settings}> */}
       <div className="relative overflow-hidden pt-40 sm:pt-20">
         <div className="row y-gap-30">
-        {attractions.slice(0, visibleAttractions).map((item) => (
+        {activeAttractions.slice(0, visibleAttractions).map((item) => (
             // <div key={item?.id} data-aos="fade" data-aos-delay={100}>
             <div
               className="col-xl-3 col-lg-3 col-sm-6"
