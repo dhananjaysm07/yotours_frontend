@@ -59,9 +59,9 @@ function PackageGridWrapper() {
               </div> */}
             <div className="col-xl-12">
               <div className="row g-4">
-                {data?.getallpackages?.map((holiday) => {
+                {data?.getallpackages?.map((holiday, index) => {
                   return (
-                    <div className="col-lg-3 col-md-6">
+                    <div className="col-lg-3 col-md-6" key={index}>
                       <PackageCard
                         image={holiday?.summaryData?.photos?.[0]?.url || ""}
                         date={`${holiday.durationData?.days} days & ${holiday.durationData?.nights} nights `}
